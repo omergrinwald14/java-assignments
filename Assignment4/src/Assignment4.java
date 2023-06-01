@@ -43,10 +43,18 @@ public class Assignment4 {
 				System.out.println("Please enter str1:");
 				String str1=sc.next();
 				System.out.println("Please enter str2:");
-				String str2=sc.next();	
+				String str2=sc.next();
+				if(str1.length()<=str2.length())
+					System.out.println	(LCS(str1,str2));
+				else
+					System.out.println(LCS(str2,str1));//the short str would be called as-str1
 			}
 
 			if(option == 4) {
+				System.out.println("Please enter a string: ");
+				String str=sc.next();
+				System.out.println("The number of substrings is "+countSubstrings(str));
+
 			
 			}
 		}
@@ -92,14 +100,40 @@ public class Assignment4 {
 	
 
 
-//public static String LCS(String str1, String str2) {
-//if (str1.length()>str2.length())
-//{
-	//CHECK
+public static String LCS(String str1, String str2) {
 
-} 
+{
+	int i=0;
+	if(str1.length()==0 || str2.length()==0)
+		return "";
+	if(str1.charAt(0)==str2.charAt(0))
+		return  str1.charAt(i) + LCS(str1.substring(i),str2.substring(i));
+	return LCS(str1,str2.substring(i+1));
+}
+
+//public static int Lcs(String a, String b) {
+	//if (a.length>b.length)
+		//return a;
+}
+public static int countSubstrings(String str) {
+	return countSubstrings(str,0,str.length()-1);
+}
+
+public static int countSubstrings(String str, int start, int end){
+	if (start==str.length()-1)
+		return 0;
+	if (end==-1)
+		return countSubstrings(str,start+1,str.length()-1);
+	if(str.charAt(start)==str.charAt(end))
+		return 1+countSubstrings(str,start,end-1);
+	else
+		return countSubstrings(str,start,end-1);
+}
+}
 
 
+
+	
 
 
 
