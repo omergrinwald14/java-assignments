@@ -92,7 +92,7 @@ public class Assignment4 {
 	
 
 
-public static String LCS(String str1, String str2) {
+//public static String LCS(String str1, String str2) {
 //if (str1.length()>str2.length())
 //{
 	//CHECK
