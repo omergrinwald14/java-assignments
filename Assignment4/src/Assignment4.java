@@ -3,7 +3,8 @@ import java.util.Scanner;
 public class Assignment4 {
 	public static Scanner sc = new Scanner(System.in);
 
-	public static void main(String[] args) {	
+	public static void main(String[] args) {
+
 		boolean flag = true; // will get the value 'false' when the user choose to end program
 		int option; 
 
@@ -29,37 +30,44 @@ public class Assignment4 {
 				int []arr=new int [num];
 				System.out.println("Please enter the array values:");
 				for (int i=0;i<arr.length;i++)
-				{
 					arr[i]=sc.nextInt();
-				}
 				System.out.println("Please enter a number to search:");
 				int x=sc.nextInt();;
-				System.out.println( "The number "+ x +" appears" + countOccurrences(arr,x) + " times in this array ");
+				System.out.println( "The number "+ x +" appears " + countOccurrences(arr,x) + " times in this array");
 			}
 
 			if(option == 3) { 
+				String str1;
+				String str2;
 				System.out.println("Please enter str1:");
-				String str1=sc.next();
+				do {
+					str1=sc.nextLine();
+				}
+				while(str1.length() == 0);
 				System.out.println("Please enter str2:");
-				String str2=sc.next();
-				System.out.println(LCS(str1,str2));
+				do {
+					str2=sc.nextLine();
+				}
+				while(str2.length()==0);
+				System.out.println("The longest common subsequence is: " + LCS(str1,str2));
 			}
 
 			if(option == 4) {
-				System.out.println("Please enter a string: ");
+				System.out.println("Please enter a string:");
 				String str=sc.next();
 				System.out.println("The number of substrings is " + countSubstrings(str));
 			}
 		}
 	}	
-	public static int printMenu() { // print menu and ask user to choose an option //Welcome! Please choose an option:
+
+	public static int printMenu() { // print menu and ask user to choose an option
 		int option;
-		System.out.println("~ Photo Analyzed ~\n"
+		System.out.println("Welcome! Please choose an option:\n"
 				+ "0. End Program\n"
 				+ "1. Uppercase Vowels\n"
 				+ "2. Count Occurrences\n"
 				+ "3. Longest Common Subsequence\n"
-				+ "4. Count Substrings\n");
+				+ "4. Count Substrings");
 		option = sc.nextInt();
 		return option;
 	}
@@ -71,7 +79,7 @@ public class Assignment4 {
 		if(s.charAt(0)=='a'|| s.charAt(0)=='e'|| s.charAt(0)=='i'|s.charAt(0)=='o'||s.charAt(0)=='u')	
 		{
 
-			return (char)((int)s.charAt(0)-32)+uppercaseVowels(s.substring(1));
+			return (char)(s.charAt(0)-32)+uppercaseVowels(s.substring(1));
 		}
 		else
 			return s.charAt(0)+uppercaseVowels(s.substring(1));
