@@ -10,10 +10,12 @@ public class Playlist {
 	public Playlist() {
 		name = "Playlist" + numOfPlaylists;
 		numOfPlaylists++;
-		pl = new List();
+		pl = new List<Song>();
 	}
 	public Playlist(String name) {
 		this.name = name;
+		pl = new List<Song>();
+
 	}
 	
 	//getters	
