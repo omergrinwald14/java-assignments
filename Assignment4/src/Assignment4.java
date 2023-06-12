@@ -79,6 +79,7 @@ public class Assignment4 {
 		option = sc.nextInt();
 		return option;
 	}
+	
 	public static String uppercaseVowels(String s) { // replace vowels with upper-case letters
 		if(s.length() == 0) 
 			return ""; // base case - return empty string when the string is empty
@@ -91,9 +92,11 @@ public class Assignment4 {
 		else
 			return currentChar + uppercaseVowels(s.substring(1)); //leave the letter as it is and call the function on the rest of the string
 	}	
+	
 	public static int countOccurrences(int[] arr, int x) { // count occurrences of 'x' in a certain array of integers
 		return countOccurrences(arr,x,arr.length-1); 
 	}	
+	
 	public static int countOccurrences(int[] arr, int x, int i) {
 		if(i<0)
 			return 0; // base case - will get here after we finished the check on index 0
@@ -102,22 +105,25 @@ public class Assignment4 {
 		else
 			return countOccurrences(arr,x,i-1); // call the function and move and index 1 to the left
 	}
+	
 	public static String LCS(String str1, String str2) { // longest common sequence
 		if(str1.length()==0 || str2.length()==0) // base case - if one of the strings is empty, there is nothing to compare
 			return "";
 		if(str1.charAt(0)==str2.charAt(0)) // the first char at each string is the same
 			return str1.charAt(0) + LCS(str1.substring(1),str2.substring(1)); // return the specific char and add the function with the rest of the strings
 
-		// when it's not stop condition, and the first char is not the same - split into 2 options
+		//  split into 2 options
 		String left = LCS(str1,str2.substring(1)); // promoting the 2nd string only
 		String right = LCS(str1.substring(1),str2); // promoting the 1st string only
 		if(left.length()>=right.length()) // return the longest sequence
 			return left;
 		return right;
 	}
+	
 	public static int countSubstrings(String str) {  // count substrings that begin and end with the same char
 		return countSubstrings(str,0,str.length()-1);
 	}
+	
 	public static int countSubstrings(String str, int start, int end){  
 		if (start==str.length()-1) // base case - a one char substrings
 			return 1;
