@@ -112,7 +112,7 @@ public class Assignment4 {
 		if(str1.charAt(0)==str2.charAt(0)) // the first char at each string is the same
 			return str1.charAt(0) + LCS(str1.substring(1),str2.substring(1)); // return the specific char and add the function with the rest of the strings
 
-		//  split into 2 options
+		// split into 2 options
 		String left = LCS(str1,str2.substring(1)); // promoting the 2nd string only
 		String right = LCS(str1.substring(1),str2); // promoting the 1st string only
 		if(left.length()>=right.length()) // return the longest sequence
