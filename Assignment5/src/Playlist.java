@@ -11,6 +11,10 @@ public class Playlist {
 		name = "Playlist" + numOfPlaylists;
 		numOfPlaylists++;
 	}
+	public Playlist(String name) {
+		this.name = name;
+		//this.pl = null;
+	}
 	
 	//getters	
 	public String getName() {
