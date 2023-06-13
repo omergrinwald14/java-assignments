@@ -8,7 +8,7 @@ public class Playlist {
 
 	//constructors	
 	public Playlist() {
-		name = "Playlist" + numOfPlaylists;
+		name = "Playlist" + (numOfPlaylists + 1);
 		numOfPlaylists++;
 		pl = new List<Song>();
 	}
@@ -23,7 +23,7 @@ public class Playlist {
 		return name;
 	}
 
-	public List<Song> getsSongsList() {
+	public List<Song> getSongsList() {
 		return pl;
 	}
 
@@ -46,9 +46,14 @@ public class Playlist {
 	}
 
 	public Node<Song> addSong(Song s) {
-		Node<Song> q = null;
-		for(Node<Song> p = pl.getFirst(); p!= null; p = p.getNext())
+		Node<Song> q = pl.getFirst();
+		if(q == null) {
 			q =	pl.insert(q,s);
+			return q;
+		}
+		while (q.getNext() != null) 
+			q=q.getNext();
+		q =	pl.insert(q,s);
 		duration = duration + s.getDuration();
 		return q;
 	}
@@ -90,15 +95,33 @@ public class Playlist {
 
 	public Playlist sortByDuration() {
 		Playlist sortedPlaylist = new Playlist();
+		Node<Song> q = pl.getFirst();
+		Node<Song> min = pl.getFirst();
+		Node<Song> insertIndex = sortedPlaylist.getSongsList().getFirst();
 		for(Node<Song> p = pl.getFirst(); p!= null; p = p.getNext()) {
-			sortedPlaylist.getsSongsList().insert(p,p.getData());
-			
+			q=p;
+			min=p;
+			while (q.getNext()!=null) {
+				if(min.getData().getDuration()>q.getData().getDuration()) {
+					min = q;
+				}
+				q = q.getNext();
 			}
-		
-		
+			insertIndex = sortedPlaylist.getSongsList().insert(insertIndex,min.getData());
+		}
+
 		return sortedPlaylist;
 	}
-	
+
+	public String toString() {
+		String s = this.name+" songs:\n";
+		for (Node <Song> p = pl.getFirst(); p != null; p=p.getNext()) {
+			s += p.toString()+"\n";
+		}
+		s += this.name+" duration: "+String.format("%.2f",
+				this.getDuration())+"\n";
+		return s;
+	}
 
 
 }

@@ -2,61 +2,36 @@
 public class Assignment5 {
 
 	public static void main(String[] args) {
-		
-		
-		//creating covers
-		int[][] image1 = {{1,2,3},{7,8,9},{0,2,4}};
-		int[][] image2 = {{1,2,3,4,5,6},{7,8,9,0,1,2},{0,2,4,6,8,0}};
-		Cover c1 = new Cover(image1);
-		Cover c2 = new Cover(image2);
-		Cover c3 = new Cover(c2);
 
 		//creating songs
-		Song s1 = new Song("a", 2.5, "pop", c1);	
-		Song s2 = new Song("b", 0.1, "pop", c2);
-		Song s3 = new Song("b", 0.1, "pop", c3);
+		Song s1 = new Song("a", 2.5, "pop");	
+		Song s2 = new Song("b", 3, "pop");
+		Song s3 = new Song("c", 1.5, "rock");
+		Song s4 = new Song("d", 1.7, "pop");	
+		Song s5 = new Song("e", 2.2, "pop");	
+		Song s6 = new Song("f", 3.4, "rock");	
+		Song s7 = new Song("g", 2, "pop");	
+		Song s8 = new Song("h", 1.8, "rock");	
 
-		//print covers		
-		System.out.println("print covers:");
-		System.out.println(s1.getCover());
-		System.out.println(s2.getCover());
-		System.out.println(s3.getCover());
-
 		
-		//flip covers
-		System.out.println("flip covers:");
-		s1.getCover().flip();
-		System.out.println(s1.getCover());
-		
-		s2.getCover().flip();
-		System.out.println(s2.getCover());
+		//creating a playlist and adding songs
+		System.out.println("creating a playlist and adding songs:");
+		Playlist pl1 = new Playlist();
+		pl1.addSong(s1);
+		pl1.addSong(s4);
+		pl1.addSong(s2);
+		pl1.addSong(s3);
+		System.out.println(pl1);	
 		
 		
-		//crop covers
-		System.out.println("crop covers:");
-		s1.getCover().crop(2,2,2,2);
-		System.out.println(s1.getCover());
+		//creating empty playlists
+		System.out.println("creating empty playlists:");
+		Playlist pl2 = new Playlist();
+		System.out.println(pl2);
 		
-		s2.getCover().crop(2,4,2,4);
-		System.out.println(s2.getCover());
+		Playlist pl3 = new Playlist();
+		System.out.println(pl3);
 		
-		s2.getCover().crop(2,4,-5,-5);
-		System.out.println(s2.getCover());
-		
-		s2.getCover().crop(2,4,1,3);
-		System.out.println(s2.getCover());
-		
-		
-		//apply filter:
-		System.out.println("apply filter:");
-		s1.getCover().applyFilter();
-		System.out.println(s1.getCover());
-		
-		s2.getCover().applyFilter();
-		System.out.println(s2.getCover());
-		
-		System.out.println(s3.getCover());
-
 		
 
 	}
