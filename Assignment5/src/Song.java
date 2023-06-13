@@ -52,7 +52,7 @@ public class Song {
 		this.duration = duration;
 	}
 	public String toString() {
-		return this.name+", Duration: "+this.duration+", Genre:"+this.genre;
+		return this.name+", Duration: "+this.duration+", Genre: "+this.genre;
 		}
 	
 	

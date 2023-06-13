@@ -49,6 +49,7 @@ public class Playlist {
 		Node<Song> q = pl.getFirst();
 		if(q == null) {
 			q =	pl.insert(q,s);
+			duration = duration + s.getDuration();
 			return q;
 		}
 		while (q.getNext() != null) 
