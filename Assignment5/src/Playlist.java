@@ -32,6 +32,37 @@ public class Playlist {
 			return 0;
 		return duration;
 	}
+	public Playlist copy(Playlist pl1){
+		Playlist ans = new Playlist();
+		if (pl1.getSongsList() == null){
+			return null;
+		}
+		Node<Song> pos = null; 
+		for(Node<Song> p = pl1.getSongsList().getFirst(); p != null; p = p.getNext()){
+			pos = ans.getSongsList().insert(pos, p.getData());
+		}
+
+		return ans;
+	}
+	
+	public Playlist merge(Playlist pl1){
+
+		if (pl1 == null || this.pl.isEmpty()){
+			return copy(pl1);
+		}
+		if (this.pl == null || pl1.getSongsList().isEmpty()){
+			return copy(this);
+		}
+		Playlist pl3 = copy(pl1);
+		Node<Song> p = pl3.getSongsList().getFirst();
+		while (p.getNext() != null){
+			p = p.getNext();
+		}
+		p.setNext(copy(pl1).getSongsList().getFirst());
+		return pl3;
+
+	}
+
 
 	public Node<Song> getSongAt(int index) {
 		int count = 0;
@@ -91,8 +122,24 @@ public class Playlist {
 
 	public Playlist sortByName() {
 		Playlist sortedPlaylist = new Playlist();
-		return sortedPlaylist;
+		Node<Song> q = pl.getFirst();
+		Node<Song> min = pl.getFirst();
+		Node<Song> insertIndex = sortedPlaylist.getSongsList().getFirst();
+		for(Node<Song> p = pl.getFirst(); p!= null; p = p.getNext()) {
+			q=p;
+			min=p;
+			while (q.getNext()!=null) {
+				if(min.getData().getName().compareTo(q.getData().getName())>0) {
+					min = q;
+				}
+				q = q.getNext();
+			}
+			insertIndex = sortedPlaylist.getSongsList().insert(insertIndex,min.getData());
+		}
+
+		return sortedPlaylist;	
 	}
+
 
 	public Playlist sortByDuration() {
 		Playlist sortedPlaylist = new Playlist();
@@ -113,6 +160,8 @@ public class Playlist {
 
 		return sortedPlaylist;
 	}
+
+
 
 	public String toString() {
 		String s = this.name+" songs:\n";

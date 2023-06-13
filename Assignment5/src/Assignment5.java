@@ -32,7 +32,54 @@ public class Assignment5 {
 		Playlist pl3 = new Playlist();
 		System.out.println(pl3);
 		
+		//merging a full playlist with an empty playlist
+		System.out.println("merging a full playlist with an empty playlist:");
+		pl1.merge(pl2);
+		System.out.println(pl1);
+		System.out.println(pl2);
 		
+		
+		System.out.println("merging an empty playlist with a full playlis:");
+		pl3.merge(pl1);
+		System.out.println(pl1);
+		System.out.println(pl3);
+		
+		
+		//creating a new playlist and adding songs
+		System.out.println("creating a new playlist and adding songs:");
+		Playlist pl4 = new Playlist();
+		pl4.addSong(s8);
+		pl4.addSong(s6);
+		pl4.addSong(s5);
+		pl4.addSong(s7);
+		System.out.println(pl4);
+		
+		
+		System.out.println("merging two full playlists:");
+		pl4.merge(pl1);
+		System.out.println(pl1);
+		System.out.println(pl4);
+
+		
+		//setting songs at indices
+		System.out.println("setting songs at indices:");
+		pl1.setSongAt(2, s8);
+		System.out.println(pl1);
+		
+		pl1.setSongAt(5, s2);
+		System.out.println(pl1);
+		
+		
+		//sorting the merged playlist by name
+		System.out.println("sorting the merged playlist:");
+		System.out.println(pl4);
+		
+		pl4.sortByName();
+		System.out.println(pl4);
+		
+		pl4.sortByDuration();
+		System.out.println(pl4);
+
 
 	}
 
