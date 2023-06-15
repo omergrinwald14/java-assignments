@@ -28,38 +28,26 @@ public class Playlist {
 	}
 
 	public double getDuration() {
-		if(numOfPlaylists == 0)
-			return 0;
+		this.duration = 0;
+		for(Node<Song> p=pl.getFirst(); p!=null; p=p.getNext()) {
+			duration = duration + p.getData().getDuration();
+		}
 		return duration;
 	}
-	public Playlist copy(Playlist pl1){
-		Playlist ans = new Playlist();
-		if (pl1.getSongsList() == null){
-			return null;
-		}
-		Node<Song> pos = null; 
-		for(Node<Song> p = pl1.getSongsList().getFirst(); p != null; p = p.getNext()){
-			pos = ans.getSongsList().insert(pos, p.getData());
-		}
 
-		return ans;
-	}
-	
-	public Playlist merge(Playlist pl1){
-
-		if (pl1 == null || this.pl.isEmpty()){
-			return copy(pl1);
+	public void merge(Playlist pl1) {
+		if(pl1.getSongsList().getFirst()==null && this.pl.getFirst()==null)
+			return;
+		if(pl1.getSongsList().getFirst()==null && this.pl.getFirst()!=null)
+			return;
+		if(pl1.getSongsList().getFirst()!=null && this.pl.getFirst()==null) {
+			this.pl = pl1.getSongsList();
+			return; 
 		}
-		if (this.pl == null || pl1.getSongsList().isEmpty()){
-			return copy(this);
-		}
-		Playlist pl3 = copy(pl1);
-		Node<Song> p = pl3.getSongsList().getFirst();
-		while (p.getNext() != null){
-			p = p.getNext();
-		}
-		p.setNext(copy(pl1).getSongsList().getFirst());
-		return pl3;
+		Node<Song> p=pl.getFirst();
+		while(p.getNext()!=null)
+			p=p.getNext();
+		p.setNext(pl1.getSongsList().getFirst());
 
 	}
 
@@ -80,13 +68,11 @@ public class Playlist {
 		Node<Song> q = pl.getFirst();
 		if(q == null) {
 			q =	pl.insert(q,s);
-			duration = duration + s.getDuration();
 			return q;
 		}
 		while (q.getNext() != null) 
 			q=q.getNext();
 		q =	pl.insert(q,s);
-		duration = duration + s.getDuration();
 		return q;
 	}
 
@@ -104,8 +90,8 @@ public class Playlist {
 	}
 
 	public boolean setSongAt(int index, Song s) {
-		int count = 0;
-		for(Node<Song> p = pl.getFirst(); p!= null; p = p.getNext()) {
+		int count = 1;
+		for(Node<Song> p=pl.getFirst(); p!=null; p=p.getNext()) {
 			if(count == index) {
 				Node<Song> prev = pl.getFirst();
 				while(prev.getNext()!=p)
@@ -116,7 +102,7 @@ public class Playlist {
 			}
 			count++;
 		}
-		System.out.println("The song cannot be removed");
+		System.out.println("The song cannot be set at this index");
 		return false;
 	}
 
