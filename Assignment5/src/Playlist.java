@@ -77,7 +77,7 @@ public class Playlist {
 	}
 
 	public boolean removeSong(int index) { 
-		int count = 0;
+		int count = 1;
 		for(Node<Song> p = pl.getFirst(); p!= null; p = p.getNext()) {
 			if(count == index) {
 				p = pl.remove(p);
@@ -90,10 +90,15 @@ public class Playlist {
 	}
 
 	public boolean setSongAt(int index, Song s) {
+		if(index == 1) {
+			pl.remove(pl.getFirst());
+			pl.insert(null, s);
+			return true;
+		}
 		int count = 1;
 		for(Node<Song> p=pl.getFirst(); p!=null; p=p.getNext()) {
 			if(count == index) {
-				Node<Song> prev = pl.getFirst();
+				Node<Song> prev = pl.getFirst();	
 				while(prev.getNext()!=p)
 					prev = prev.getNext();
 				pl.remove(p);
@@ -107,44 +112,46 @@ public class Playlist {
 	}
 
 	public Playlist sortByName() {
-		Playlist sortedPlaylist = new Playlist();
+		List<Song> sorted = new List<Song>();	
+		Node<Song> insertIndex = null;
 		Node<Song> q = pl.getFirst();
 		Node<Song> min = pl.getFirst();
-		Node<Song> insertIndex = sortedPlaylist.getSongsList().getFirst();
-		for(Node<Song> p = pl.getFirst(); p!= null; p = p.getNext()) {
-			q=p;
-			min=p;
-			while (q.getNext()!=null) {
-				if(min.getData().getName().compareTo(q.getData().getName())>0) {
+		while(pl.getFirst()!=null) {
+			q=pl.getFirst();
+			min=pl.getFirst();
+			while (q!=null) {
+				if(min.getData().getName().compareTo(q.getData().getName())>0) 
 					min = q;
-				}
 				q = q.getNext();
 			}
-			insertIndex = sortedPlaylist.getSongsList().insert(insertIndex,min.getData());
+			insertIndex = sorted.insert(insertIndex,min.getData());
+			pl.remove(min);
 		}
-
-		return sortedPlaylist;	
+		pl = sorted;
+		return this;	
 	}
 
 
 	public Playlist sortByDuration() {
-		Playlist sortedPlaylist = new Playlist();
+		List<Song> sorted = new List<Song>();
+		Node<Song> insertIndex = null;
 		Node<Song> q = pl.getFirst();
 		Node<Song> min = pl.getFirst();
-		Node<Song> insertIndex = sortedPlaylist.getSongsList().getFirst();
-		for(Node<Song> p = pl.getFirst(); p!= null; p = p.getNext()) {
-			q=p;
-			min=p;
-			while (q.getNext()!=null) {
+		while(pl.getFirst()!=null) {
+			q=pl.getFirst();
+			min=pl.getFirst();
+			while (q!=null) {
 				if(min.getData().getDuration()>q.getData().getDuration()) {
 					min = q;
 				}
 				q = q.getNext();
 			}
-			insertIndex = sortedPlaylist.getSongsList().insert(insertIndex,min.getData());
-		}
+			insertIndex = sorted.insert(insertIndex,min.getData());
+			pl.remove(min);
 
-		return sortedPlaylist;
+		}
+		pl = sorted;
+		return this;
 	}
 
 
