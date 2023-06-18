@@ -44,11 +44,10 @@ public class Playlist {
 			this.pl = pl1.getSongsList();
 			return; 
 		}
-		Node<Song> p=pl.getFirst();
+		Node<Song> p=pl.getFirst(); 
 		while(p.getNext()!=null)
-			p=p.getNext();
+			p=p.getNext(); 
 		p.setNext(pl1.getSongsList().getFirst());
-
 	}
 
 
@@ -91,7 +90,7 @@ public class Playlist {
 
 	public boolean setSongAt(int index, Song s) {
 		if(index == 1) {
-			pl.remove(pl.getFirst());
+			pl.remove(pl.getFirst() );
 			pl.insert(null, s);
 			return true;
 		}
