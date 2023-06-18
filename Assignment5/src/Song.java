@@ -4,7 +4,7 @@ public class Song {
 	private double duration;
 	private String genre;
 	private Cover cover;
-	private static int numOfSongs=0;
+	private static int numOfSongs=0; // static variable to keep track of the number of songs
 
 	// constructors
 	public Song() {
