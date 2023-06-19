@@ -5,9 +5,9 @@ public class Assignment5 {
 
 		//creating songs
 		Song s1 = new Song("a", 2.5, "pop");	
-		Song s2 = new Song("B", 3, "pop");
+		Song s2 = new Song("b", 3, "pop");
 		Song s3 = new Song("c", 1.5, "rock");
-		Song s4 = new Song("D", 1.7, "pop");	
+		Song s4 = new Song("d", 1.7, "pop");	
 		Song s5 = new Song("e", 2.2, "pop");	
 		Song s6 = new Song("f", 3.4, "rock");	
 		Song s7 = new Song("g", 2, "pop");	
@@ -77,7 +77,9 @@ public class Assignment5 {
 		pl4.sortByName();
 		System.out.println(pl4);
 		
-		
+		pl4.sortByDuration();
+		System.out.println(pl4);
+
 
 	}
 

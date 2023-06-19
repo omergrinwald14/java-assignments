@@ -35,14 +35,19 @@ public class Playlist {
 		return duration;
 	}
 
-	public void merge(Playlist pl1) {
-		if(pl1.getSongsList().getFirst()==null && this.pl.getFirst()==null)
+	public void merge(Playlist pl1) { // merge two playlists
+		if(pl1.getSongsList().isEmpty() && this.pl.isEmpty()) // both empty
 			return;
-		if(pl1.getSongsList().getFirst()==null && this.pl.getFirst()!=null)
+		if(pl1.getSongsList().isEmpty() && !(this.pl.isEmpty())) // second empty and first is'nt
 			return;
-		if(pl1.getSongsList().getFirst()!=null && this.pl.getFirst()==null) {
-			this.pl = pl1.getSongsList(); // replace current playlist (which is null) with pl1
-			return; 
+		if(!(pl1.getSongsList().isEmpty()) && this.pl.isEmpty()) { // second is'nt empty and first is
+			Node<Song> p = pl1.getSongsList().getFirst();
+			Node<Song> q = null;
+			while(p!=null) {
+				q=pl.insert(q,p.getData()); 
+				p=p.getNext();
+			}
+			return;
 		}
 		Node<Song> p=pl.getFirst(); 
 		while(p.getNext()!=null)
