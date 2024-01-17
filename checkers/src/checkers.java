@@ -10,6 +10,7 @@ public class checkers {
 			{"R", "-", "R", "-", "R", "-", "R", "-"},
 			{"-", "R", "-", "R", "-", "R", "-", "R"},
 			{"R", "-", "R", "-", "R", "-", "R", "-"}};
+
 	public static void main(String[] args) {
 		boolean status_game = true;
 		int status_client = 1;
@@ -33,7 +34,6 @@ public class checkers {
 			status_game = calc_client_winner(check_board);
 			System.out.println("The board:");
 			printBoard(check_board);
-			//computerturn()
 		}
 		System.out.println("BYE BYE");
 	}
@@ -69,11 +69,22 @@ public class checkers {
 					if (is_food(move, check_board)) {
 						check_board[i_origin][j_origin] = "*";
 						check_board[i_dest][j_dest] = "R";
-						if (j_dest > j_origin)
-							check_board[i_origin + 1][j_origin + 1] = "*";
-						if (j_dest < j_origin)
-							check_board[i_origin + 1][j_origin - 1] = "*";
+						if (i_dest > i_origin) { //move down
+							if(j_dest>j_origin) //move down and right
+								check_board[i_origin + 1][j_origin + 1] = "*";
+							if(j_dest<j_origin) //move down and left
+								check_board[i_origin + 1][j_origin - 1] = "*";
+						}
+						if (i_dest < i_origin) { //move up
+							if(j_dest>j_origin) //move up and right
+								check_board[i_origin - 1][j_origin + 1] = "*";
+							if(j_dest<j_origin) //move up and left
+								check_board[i_origin - 1][j_origin - 1] = "*";
+						}
+						if(double_food_possible(i_dest,j_dest,check_board))
+							execute_double_food(check_board);
 						flag = true;
+
 					}
 				}
 			}
@@ -98,7 +109,39 @@ public class checkers {
 			}
 
 	}
+	public static void execute_double_food(String[][] check_board) {
+		boolean flag = true;
+		while(flag) {
+			System.out.println("you have another move possible, please enter again");
+			System.out.println("the board:");
+			printBoard(check_board);
+			String move = sc.next();
+			int i_dest = 8 - (move.charAt(0) - '0');
+			int j_dest = (move.charAt(1) - '0') - 1;
+			int i_origin = 8 - (move.charAt(3) - '0');
+			int j_origin = (move.charAt(4) - '0') - 1;
+			if(is_valid_string(move) && is_valid_coordinate(8-(move.charAt(0)-'0'),(move.charAt(1)-'0')-1)) {	
+				check_board[i_origin][j_origin] = "*";
+				check_board[i_dest][j_dest] = "R";
+				if (i_dest > i_origin) { //move down
+					if(j_dest>j_origin) //move down and right
+						check_board[i_origin + 1][j_origin + 1] = "*";
+					if(j_dest<j_origin) //move down and left
+						check_board[i_origin + 1][j_origin - 1] = "*";
+				}
 
+				if (i_dest < i_origin) { //move up
+					if(j_dest>j_origin) //move up and right
+						check_board[i_origin - 1][j_origin + 1] = "*";
+					if(j_dest<j_origin) //move up and left
+						check_board[i_origin - 1][j_origin - 1] = "*";
+				}				
+			}
+			if(!double_food_possible(i_dest,j_dest,check_board))
+				flag = false;
+		}
+	}
+	
 	public static boolean isRed(String move, String[][] check_board) {
 		int i = 8 - (move.charAt(3) - '0');
 		int j = (move.charAt(4) - '0') - 1;
@@ -134,10 +177,10 @@ public class checkers {
 		int j_origin = (move.charAt(4) - '0') - 1;
 		if (i_origin == i_dest + 2) {
 			if (j_origin == j_dest - 2)//move right
-				if (check_board[i_origin + 1][j_origin + 1].equals("W"))
+				if (check_board[i_origin - 1][j_origin + 1].equals("W"))
 					return true;
 			if (j_origin == j_dest + 2)//move left
-				if (check_board[i_origin + 1][j_origin - 1].equals("W"))
+				if (check_board[i_origin - 1][j_origin - 1].equals("W"))
 					return true;
 		}
 		return false;
@@ -153,6 +196,11 @@ public class checkers {
 		if(i_dest<0 || j_dest<0 || i_origin<0 || j_origin<0)
 			return false;
 
+		return true;
+	}
+	public static boolean is_valid_coordinate(int i,int j) {
+		if(i>7||i<0||j>7||j<0)
+			return false;
 		return true;
 	}
 
@@ -190,26 +238,37 @@ public class checkers {
 			System.out.println("Sorry, it's a tie");
 		}
 	}
-	public static boolean double_food_possible(int i, int j, String[][] check_board) {
+	public static boolean double_food_possible(int i, int j, String[][] check_board) {		
 		if(check_board[i][j]=="W") {
-			if(check_board[i+1][j+1].equals("R"))
+			if(is_valid_coordinate(i+2,j+2) && check_board[i+1][j+1].equals("R"))
 				if(check_board[i+2][j+2].equals("*"))
 					return true;
-			if(check_board[i+1][j-1].equals("R"))
+			if(is_valid_coordinate(i+2,j-2) && check_board[i+1][j-1].equals("R"))
 				if(check_board[i+2][j-2].equals("*"))
 					return true;
-		}
-		if(check_board[i][j]=="R") {
-			if(check_board[i-1][j-1].equals("W"))
+			if(is_valid_coordinate(i-2,j-2) && check_board[i-1][j-1].equals("R"))
 				if(check_board[i-2][j-2].equals("*"))
 					return true;
-			if(check_board[i-1][j+1].equals("W"))
+			if(is_valid_coordinate(i-2,j+2) && check_board[i-1][j+1].equals("R"))
 				if(check_board[i-2][j+2].equals("*"))
 					return true;
 		}
-
+		if(check_board[i][j]=="R") {
+			if(is_valid_coordinate(i-2,j-2) && check_board[i-1][j-1].equals("W"))
+				if(check_board[i-2][j-2].equals("*"))
+					return true;
+			if(is_valid_coordinate(i-2,j+2) && check_board[i-1][j+1].equals("W"))
+				if(check_board[i-2][j+2].equals("*"))
+					return true;
+			if(is_valid_coordinate(i+2,j+2) && check_board[i+1][j+1].equals("W"))
+				if(check_board[i+2][j+2].equals("*"))
+					return true;
+			if(is_valid_coordinate(i+2,j-2) && check_board[i+1][j-1].equals("W"))
+				if(check_board[i+2][j-2].equals("*"))
+					return true;
+		}		
 		return false;
 	}
 
-	
+
 }
