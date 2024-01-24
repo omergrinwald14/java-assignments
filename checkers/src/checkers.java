@@ -106,14 +106,34 @@ public class checkers {
 				}
 		for (int i = 0; i < 8 && !flag; i++)
 			for (int j = 0; j < 8 && !flag; j++) {
-				if(is_food_queen_computer(i, j, check_board, "right-forward"))
+				if(is_food_queen_computer(i, j, check_board, "right-forward")) {
+					check_board[i][j] = "*";
+					check_board[i+1][j+1] = "*";
+					check_board[i+2][j+2] = "*";
+					index_direction = "right-forward";
 					break;
-				if(is_food_queen_computer(i, j, check_board, "right-back"))
+				}
+				if(is_food_queen_computer(i, j, check_board, "right-back"))	{
+					check_board[i][j] = "*";
+					check_board[i-1][j+1] = "*";
+					check_board[i-2][j+2] = "*";
+					index_direction = "right-back";
 					break;
-				if(is_food_queen_computer(i, j, check_board, "left-forward"))
+				}
+				if(is_food_queen_computer(i, j, check_board, "left-forward")) {
+					check_board[i][j] = "*";
+					check_board[i+1][j-1] = "*";
+					check_board[i+2][j-2] = "*";
+					index_direction = "left-forward";
 					break;
-				if(is_food_queen_computer(i, j, check_board, "left-back"))
+				}
+				if(is_food_queen_computer(i, j, check_board, "left-back")) {
+					check_board[i][j] = "*";
+					check_board[i-1][j-1] = "*";
+					check_board[i-2][j-2] = "*";
+					index_direction = "left-back";
 					break;
+				}		
 			}
 		
 		//finish check if there is "Eat" move
@@ -141,7 +161,7 @@ public class checkers {
 					check_board[i_double - 2][j_double - 2] = "W";
 					i_double = i_double - 2;
 					j_double = j_double - 2;
-					continue;
+					break;
 				}
 			if (is_valid_coordinate(i_double - 2, j_double + 2) && check_board[i_double - 1][j_double + 1].equals("R"))//left down direction
 				if (check_board[i_double - 2][j_double + 2].equals("*")){
@@ -150,7 +170,7 @@ public class checkers {
 					check_board[i_double - 2][j_double + 2] = "W";
 					i_double = i_double - 2;
 					j_double = j_double + 2;
-					continue;
+					break;
 				}
 			if (is_valid_coordinate(i_double + 2, j_double + 2) && check_board[i_double + 1][j_double + 1].equals("R"))//right and left direction
 				if (check_board[i_double + 2][j_double + 2].equals("*")){
@@ -159,7 +179,7 @@ public class checkers {
 					check_board[i_double + 2][j_double + 2] = "W";
 					i_double = i_double + 2;
 					j_double = j_double + 2;
-					continue;
+					break;
 				}
 			if (is_valid_coordinate(i_double + 2, j_double - 2) && check_board[i_double + 1][j_double - 1].equals("R"))
 				if (check_board[i_double + 2][j_double - 2].equals("*")){
@@ -168,7 +188,7 @@ public class checkers {
 					check_board[i_double + 2][j_double - 2] = "W";
 					i_double = i_double + 2;
 					j_double = j_double - 2;
-					continue;
+					break;
 				}
 		}
 		if(!flag) {//nothing to eat do a random move
