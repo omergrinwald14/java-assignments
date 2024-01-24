@@ -106,32 +106,48 @@ public class checkers {
 				}
 		for (int i = 0; i < 8 && !flag; i++)
 			for (int j = 0; j < 8 && !flag; j++) {
-				if(is_food_queen_computer(i, j, check_board, "right-forward")) {
+				if(is_food_queen_computer(i, j, check_board, "right-down")) {
 					check_board[i][j] = "*";
 					check_board[i+1][j+1] = "*";
-					check_board[i+2][j+2] = "*";
-					index_direction = "right-forward";
+					check_board[i+2][j+2] = "QW";
+					index_i = i;
+					index_j = j;
+					i_double = i+2;
+					j_double = j+2;
+					index_direction = "right-down";
 					break;
 				}
-				if(is_food_queen_computer(i, j, check_board, "right-back"))	{
+				if(is_food_queen_computer(i, j, check_board, "right-up"))	{
 					check_board[i][j] = "*";
 					check_board[i-1][j+1] = "*";
-					check_board[i-2][j+2] = "*";
-					index_direction = "right-back";
+					check_board[i-2][j+2] = "QW";
+					index_i = i;
+					index_j = j;
+					i_double = i-2;
+					j_double = j+2;
+					index_direction = "right-up";
 					break;
 				}
 				if(is_food_queen_computer(i, j, check_board, "left-forward")) {
 					check_board[i][j] = "*";
 					check_board[i+1][j-1] = "*";
-					check_board[i+2][j-2] = "*";
+					check_board[i+2][j-2] = "QW";
+					index_i = i;
+					index_j = j;
+					i_double = i+2;
+					j_double = j-2;
 					index_direction = "left-forward";
 					break;
 				}
-				if(is_food_queen_computer(i, j, check_board, "left-back")) {
+				if(is_food_queen_computer(i, j, check_board, "left-up")) {
 					check_board[i][j] = "*";
 					check_board[i-1][j-1] = "*";
-					check_board[i-2][j-2] = "*";
-					index_direction = "left-back";
+					check_board[i-2][j-2] = "QW";
+					index_i = i;
+					index_j = j;
+					i_double = i-2;
+					j_double = j-2;
+					index_direction = "left-up";
 					break;
 				}		
 			}
@@ -155,63 +171,74 @@ public class checkers {
 		//check more to eat
 		while(index_direction != "" && double_food_possible(i_double,j_double,check_board)){
 			if (is_valid_coordinate(i_double - 2, j_double - 2) && check_board[i_double - 1][j_double - 1].equals("R"))//right down direction
-				if (check_board[i_double - 2][j_double - 2].equals("*")){//change the board
+				if (check_board[i_double - 2][j_double - 2].equals("*")){ //if true - execute double eat
 					check_board[i_double][j_double] = "*";
 					check_board[i_double - 1][j_double - 1] = "*";
-					check_board[i_double - 2][j_double - 2] = "W";
+					if(check_board[i_double][j_double].equals("W"))
+						check_board[i_double - 2][j_double - 2] = "W";
+					if(check_board[i_double][j_double].equals("QW"))
+						check_board[i_double - 2][j_double - 2] = "QW";
 					i_double = i_double - 2;
 					j_double = j_double - 2;
-					break;
+					continue;
 				}
 			if (is_valid_coordinate(i_double - 2, j_double + 2) && check_board[i_double - 1][j_double + 1].equals("R"))//left down direction
 				if (check_board[i_double - 2][j_double + 2].equals("*")){
 					check_board[i_double][j_double] = "*";
 					check_board[i_double - 1][j_double + 1] = "*";
-					check_board[i_double - 2][j_double + 2] = "W";
+					if(check_board[i_double][j_double].equals("W"))
+						check_board[i_double - 2][j_double + 2] = "W";
+					if(check_board[i_double][j_double].equals("QW"))
+						check_board[i_double - 2][j_double + 2] = "QW";
 					i_double = i_double - 2;
 					j_double = j_double + 2;
-					break;
+					continue;
 				}
 			if (is_valid_coordinate(i_double + 2, j_double + 2) && check_board[i_double + 1][j_double + 1].equals("R"))//right and left direction
 				if (check_board[i_double + 2][j_double + 2].equals("*")){
 					check_board[i_double][j_double] = "*";
 					check_board[i_double + 1][j_double + 1] = "*";
-					check_board[i_double + 2][j_double + 2] = "W";
+					if(check_board[i_double][j_double].equals("W"))
+						check_board[i_double + 2][j_double + 2] = "W";
+					if(check_board[i_double][j_double].equals("QW"))
+						check_board[i_double + 2][j_double + 2] = "QW";		
 					i_double = i_double + 2;
 					j_double = j_double + 2;
-					break;
+					continue;
 				}
 			if (is_valid_coordinate(i_double + 2, j_double - 2) && check_board[i_double + 1][j_double - 1].equals("R"))
 				if (check_board[i_double + 2][j_double - 2].equals("*")){
 					check_board[i_double][j_double] = "*";
 					check_board[i_double + 1][j_double - 1] = "*";
-					check_board[i_double + 2][j_double - 2] = "W";
+					if(check_board[i_double][j_double].equals("W"))
+						check_board[i_double + 2][j_double - 2] = "W";
+					if(check_board[i_double][j_double].equals("QW"))
+						check_board[i_double + 2][j_double - 2] = "QW";
 					i_double = i_double + 2;
 					j_double = j_double - 2;
-					break;
+					continue;
 				}
 		}
-		if(!flag) {//nothing to eat do a random move
-
-			int[] computer_tools = new int[12];//calculate how many tools left in the game
+		if(!flag) { //nothing to eat do a random move with regular tool
+			int[] computer_tools = new int[12]; //calculate how many tools left in the game
 			int count = 0;
 			for (int i = 0; i < 7; i++)
 				for (int j = 0; j < 7; j++) {
-					if (check_board[i][j].equals("W")) {
+					if (check_board[i][j].equals("W")||check_board[i][j].equals("QW")) {
 						computer_tools[count] = i * 10 + j;
 						count++;
 					}
 				}
 			String next_forward=random_forward(computer_tools,check_board);
-			if(!next_forward.isEmpty())
+			if(!next_forward.isEmpty()) {
 				flag=true;
-			return flag;
-
-
+				return flag;
+			}
 		}
+		
 		//if (flag==false)
 		//tie_stage();
-		flag=calc_tie_computer(check_board);//check this
+		flag=calc_tie_computer(check_board);
 		return flag;
 	}
 	public static int client_turn(String[][] check_board) {
@@ -264,6 +291,7 @@ public class checkers {
 		return 1;
 	}
 
+		
 	public static void printBoard(String[][] check_board) {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
@@ -456,8 +484,11 @@ public class checkers {
 			count_random[random_tool]++;
 			loc_i = computer_tools[random_tool] / 10;
 			loc_j = computer_tools[random_tool] % 10;
-
-			direction = is_computer_forward(loc_i, loc_j, check_board);
+			if(check_board[loc_i][loc_j].equals("W"))
+				direction = W_forward(loc_i, loc_j, check_board);
+			if(check_board[loc_i][loc_j].equals("QW"))
+				direction = QW_forward(loc_i, loc_j, check_board);
+			
 			if (direction.equals("right")||direction.equals("left")) {
 				check_board[loc_i][loc_j] = "*";
 				if (direction.equals("right"))
@@ -466,6 +497,19 @@ public class checkers {
 					check_board[loc_i+1][loc_j-1] = "W";
 				flag = true;
 			}
+			if (direction.equals("right-up")||direction.equals("left-up")||direction.equals("left-down")||direction.equals("right-down")) {
+				check_board[loc_i][loc_j] = "*";
+				if(direction.equals("right-up"))
+					check_board[loc_i-1][loc_j+1] = "QW";
+				if(direction.equals("right-down"))
+					check_board[loc_i+1][loc_j+1] = "QW";
+				if(direction.equals("left-up"))
+					check_board[loc_i-1][loc_j-1] = "QW";
+				if(direction.equals("left-down"))
+					check_board[loc_i+1][loc_j-1] = "QW";
+				flag = true;
+			}
+			
 			if(direction.equals(""))
 			{
 				computer_tools[random_tool]=0;
@@ -477,15 +521,14 @@ public class checkers {
 				if(count!=12)
 					count=0;
 				else
-					flag=true;//no forwad
+					flag=true; //no forward
 			}
 		}
 		return direction;
 
 	}
-	public static String is_computer_forward (int loc_i,int loc_j,String[][]check_board)
+	public static String W_forward (int loc_i,int loc_j,String[][]check_board)
 	{
-		int count =0;
 		int direction;
 		if  (loc_j == 0 )
 			if(check_board[loc_i+1][loc_j+1].equals("*"))
@@ -496,7 +539,7 @@ public class checkers {
 		{
 			if (check_board[loc_i+1][loc_j+1].equals("*") && check_board[loc_i+1][loc_j-1].equals("*")) {
 
-				direction = rand.nextInt(11);//1-3 right, 4-10 left
+				direction = rand.nextInt(1,11);//1-3 right, 4-10 left
 				if (direction > 0 && direction < 4)
 					return "right";
 				else return "left";
@@ -510,6 +553,18 @@ public class checkers {
 			else return "";
 		}
 
+		return "";
+	}
+	public static String QW_forward(int loc_i,int loc_j,String[][]check_board){
+		int direction = rand.nextInt(1,5);
+		if(direction==1 && is_valid_coordinate(loc_i-1,loc_j+1))
+			return "right-up";
+		if(direction==2 && is_valid_coordinate(loc_i+1,loc_j+1))
+			return "right-down";
+		if(direction==3 && is_valid_coordinate(loc_i-1,loc_j-1))
+			return "left-up";
+		if(direction==4 && is_valid_coordinate(loc_i+1,loc_j-1))
+			return "left-down";
 		return "";
 	}
 	public static boolean is_food_first_computer ( int i, int j, String[][] check_board, String direction)
@@ -598,110 +653,77 @@ public class checkers {
 	}
 
 
+	
+	//queen methods
 	public static void check_Q_computer(String[][] check_board) {
 		for(int i=7;i<8;i++)
 			for(int j=0;j<8;j++)
 				if(check_board[i][j].equals("W"))
-					check_board[i][j] = "Q-W";
+					check_board[i][j] = "QW";
 	}
 	public static void check_Q_client(String[][] check_board) {
 		for(int i=0;i<1;i++)
 			for(int j=0;j<8;j++)
 				if(check_board[i][j].equals("R"))
-					check_board[i][j] = "Q-R";
+					check_board[i][j] = "QR";
 	}
 	public static boolean is_food_queen_computer(int i, int j, String[][] check_board, String direction) {//original input . text the 2 for loop on rows and col
 
-		if (is_valid_coordinate(i+2,j+2) && check_board[i][j].equals("Q-W") && direction.equals("right-forward"))//move right
+		if (is_valid_coordinate(i+2,j+2) && check_board[i][j].equals("QW") && direction.equals("right-down"))//move right
 		{
 			if (check_board[i+1][j+1].equals("R"))
 				if (check_board[i+2][j+2].equals("*")) {
 					check_board[i][j] = "*";
 					check_board[i+1][j+1] = "*";
-					check_board[i+2][j+2] = "Q-W";
+					check_board[i+2][j+2] = "QW";
 					return true;
 				}
 		}
 
-		if (is_valid_coordinate(i-2,j+2) && check_board[i][j].equals("Q-W") && direction.equals("right-back"))//move right
+		if (is_valid_coordinate(i-2,j+2) && check_board[i][j].equals("QW") && direction.equals("right-up"))//move right
 		{
 			if (check_board[i-1][j+1].equals("R"))
 				if (check_board[i-2][j+2].equals("*")) {
 					check_board[i][j] = "*";
 					check_board[i-1][j+1] = "*";
-					check_board[i-2][j+2] = "Q-W";
+					check_board[i-2][j+2] = "QW";
 					return true;
 				}
 		}
 
-		if (is_valid_coordinate(i+2,j-2) && check_board[i][j].equals("Q-W") && direction.equals("left-forward"))//move left
+		if (is_valid_coordinate(i+2,j-2) && check_board[i][j].equals("QW") && direction.equals("left-forward"))//move left
 		{
 			if (check_board[i+1][j-1].equals("R"))
 				if (check_board[i+2][j-2].equals("*")) {
 					check_board[i][j] = "*";
 					check_board[i+1][j-1] = "*";
-					check_board[i+2][j-2] = "Q-W";
+					check_board[i+2][j-2] = "QW";
 					return true;
 				}
 		}
 
-		if (is_valid_coordinate(i-2,j-2) && check_board[i][j].equals("Q-W") && direction.equals("left-back")) {//move left
+		if (is_valid_coordinate(i-2,j-2) && check_board[i][j].equals("QW") && direction.equals("left-up")) {//move left
 			if (check_board[i-1][j-1].equals("R"))
 				if (check_board[i-2][j-2].equals("*")) {
 					check_board[i][j] = "*";
 					check_board[i-1][j-1] = "*";
-					check_board[i-2][j-2] = "Q-W";
+					check_board[i-2][j-2] = "QW";
 					return true;
 				}
 		}
 		return false; // if there is'nt any option to eat with queen
 	}
-	public static boolean double_eat_queen_computer(int i, int j, String[][] check_board) {//original input . text the 2 for loop on rows and col
-
-
-
-		if (check_board[i+1][j+1].equals("R"))
-		{
-			if (check_board[i+2][j+2].equals("*"))
-				eat_queen_computer(i+1, j+1, check_board, i+2, j+2);
-			return true;
-		}
-
-
-		if (check_board[i-1][j+1].equals("R"))
-		{
-			if (check_board[i-2][j+2].equals("*"))
-				eat_queen_computer(i-1, j+1, check_board, i-2, j+2);
-			return true;
-		}
-
-		if (check_board[i+1][j-1].equals("R"))
-		{
-			if (check_board[i+2][j-2].equals("*"))
-				eat_queen_computer(i+1, j-1, check_board, i+2, j-2);
-			return true;
-		}
-		if (check_board[i-1][j-1].equals("R"))
-		{
-			if (check_board[i-2][j-2].equals("*"))
-				eat_queen_computer(i-1, j-1, check_board, i-2, j-2);
-			return true;
-		}
-
-		return  false;
-
-	}
 	public static void is_food_queen_player(int i, int j, String[][] check_board, String direction) {//original input . text the 2 for loop on rows and col
 
 
-		if (check_board[i][j].equals("Q-R") && direction.equals("right-forward"))//move right
+		if (check_board[i][j].equals("QR") && direction.equals("right-down"))//move right
 		{
 			if (check_board[i-1][j+1].equals("W"))
 				if (check_board[i-2][j+2].equals("*"))
 					eat_queen_player(i-1, j+1, check_board, i-2, j+2);
 		}
 
-		if (check_board[i][j].equals("Q-W") && direction.equals("right-back"))//move right
+		if (check_board[i][j].equals("QW") && direction.equals("right-up"))//move right
 		{
 			if (check_board[i+1][j+1].equals("W"))
 				if (check_board[i+2][j+2].equals("*"))
@@ -709,14 +731,14 @@ public class checkers {
 		}
 
 
-		if (check_board[i][j].equals("Q-W") && direction.equals("left-forward"))//move left
+		if (check_board[i][j].equals("QW") && direction.equals("left-forward"))//move left
 		{
 			if (check_board[i-1][j-1].equals("W"))
 				if (check_board[i-2][j-2].equals("*"))
 					eat_queen_player(i-1, j-1, check_board, i+2, j-2);
 		}
 
-		if (check_board[i][j].equals("Q-W") && direction.equals("left-back")) {//move left
+		if (check_board[i][j].equals("QW") && direction.equals("left-up")) {//move left
 			if (check_board[i+1][j-1].equals("W"))
 				if (check_board[i+2][j-2].equals("*"))
 					eat_queen_player(i+1, j-1, check_board, i+2, j-2);
@@ -757,7 +779,7 @@ public class checkers {
 		return  false;
 
 	}
-	/*  public static String is_Q-W_NEWMOVE(int loc_i, int loc_j, String[][] check_board) {
+	/*  public static String is_QW_NEWMOVE(int loc_i, int loc_j, String[][] check_board) {
         int count = 0;
         int direction;
         if (loc_j == 0)
@@ -788,10 +810,9 @@ public class checkers {
 
         return "";
     }*/
-	public  static void    queen_computer_move ( int loc_i, int loc_j, String[][] check__board,int des_i,int des_j )
-	{
+	public static void queen_computer_move ( int loc_i, int loc_j, String[][] check_board,int des_i,int des_j ) {
 		check_board[loc_i][loc_j]="*";
-		check_board[des_i][des_j]="Q-R";
-		    }
+		check_board[des_i][des_j]="QR";
+	}
 
 }
