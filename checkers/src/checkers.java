@@ -4,14 +4,14 @@ import java.util.Random;
 public class checkers {
 	static Scanner sc = new Scanner(System.in);
 	static Random rand = new Random();
-	static String[][] newBoard = {{"-", "W", "-", "W", "-", "W", "-", "W"},
-			{"W", "-", "W", "-", "W", "-", "W", "-"},
-			{"-", "W", "-", "W", "-", "W", "-", "W"},
-			{"*", "-", "*", "-", "*", "-", "*", "-"},
-			{"-", "*", "-", "W", "-", "W", "-", "*"},
-			{"R", "-", "R", "-", "R", "-", "*", "-"},
-			{"-", "R", "-", "R", "-", "R", "-", "R"},
-			{"R", "-", "R", "-", "R", "-", "R", "-"}};
+	static String[][] newBoard = {{"-", "*", "-", "*", "-", "*", "-", "W"},
+			{"W", "-", "*", "-", "W", "-", "R", "-"},
+			{"-", "W", "-", "R", "-", "W", "-", "W"},
+			{"*", "-", "R", "-", "*", "-", "*", "-"},
+			{"-", "QR", "-", "W", "-", "W", "-", "*"},
+			{"W", "-", "W", "-", "*", "-", "*", "-"},
+			{"-", "R", "-", "*", "-", "R", "-", "R"},
+			{"R", "-", "*", "-", "*", "-", "R", "-"}};
 	public static void main(String[] args) {
 
 
@@ -52,8 +52,6 @@ public class checkers {
 
 			System.out.println("The board:");
 			printBoard(check_board);
-
-
 		}
 		System.out.println("BYE BYE");
 
@@ -151,7 +149,7 @@ public class checkers {
 					break;
 				}		
 			}
-		
+
 		//finish check if there is "Eat" move
 		//if there is eat = do it according to the  i,j,direction
 		if (index_direction.equals("right")) { // also indicates that 'flag' is true
@@ -235,7 +233,7 @@ public class checkers {
 				return flag;
 			}
 		}
-		
+
 		//if (flag==false)
 		//tie_stage();
 		flag=calc_tie_computer(check_board);
@@ -256,11 +254,10 @@ public class checkers {
 				int i_origin = 8 - (move.charAt(3) - '0');
 				int j_origin = (move.charAt(4) - '0') - 1;
 
-				if (is_empty(move, check_board) && isRed(move, check_board)) {
-
-					if (is_food_client(move, check_board)) {
+				if (is_empty(move, check_board) && isQR(move, check_board)) {
+					if (is_food_client_QR(move, check_board)) {
 						check_board[i_origin][j_origin] = "*";
-						check_board[i_dest][j_dest] = "R";
+						check_board[i_dest][j_dest] = "QR";
 						if (i_dest > i_origin) { //move down
 							if (j_dest > j_origin) //move down and right
 								check_board[i_origin + 1][j_origin + 1] = "*";
@@ -274,11 +271,32 @@ public class checkers {
 								check_board[i_origin - 1][j_origin - 1] = "*";
 						}
 
-						if (double_food_possible(i_dest, j_dest, check_board))
+						flag = true;
+						if (double_food_possible(i_dest, j_dest, check_board) && flag)
 							execute_double_food(check_board);
+					}
+					if (isfoward_client_QR(move, check_board) && !flag) {
+						check_board[i_origin][j_origin] = "*";
+						check_board[i_dest][j_dest] = "QR";
 						flag = true;
 					}
-					if (isfoward_client(move, check_board)) {
+				}
+				if (is_empty(move, check_board) && isRed(move, check_board) && !flag) {
+					if (is_food_client(move, check_board)) {
+						check_board[i_origin][j_origin] = "*";
+						check_board[i_dest][j_dest] = "R";
+						if (i_dest < i_origin) { //move up
+							if (j_dest > j_origin) //move up and right
+								check_board[i_origin - 1][j_origin + 1] = "*";
+							if (j_dest < j_origin) //move up and left
+								check_board[i_origin - 1][j_origin - 1] = "*";
+						}
+
+						flag = true;
+						if (double_food_possible(i_dest, j_dest, check_board) && flag)
+							execute_double_food(check_board);
+					}
+					if (isfoward_client(move, check_board) && !flag) {
 						check_board[i_origin][j_origin] = "*";
 						check_board[i_dest][j_dest] = "R";
 						flag = true;
@@ -291,7 +309,7 @@ public class checkers {
 		return 1;
 	}
 
-		
+
 	public static void printBoard(String[][] check_board) {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
@@ -336,6 +354,13 @@ public class checkers {
 				flag = false;
 		}
 	}
+	public static boolean isQR(String move, String[][] check_board) {
+		int i = 8 - (move.charAt(3) - '0');
+		int j = (move.charAt(4) - '0') - 1;
+		if (check_board[i][j].equals("QR"))
+			return true;
+		return false;
+	}
 	public static boolean isRed(String move, String[][] check_board) {
 		int i = 8 - (move.charAt(3) - '0');
 		int j = (move.charAt(4) - '0') - 1;
@@ -343,12 +368,23 @@ public class checkers {
 			return true;
 		return false;
 	}
+	public static boolean isfoward_client_QR(String move, String[][] check_board) {
+		int i_dest = 8 - (move.charAt(0) - '0');
+		int j_dest = (move.charAt(1) - '0') - 1;
+		int i_origin = 8 - (move.charAt(3) - '0');
+		int j_origin = (move.charAt(4) - '0') - 1;
+		if(is_valid_coordinate(i_origin, j_origin) && is_valid_coordinate(i_dest, j_dest))
+			if (i_origin == i_dest + 1 || i_origin == i_dest - 1)
+				if (j_origin == j_dest + 1 || j_origin == j_dest - 1)
+					return true;
+		return false;
+	}
 	public static boolean isfoward_client(String move, String[][] check_board) {
 		int i_dest = 8 - (move.charAt(0) - '0');
 		int j_dest = (move.charAt(1) - '0') - 1;
 		int i_origin = 8 - (move.charAt(3) - '0');
 		int j_origin = (move.charAt(4) - '0') - 1;
-		if (i_origin == 0 || j_dest < 0 || j_dest > 7)
+		if (i_origin <= 0 || j_dest < 0 || j_dest > 7)
 			return false;
 		if (i_origin == i_dest + 1)
 			if (j_origin == j_dest + 1 || j_origin == j_dest - 1)
@@ -363,6 +399,21 @@ public class checkers {
 		return true;
 	}
 	public static boolean is_food_client(String move, String[][] check_board) {
+		int i_dest = 8 - (move.charAt(0) - '0');
+		int j_dest = (move.charAt(1) - '0') - 1;
+		int i_origin = 8 - (move.charAt(3) - '0');
+		int j_origin = (move.charAt(4) - '0') - 1;
+		if (i_origin == i_dest + 2) { //move up
+			if (j_origin == j_dest - 2)//move up and right
+				if (check_board[i_origin - 1][j_origin + 1].equals("W"))
+					return true;
+			if (j_origin == j_dest + 2)//move up and left
+				if (check_board[i_origin - 1][j_origin - 1].equals("W"))
+					return true;
+		}
+		return false;
+	}
+	public static boolean is_food_client_QR(String move, String[][] check_board) {
 		int i_dest = 8 - (move.charAt(0) - '0');
 		int j_dest = (move.charAt(1) - '0') - 1;
 		int i_origin = 8 - (move.charAt(3) - '0');
@@ -488,7 +539,7 @@ public class checkers {
 				direction = W_forward(loc_i, loc_j, check_board);
 			if(check_board[loc_i][loc_j].equals("QW"))
 				direction = QW_forward(loc_i, loc_j, check_board);
-			
+
 			if (direction.equals("right")||direction.equals("left")) {
 				check_board[loc_i][loc_j] = "*";
 				if (direction.equals("right"))
@@ -509,7 +560,7 @@ public class checkers {
 					check_board[loc_i+1][loc_j-1] = "QW";
 				flag = true;
 			}
-			
+
 			if(direction.equals(""))
 			{
 				computer_tools[random_tool]=0;
@@ -653,7 +704,7 @@ public class checkers {
 	}
 
 
-	
+
 	//queen methods
 	public static void check_Q_computer(String[][] check_board) {
 		for(int i=7;i<8;i++)
@@ -712,107 +763,6 @@ public class checkers {
 				}
 		}
 		return false; // if there is'nt any option to eat with queen
-	}
-	public static void is_food_queen_player(int i, int j, String[][] check_board, String direction) {//original input . text the 2 for loop on rows and col
-
-
-		if (check_board[i][j].equals("QR") && direction.equals("right-down"))//move right
-		{
-			if (check_board[i-1][j+1].equals("W"))
-				if (check_board[i-2][j+2].equals("*"))
-					eat_queen_player(i-1, j+1, check_board, i-2, j+2);
-		}
-
-		if (check_board[i][j].equals("QW") && direction.equals("right-up"))//move right
-		{
-			if (check_board[i+1][j+1].equals("W"))
-				if (check_board[i+2][j+2].equals("*"))
-					eat_queen_player(i+1, j+1, check_board, i +2, j+2);
-		}
-
-
-		if (check_board[i][j].equals("QW") && direction.equals("left-forward"))//move left
-		{
-			if (check_board[i-1][j-1].equals("W"))
-				if (check_board[i-2][j-2].equals("*"))
-					eat_queen_player(i-1, j-1, check_board, i+2, j-2);
-		}
-
-		if (check_board[i][j].equals("QW") && direction.equals("left-up")) {//move left
-			if (check_board[i+1][j-1].equals("W"))
-				if (check_board[i+2][j-2].equals("*"))
-					eat_queen_player(i+1, j-1, check_board, i+2, j-2);
-		}
-
-
-
-	}
-	public static boolean double_eat_player_computer(int i, int j, String[][] check_board) {//original input . text the 2 for loop on rows and col
-
-		if (check_board[i-1][j+1].equals("w"))
-		{
-			if (check_board[i-2][j+2].equals("*"))
-				eat_queen_computer(i- 1, j+1, check_board, i-2, j+2);
-			return true;
-		}
-
-		if (check_board[i +1][j+1].equals("w"))
-		{
-			if (check_board[i-2][j+2].equals("*"))
-				eat_queen_computer(i+1, j+1, check_board, i+2, j+2);
-			return true;
-		}
-
-		if (check_board[i-1][j-1].equals("W"))
-		{
-			if (check_board[i-2][j-2].equals("*"))
-				eat_queen_computer(i-1, j-1, check_board, i-2, j-2);
-			return true;
-		}
-		if (check_board[i+1][j-1].equals("W"))
-		{
-			if (check_board[i+2][j-2].equals("*"))
-				eat_queen_computer(i+ 1, j-1, check_board, i+2, j-2);
-			return true;
-		}
-
-		return  false;
-
-	}
-	/*  public static String is_QW_NEWMOVE(int loc_i, int loc_j, String[][] check_board) {
-        int count = 0;
-        int direction;
-        if (loc_j == 0)
-            if (check_board[loc_i+1][loc_j+1].equals("")&& check_board[loc_i-1][loc_j+1].equals(""))
-                direction = rand.nextInt(5);//1-3 right, 4-10 left
-        if (direction > 0 && direction < 2)
-                queen_computer_move(i,j,check_board,i+1,j+1);
-            else
-            queen_computer_move(i,j,check_board,i-1,j+1);
-
-        if (loc_j >= 1 || loc_j <= 6)//both direction
-        {
-            if (check_board[loc_i+1][loc_j+1].equals("") && check_board[loc_i+1][loc_j-1].equals("")) {
-
-                direction = rand.nextInt(11);//1-3 right, 4-10 left
-                if (direction > 0 && direction < 4)
-                    return "right";
-                else return "left";
-            }
-
-
-        }
-        if (loc_j == 7) { //left
-            if (check_board[loc_i+1][loc_j-1].equals("*"))
-                return "left";
-            else return "";
-        }
-
-        return "";
-    }*/
-	public static void queen_computer_move ( int loc_i, int loc_j, String[][] check_board,int des_i,int des_j ) {
-		check_board[loc_i][loc_j]="*";
-		check_board[des_i][des_j]="QR";
 	}
 
 }
