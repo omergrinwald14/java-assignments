@@ -247,7 +247,7 @@ public class checkers {
 
                 if (is_empty(move, check_board) && isQR(move, check_board)) {//if its a queen
                     if (is_food_client_QR(move, check_board)) {
-                        check_board[i_origin][j_origin] = "*";//change the borad
+                        check_board[i_origin][j_origin] = "*";//change the board
                         check_board[i_dest][j_dest] = "Q-R";
                         if (i_dest > i_origin) { //move down, eat the white
                             if (j_dest > j_origin) //move down and right
@@ -266,13 +266,12 @@ public class checkers {
                         if (double_food_possible(i_dest, j_dest, check_board) && flag)
                             execute_double_food(check_board);
                     }
-                    if(check_board[i_origin][j_origin].equals("Q-R")) { 
                         if (isfoward_client_QR(move, check_board) && !flag) {
                             check_board[i_origin][j_origin] = "*";
                             check_board[i_dest][j_dest] = "Q-R";
                             flag = true;
                         }
-                    }
+                    
                 }
                 if (is_empty(move, check_board) && isRed(move, check_board) && !flag) {
                     if (is_food_client(move, check_board)) {
