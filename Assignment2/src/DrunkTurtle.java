@@ -26,8 +26,8 @@ public class DrunkTurtle extends Turtle{
 		int d = (int)(Math.random()*1.5*degrees);
 		super.turnLeft(d);
 	}
-	 public void move_notdrunk(int x)
+	 public void move_notdrunk(double x)
 	 {
-		 super.moveforward(x);
+		 super.moveForward(x);
 	 }
 }
