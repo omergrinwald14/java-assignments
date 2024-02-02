@@ -16,7 +16,6 @@ public class DrunkTurtle extends Turtle{
 			double d2 = Math.random()*distance;
 			super.moveForward(d2);
 		}	
-		
 	}
 	public void turnRight(int degrees) {
 		int d = (int)(Math.random()*1.5*degrees);
@@ -26,8 +25,7 @@ public class DrunkTurtle extends Turtle{
 		int d = (int)(Math.random()*1.5*degrees);
 		super.turnLeft(d);
 	}
-	 public void move_notdrunk(double x)
-	 {
-		 super.moveForward(x);
+	public void move_NotDrunk(double distance) {
+		 super.moveForward(distance);
 	 }
 }
