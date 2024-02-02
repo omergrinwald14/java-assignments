@@ -12,6 +12,13 @@ public class HangoverTurtle extends DrunkTurtle
 		  }	
 		 //else, 50% of not doing anything
 	}
+	public void turnRightNormal(int degree) {
+		super.turnRightNormal(degree);
+	}
+	
+	public void move_NotDrunk(double distance) {
+		super.move_NotDrunk(distance);
+	}
 
 }
 

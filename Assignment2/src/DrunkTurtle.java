@@ -28,4 +28,7 @@ public class DrunkTurtle extends Turtle{
 	public void move_NotDrunk(double distance) {
 		 super.moveForward(distance);
 	 }
+	public void turnRightNormal(int degree) {
+		super.turnRight(degree);
+	}
 }

@@ -7,7 +7,7 @@ public class JumpyTurtle extends IntelligentTurtle {
 		isTailDown = true;
 	}
 	public void tailUp() {
-		super.tailDown();
+		super.tailUp();
 		isTailDown = false;
 	}
 	public void moveForward(double distance) {

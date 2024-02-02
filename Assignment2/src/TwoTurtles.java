@@ -1,7 +1,8 @@
 import Turtle.*;
+
 public class TwoTurtles {
 
-	public static void main(String[] argT) {
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Turtle Sami = new Turtle();
 		Turtle Sumo = new Turtle();
