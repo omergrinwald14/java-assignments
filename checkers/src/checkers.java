@@ -14,8 +14,6 @@ public class checkers {
             {"R", "-", "", "-", "", "-", "R", "-"}};
     public static void main(String[] args) {
 
-
-
         boolean status_game = true;
         int status_client = 1;
         String[][] check_board = new String[8][8];

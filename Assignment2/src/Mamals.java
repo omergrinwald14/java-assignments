@@ -1,11 +1,7 @@
 
 public class Mamals {
-String type;
-public Mamals (String type)
-{
-	this.type=type;
-}
-	public static boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals)
+protected String type;
+public static boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals)
 	{
 		 if (i_origin == i_dest + 1)
 	            if (j_origin == j_dest + 1 || j_origin == j_dest - 1)
@@ -18,7 +14,7 @@ public Mamals (String type)
 	                return true;
 	        return false;
 	}
-	  public static boolean is_first_food(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
+public static boolean is_first_food(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
 	        
 	        if (i_origin == i_dest + 2) { //move up
 	            if (j_origin == j_dest - 2)//move up and right
@@ -45,3 +41,23 @@ public static boolean is_double_food(int i_dest,int j_dest,int i_origin,int j_or
 	
 }
 
+//constructors
+public Mamals (String type) {
+		this.type=type;
+}
+
+//getters
+public String GetType() {
+	return type;
+}
+public String toString() {
+	return type;
+}
+
+public boolean equals(Mamals other) {
+	if(this.type.equals(other.type))
+		return true;
+	else
+		return false;
+}
+}
