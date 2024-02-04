@@ -13,8 +13,20 @@ public class Mamals_Checkers {
         	endGame();
         if(choose == 1)
         	startGame();
+<<<<<<< HEAD
         while (status_game==1 && status_client == 1) {
         }
+=======
+  int status_game=1;
+  int status_player=1;
+ /* while (status_game==1 && status_player==1)
+  {
+	  
+  }
+      */      
+        
+
+>>>>>>> branch 'main' of https://github.com/omergrinwald14/java-assignments.git
 	}
 	public static void setNewBoard(Mamals[][] check_mamals) {
 		for(int i=0;i<check_mamals.length;i++) {
@@ -70,9 +82,26 @@ public class Mamals_Checkers {
 	            System.out.println();
 	        }
 	    }
+<<<<<<< HEAD
 	public static boolean is_valid_coordinate(int i, int j) {
         if (i > 7 || i < 0 || j > 7 || j < 0)
             return false;
         return true;
     }
+=======
+	 public static int player_turn(String[][] check_board) {
+		 System.out.println("It's your turn, please enter your move.");
+	        String move = sc.next();
+            if (move.equals("STOP"))
+            	computer_winner();
+            return 0;
+	 }
+	 public static void client_winner() {
+
+	        System.out.println("Congratulations, user has won :)");
+	    }
+	 public static void computer_winner() {
+	        System.out.println("Sorry, computer has won:(");
+	    }
+>>>>>>> branch 'main' of https://github.com/omergrinwald14/java-assignments.git
 }
