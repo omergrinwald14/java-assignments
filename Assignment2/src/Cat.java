@@ -20,39 +20,97 @@ public static boolean forward_player(int i_dest,int j_dest,int i_origin,int j_or
 		return false;
 	}
 public static boolean forward_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
+ int i_dest=0;
+ int j_dest=0;
+ boolean flag=false;
 
-	if (check_mamals[i_origin+1][j_origin+1].equals("*")||check_mamals[i_origin+1][j_origin+1].equals("*"))
-	{
-		double direction=1+(int)Math.random()*10;
-		if(direction <=5)//move right
+		for (int direction=1;direction<=8&& !flag ;direction++;)
 		{
-			check_mamals[i_origin+1][j_origin+1]=check_mamals[i_origin][j_origin];
-			check_mamals[i_origin][j_origin]=new Mamals("*",0);
+		if(direction ==1)//move up and the most left
+		{
+			if(check_mamals [i_origin+1][j_origin-1].equals("*"))
+			{
+			i_dest=1;
+			j_dest=-1;
+			flag=true;
+			}
+			if(direction ==2)//move up and the most left
+			{
+				if(check_mamals [i_origin+1][j_origin].equals("*"))
+				{
+				i_dest=1;
+				j_dest=0;
+				flag=true;
+				}
+			}
+			if(direction ==3)//move up and the most left
+			{
+				if(check_mamals [i_origin+1][j_origin+1].equals("*"))
+				{
+				i_dest=1;
+				j_dest=1;
+				flag=true;
+				}
+			}
+			if(direction ==4)//move up and the most left
+			{
+				if(check_mamals [i_origin][j_origin-1].equals("*"))
+				{
+				i_dest=0;
+				j_dest=-1;
+				flag=true;
+				}
+			}
+			if(direction ==5)//move up and the most left
+			{
+				if(check_mamals [i_origin][j_origin+1].equals("*"))
+				{
+				i_dest=0;
+				j_dest=1;
+				flag=true;
+				}
+			}
+			if(direction ==6)//move up and the most left
+			{
+				if(check_mamals [i_origin-1][j_origin-1].equals("*"))
+				{
+				i_dest=-1;
+				j_dest=-1;
+				flag=true;
+				}
+			}
+			if(direction ==7)//move up and the most left
+			{
+				if(check_mamals [i_origin-1][j_origin].equals("*"))
+				{
+				i_dest=-1;
+				j_dest=0;
+				flag=true;
+				}
+			}
+			if(direction ==8)//move up and the most left
+			{
+				if(check_mamals [i_origin-1][j_origin+1].equals("*"))
+				{
+				i_dest=-1;
+				j_dest=1;
+				flag=true;
+				}
+			}
+		}
+			if(i_dest!=0||j_dest!=0)
+			{
+			check_mamals[i_origin+i_dest][j_origin+j_dest]=check_mamals[i_origin][j_origin];
+			check_mamals[i_origin][j_origin]=new Mamals("*",0);	
 			return true;
-		}
-			else//move left 
-			{
-				check_mamals[i_origin+1][j_origin-1]=check_mamals[i_origin][j_origin];
-				check_mamals[i_origin][j_origin]=new Mamals("*",0);	
-				return true;
 			}
+			return false;
 		}
-	if (check_mamals[i_origin+1][j_origin+1].equals("*"))//only right
-			{
-		check_mamals[i_origin+1][j_origin+1]=check_mamals[i_origin][j_origin];
-		check_mamals[i_origin][j_origin]=new Mamals("*",0);
-		return true;
-			}
-	if (check_mamals[i_origin+1][j_origin+1].equals("*"))//only left
-	{
-		check_mamals[i_origin+1][j_origin-1]=check_mamals[i_origin][j_origin];
-		check_mamals[i_origin][j_origin]=new Mamals("*",0);	
-		return true;
-	}
+		
+			
+}}
+
 	
-return false;
-}
-	}
 
 
 
