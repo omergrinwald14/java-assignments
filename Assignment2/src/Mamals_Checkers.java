@@ -21,11 +21,6 @@ public class Mamals_Checkers {
 			status_player =	player_turn(check_mamals);
 
 		}
-
-
-	}
-	private static int check_player_winner() {
-		return 0;
 	}
 	public static void setNewBoard(Mamals[][] check_mamals) {
 		for(int i=0;i<check_mamals.length;i++) {
@@ -166,3 +161,4 @@ public class Mamals_Checkers {
 		return true;
 	}
 
+}
