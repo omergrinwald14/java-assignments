@@ -1,8 +1,8 @@
 
 public class Mouse extends Elephant {
 
-	public Mouse(String type) {
-		super(type);
+	public Mouse(String name,int type) {
+		super(name,type);
 	}
 	
 	public static boolean first_food(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {

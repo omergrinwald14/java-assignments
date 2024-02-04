@@ -109,7 +109,7 @@ public class Mamals {
 		if(this.name.equals(other))
 			return true;
 		else
-			return false;
+			return false;
 	}
 
 }

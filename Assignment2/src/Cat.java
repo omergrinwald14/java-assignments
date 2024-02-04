@@ -1,8 +1,8 @@
 
 public class Cat extends Mamals {
 
-	public Cat(String type) {
-		super(type);
+	public Cat(String name,int type) {
+		super(name,type);
 	}
 public static boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals)
 	
