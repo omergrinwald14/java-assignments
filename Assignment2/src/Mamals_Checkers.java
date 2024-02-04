@@ -18,9 +18,9 @@ public class Mamals_Checkers {
 		int status_game=1;
 		int status_player=1;
 		while (status_game==1 && status_player==1){
-			
+
 		}
-		    
+
 
 	}
 	public static void setNewBoard(Mamals[][] check_mamals) {
