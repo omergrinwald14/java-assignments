@@ -17,5 +17,7 @@ public static boolean forward_player(int i_dest,int j_dest,int i_origin,int j_or
 				}
 		return false;
 	}
-
+	}
 }
+
+
