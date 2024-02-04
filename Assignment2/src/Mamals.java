@@ -1,85 +1,120 @@
 
-public class Mamals {
+public class Mamals { 
 
-	protected String type;
-public Mamals (String type)
+	protected String name;
+	protected int type;
 
-{
-	this.type=type;
-	
-}
-	
-
-public static boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals)
+	public static boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals)
 
 	{
-		 if (i_origin == i_dest - 1)
-	            if (j_origin == j_dest + 1 || j_origin == j_dest - 1)
-	            	if(check_mamals[i_dest][j_dest].equals("*"))
-	            	{
-	      
-	            	check_mamals[i_origin][j_origin]=new Mamals("*");
-		 check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
-	            	}
-	                return true;
-	        return false;
+		if (i_origin == i_dest - 1)
+			if (j_origin == j_dest + 1 || j_origin == j_dest - 1)
+				if(check_mamals[i_dest][j_dest].equals("*")){
+					check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
+					check_mamals[i_origin][j_origin]=new Mamals("*",0);
+					return true;
+				}
+		return false;
 	}
-public static boolean is_first_food(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
-	        
-	        if (i_origin == i_dest - 2) { //move up
-	            if (j_origin == j_dest - 2)//move up and left
-	            	if(check_mamals[i_origin - 1][j_origin + 1].type.substring(type.length)=="2")
-	            		check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
-	            	check_mamals[i_origin][j_origin]= new Mamals("*");
-		 check_mamals[i_dest-1][j_dest+1]=new Mamals("*");
-	                    return true;
-	                }
-	            if (j_origin == j_dest + 2)//up and right
-	            if(check_mamals[i_origin - 1][j_origin - 1].type.charAt(check_mamals[i_origin - 1][j_origin - 1].type.length()-1)=='2')
-                {//move up and left
-	            	check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
-            	check_mamals[i_origin][j_origin]=new Mamals("*");
-	 check_mamals[i_dest-1][j_dest-1]=new Mamals("*");
-	                
-	                    return true;
-	        }
-	                
-                return false;
-	        }
+	public static boolean first_food(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
 
-/*public static boolean is_double_food_forwardright(int i_origin,int j_origin,Mamals [][] check_mamals)// {
-	if(check_mamals[i_origin + 1][j_origin + 1].charAt(1).equals("2"))
-		check_mamals[i_origin+2][j_dest+2]=check_mamals[i_origin][j_origin];
-	check_mamals[i_origin][j_origin]=new Mamals("*");
-check_mamals[i_origin+1][j_origin+1]=new Mamals("*");
-        return true;*/
-}
+		if (i_origin == i_dest - 2) { //move up
+			if (j_origin == j_dest - 2)//move up and right
+				if(check_mamals[i_origin - 1][j_origin + 1].type==2)
+					if(check_mamals[i_origin - 2][j_origin + 2].type==0)//check that is empty
+						check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
+			check_mamals[i_origin][j_origin]= new Mamals("*",0);
+			check_mamals[i_dest-1][j_dest+1]=new Mamals("*",0);
+			return true;
+		}
+		if (j_origin == j_dest + 2)//up and left
+			if(check_mamals[i_origin - 1][j_origin - 1].type==2)
+				if(check_mamals[i_origin - 2][j_origin - 2].type==0)//check that is empty
+				{//move up and left
+					check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
+					check_mamals[i_origin][j_origin]=new Mamals("*",0);
+					check_mamals[i_dest-1][j_dest-1]=new Mamals("*",0);
+
+					return true;
+				}
+
+		return false;
+	}
+
+	public static boolean double_food(int i_origin,int j_origin,Mamals [][] check_mamals) {
+		if(check_mamals[i_origin - 1][j_origin + 1].type==2)//up right
+			if(check_mamals[i_origin - 2][j_origin + 2].type==0)
+			{
+				check_mamals[i_origin-2][j_origin+2]=check_mamals[i_origin][j_origin];
+				check_mamals[i_origin][j_origin]= new Mamals("*",0);
+				check_mamals[i_origin-1][j_origin+1]=new Mamals("*",0);
+				return true;
+			}
+		//up and left
+		if(check_mamals[i_origin - 1][j_origin - 1].type==2)
+			if(check_mamals[i_origin - 2][j_origin - 2].type==0)//check that is empty
+			{//move up and left
+				check_mamals[i_origin-2][j_origin-2]=check_mamals[i_origin][j_origin];
+				check_mamals[i_origin][j_origin]=new Mamals("*",0);
+				check_mamals[i_origin-1][j_origin-1]=new Mamals("*",0);
+				return true;
+			}
+		if(check_mamals[i_origin - 1][j_origin - 1].type==2)
+			if(check_mamals[i_origin - 2][j_origin - 2].type==0)//check that is empty
+			{//move up and left
+				check_mamals[i_origin-2][j_origin-2]=check_mamals[i_origin][j_origin];
+				check_mamals[i_origin][j_origin]=new Mamals("*",0);
+				check_mamals[i_origin-1][j_origin-1]=new Mamals("*",0);
+				return true;
+			}
+		if(check_mamals[i_origin +1][j_origin + 1].type==2)//back right
+			if(check_mamals[i_origin + 2][j_origin + 2].type==0)//check that is empty
+			{//move up and left
+				check_mamals[i_origin+2][j_origin+2]=check_mamals[i_origin][j_origin];
+				check_mamals[i_origin][j_origin]=new Mamals("*",0);
+				check_mamals[i_origin+1][j_origin+1]=new Mamals("*",0);
+				return true;
+			}
+		if(check_mamals[i_origin +1][j_origin - 1].type==2)//back left
+			if(check_mamals[i_origin + 2][j_origin - 2].type==0)//check that is empty
+			{//move up and left
+				check_mamals[i_origin+2][j_origin-2]=check_mamals[i_origin][j_origin];
+				check_mamals[i_origin][j_origin]=new Mamals("*",0);
+				check_mamals[i_origin+1][j_origin-1]=new Mamals("*",0);
+				return true;
+			}
+		return false;
+	}
 
 
-//constructors
-public Mamals (String type) {
+
+
+	//constructors
+	public Mamals (String name,int type) {
+		this.name=name;
 		this.type=type;
-}
 
-//getters
-public String GetType() {
-	return type;
-}
-public String toString() {
-	return type;
-}
+	}
 
-public boolean equals(Mamals other) {
-	if(this.type.equals(other.type))
-		return true;
-	else
-		return false;
-}
-public boolean equals(String other) {
-	if(this.type.equals(other))
-		return true;
-	else
-		return false;
-}
+	//getters
+	public String Getname() {
+		return name;
+	}
+	public String toString() {
+		return name;
+	}
+
+	public boolean equals(Mamals other) {
+		if(this.name.equals(other.name))
+			return true;
+		else
+			return false;
+	}
+	public boolean equals(String other) {
+		if(this.name.equals(other))
+			return true;
+		else
+			return false;
+	}
 
 }

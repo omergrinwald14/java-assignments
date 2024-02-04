@@ -1,8 +1,8 @@
 
 public class Mouse extends Elephant {
 
-	public Mouse(String type) {
-		super(type);
+	public Mouse(String name,int type) {
+		super(name,type);
 	}
 
 	

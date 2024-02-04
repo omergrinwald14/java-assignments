@@ -1,8 +1,9 @@
 
 public class Elephant extends Mamals {
 
-	public Elephant(String type) {
-		super(type);
+	public Elephant(String name,int type) {
+		super(name,type);
 	}
+	
 
 }
