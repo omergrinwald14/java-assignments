@@ -57,7 +57,7 @@ public class Mamals {
 				check_mamals[i_origin-1][j_origin-1]=new Mamals("*",0);
 				return true;
 			}
-		
+
 		if(check_mamals[i_origin +1][j_origin + 1].type==2)//back right
 			if(check_mamals[i_origin + 2][j_origin + 2].type==0)//check that is empty
 			{//move up and left
@@ -76,64 +76,64 @@ public class Mamals {
 			}
 		return false;
 	}
-	
+
 	public static boolean forward_computer(int i_origin,int j_origin,Mamals [][] check_mamals)
 
 	{
-			if (check_mamals[i_origin+1][j_origin+1].equals("*")||check_mamals[i_origin+1][j_origin-1].equals("*"))
+		if ((is_valid_coordinate(i_origin+1,j_origin+1)&&check_mamals[i_origin+1][j_origin+1].equals("*"))||(is_valid_coordinate(i_origin+1, j_origin-1)&&check_mamals[i_origin+1][j_origin-1].equals("*")))
+		{
+			double direction=1+(int)Math.random()*10;
+			if(direction <=5 && is_valid_coordinate(i_origin+1, j_origin+1))//move right
 			{
-				double direction=1+(int)Math.random()*10;
-				if(direction <=5)//move right
-				{
-					check_mamals[i_origin+1][j_origin+1]=check_mamals[i_origin][j_origin];
-					check_mamals[i_origin][j_origin]=new Mamals("*",0);
-					return true;
-				}
-					else//move left 
-					{
-						check_mamals[i_origin+1][j_origin-1]=check_mamals[i_origin][j_origin];
-						check_mamals[i_origin][j_origin]=new Mamals("*",0);	
-						return true;
-					}
-				}
-			if (check_mamals[i_origin+1][j_origin+1].equals("*"))//only right
-					{
 				check_mamals[i_origin+1][j_origin+1]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);
 				return true;
-					}
-			if (check_mamals[i_origin+1][j_origin-1].equals("*"))//only left
+			}
+			else if(is_valid_coordinate(i_origin+1, j_origin-1))//move left 
 			{
 				check_mamals[i_origin+1][j_origin-1]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);	
 				return true;
 			}
-			
+		}
+		if (is_valid_coordinate(i_origin+1, j_origin+1) && check_mamals[i_origin+1][j_origin+1].equals("*"))//only right
+		{
+			check_mamals[i_origin+1][j_origin+1]=check_mamals[i_origin][j_origin];
+			check_mamals[i_origin][j_origin]=new Mamals("*",0);
+			return true;
+		}
+		if (is_valid_coordinate(i_origin+1, j_origin-1) && check_mamals[i_origin+1][j_origin-1].equals("*"))//only left
+		{
+			check_mamals[i_origin+1][j_origin-1]=check_mamals[i_origin][j_origin];
+			check_mamals[i_origin][j_origin]=new Mamals("*",0);	
+			return true;
+		}
+
 		return false;
 	}
 	public static boolean first_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
-		
-				if(check_mamals[i_origin + 1][j_origin + 1].type==1)//move up right
-					if(check_mamals[i_origin + 2][j_origin + 2].equals("*"))
-					{//check that is empty
-						check_mamals[i_origin+2][j_origin+2]=check_mamals[i_origin][j_origin];
-			check_mamals[i_origin][j_origin]= new Mamals("*",0);
-			check_mamals[i_origin+1][j_origin+1]=new Mamals("*",0);
-			return true;
-		}
-				if(check_mamals[i_origin + 1][j_origin - 1].type==1)//move up left
-					if(check_mamals[i_origin + 2][j_origin - 2].equals("*"))
-					{//check that is empty
-						check_mamals[i_origin+2][j_origin-2]=check_mamals[i_origin][j_origin];
-			check_mamals[i_origin][j_origin]= new Mamals("*",0);
-			check_mamals[i_origin+1][j_origin-1]=new Mamals("*",0);
-			return true;
-				}
+
+		if(is_valid_coordinate(i_origin+2, j_origin+2) && check_mamals[i_origin + 1][j_origin + 1].type==1)//move up right
+			if(check_mamals[i_origin + 2][j_origin + 2].equals("*"))
+			{//check that is empty
+				check_mamals[i_origin+2][j_origin+2]=check_mamals[i_origin][j_origin];
+				check_mamals[i_origin][j_origin]= new Mamals("*",0);
+				check_mamals[i_origin+1][j_origin+1]=new Mamals("*",0);
+				return true;
+			}
+		if(is_valid_coordinate(i_origin+2, j_origin-2) && check_mamals[i_origin + 1][j_origin - 1].type==1)//move up left
+			if(check_mamals[i_origin + 2][j_origin - 2].equals("*"))
+			{//check that is empty
+				check_mamals[i_origin+2][j_origin-2]=check_mamals[i_origin][j_origin];
+				check_mamals[i_origin][j_origin]= new Mamals("*",0);
+				check_mamals[i_origin+1][j_origin-1]=new Mamals("*",0);
+				return true;
+			}
 
 		return false;
 	}
 	public static boolean double_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
-		if(check_mamals[i_origin - 1][j_origin + 1].type==1)//back right
+		if(is_valid_coordinate(i_origin-2, j_origin+2) && check_mamals[i_origin - 1][j_origin + 1].type==1)//back right
 			if(check_mamals[i_origin - 2][j_origin + 2].equals("*"))
 			{
 				check_mamals[i_origin-2][j_origin+2]=check_mamals[i_origin][j_origin];
@@ -142,7 +142,7 @@ public class Mamals {
 				return true;
 			}
 		//up and left
-		if(check_mamals[i_origin - 1][j_origin - 1].type==1)//back left
+		if(is_valid_coordinate(i_origin-2, j_origin-2) && check_mamals[i_origin - 1][j_origin - 1].type==1)//back left
 			if(check_mamals[i_origin - 2][j_origin - 2].equals("*"))//check that is empty
 			{//move up and left
 				check_mamals[i_origin-2][j_origin-2]=check_mamals[i_origin][j_origin];
@@ -150,8 +150,8 @@ public class Mamals {
 				check_mamals[i_origin-1][j_origin-1]=new Mamals("*",0);
 				return true;
 			}
-		
-		if(check_mamals[i_origin +1][j_origin + 1].type==1)//up right
+
+		if(is_valid_coordinate(i_origin+2, j_origin+2) && check_mamals[i_origin +1][j_origin + 1].type==1)//up right
 			if(check_mamals[i_origin + 2][j_origin + 2].equals("*"))//check that is empty
 			{//move up and left
 				check_mamals[i_origin+2][j_origin+2]=check_mamals[i_origin][j_origin];
@@ -159,7 +159,7 @@ public class Mamals {
 				check_mamals[i_origin+1][j_origin+1]=new Mamals("*",0);
 				return true;
 			}
-		if(check_mamals[i_origin +1][j_origin - 1].type==1)//up left
+		if(is_valid_coordinate(i_origin+2, j_origin-2) && check_mamals[i_origin +1][j_origin - 1].type==1)//up left
 			if(check_mamals[i_origin + 2][j_origin - 2].equals("*"))//check that is empty
 			{//move up and left
 				check_mamals[i_origin+2][j_origin-2]=check_mamals[i_origin][j_origin];
@@ -169,14 +169,15 @@ public class Mamals {
 			}
 		return false;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public static boolean is_valid_coordinate(int i, int j) {
+		if (i > 7 || i < 0 || j > 7 || j < 0)
+			return false;
+		return true;
+	}
+
+
+
 
 	//constructors
 	public Mamals (String name,int type) {
