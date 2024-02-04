@@ -170,6 +170,7 @@ public class Mamals {
 		return false;
 	}
 
+
 	public static boolean is_valid_coordinate(int i, int j) {
 		if (i > 7 || i < 0 || j > 7 || j < 0)
 			return false;
