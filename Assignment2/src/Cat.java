@@ -19,7 +19,7 @@ public class Cat extends Mamals {
 			}
 		return false;
 	}
-	public static boolean forward_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
+	public static boolean forward_computer(int i_origin,int j_origin,Mamals[][] check_mamals) {
 		int i_dest=0;
 		int j_dest=0;
 		boolean flag=false;
@@ -28,7 +28,7 @@ public class Cat extends Mamals {
 		{
 			if(direction ==1)//move up and the most left
 			{
-				if(check_mamals [i_origin+1][j_origin-1].equals("*"))
+				if(is_valid_coordinate(i_origin+1, j_origin-1) && check_mamals[i_origin+1][j_origin-1].equals("*"))
 				{
 					i_dest=1;
 					j_dest=-1;
@@ -36,7 +36,7 @@ public class Cat extends Mamals {
 				}
 				if(direction ==2)//move up and the most left
 				{
-					if(check_mamals [i_origin+1][j_origin].equals("*"))
+					if(is_valid_coordinate(i_origin+1, j_origin) && check_mamals [i_origin+1][j_origin].equals("*"))
 					{
 						i_dest=1;
 						j_dest=0;
@@ -45,7 +45,7 @@ public class Cat extends Mamals {
 				}
 				if(direction ==3)//move up and the most left
 				{
-					if(check_mamals [i_origin+1][j_origin+1].equals("*"))
+					if(is_valid_coordinate(i_origin+1, j_origin+1) && check_mamals [i_origin+1][j_origin+1].equals("*"))
 					{
 						i_dest=1;
 						j_dest=1;
@@ -54,7 +54,7 @@ public class Cat extends Mamals {
 				}
 				if(direction ==4)//move up and the most left
 				{
-					if(check_mamals [i_origin][j_origin-1].equals("*"))
+					if(is_valid_coordinate(i_origin, j_origin-1) && check_mamals [i_origin][j_origin-1].equals("*"))
 					{
 						i_dest=0;
 						j_dest=-1;
@@ -63,7 +63,7 @@ public class Cat extends Mamals {
 				}
 				if(direction ==5)//move up and the most left
 				{
-					if(check_mamals [i_origin][j_origin+1].equals("*"))
+					if(is_valid_coordinate(i_origin, j_origin+1) && check_mamals [i_origin][j_origin+1].equals("*"))
 					{
 						i_dest=0;
 						j_dest=1;
@@ -72,7 +72,7 @@ public class Cat extends Mamals {
 				}
 				if(direction ==6)//move up and the most left
 				{
-					if(check_mamals [i_origin-1][j_origin-1].equals("*"))
+					if(is_valid_coordinate(i_origin-1, j_origin-1) && check_mamals[i_origin-1][j_origin-1].equals("*"))
 					{
 						i_dest=-1;
 						j_dest=-1;
@@ -81,7 +81,7 @@ public class Cat extends Mamals {
 				}
 				if(direction ==7)//move up and the most left
 				{
-					if(check_mamals [i_origin-1][j_origin].equals("*"))
+					if(is_valid_coordinate(i_origin-1, j_origin) && check_mamals [i_origin-1][j_origin].equals("*"))
 					{
 						i_dest=-1;
 						j_dest=0;
@@ -90,7 +90,7 @@ public class Cat extends Mamals {
 				}
 				if(direction ==8)//move up and the most left
 				{
-					if(check_mamals [i_origin-1][j_origin+1].equals("*"))
+					if(is_valid_coordinate(i_origin-1, j_origin+1) && check_mamals [i_origin-1][j_origin+1].equals("*"))
 					{
 						i_dest=-1;
 						j_dest=1;
@@ -104,7 +104,6 @@ public class Cat extends Mamals {
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);	
 				return true;
 			}
-			return flag;
 		}
 	return flag;
 
