@@ -83,6 +83,49 @@ public class Mamals {
 			}
 		return false;
 	}
+	
+	public static boolean forward_computer(int i_origin,int j_origin,Mamals [][] check_mamals)
+
+	{
+			if (check_mamals[i_origin+1][j_origin+1].equals("*")||check_mamals[i_origin+1][j_origin+1].equals("*"))
+			{
+				double direction=1+(int)Math.random()*10;
+				if(direction <=5)//move right
+				{
+					check_mamals[i_origin+1][j_origin+1]=check_mamals[i_origin][j_origin];
+					check_mamals[i_origin][j_origin]=new Mamals("*",0);
+					return true;
+				}
+					else//move left 
+					{
+						check_mamals[i_origin+1][j_origin-1]=check_mamals[i_origin][j_origin];
+						check_mamals[i_origin][j_origin]=new Mamals("*",0);	
+						return true;
+					}
+				}
+			if (check_mamals[i_origin+1][j_origin+1].equals("*"))//only right
+					{
+				check_mamals[i_origin+1][j_origin+1]=check_mamals[i_origin][j_origin];
+				check_mamals[i_origin][j_origin]=new Mamals("*",0);
+				return true;
+					}
+			if (check_mamals[i_origin+1][j_origin+1].equals("*"))//only left
+			{
+				check_mamals[i_origin+1][j_origin-1]=check_mamals[i_origin][j_origin];
+				check_mamals[i_origin][j_origin]=new Mamals("*",0);	
+				return true;
+			}
+			
+		return false;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	//constructors
 	public Mamals (String name,int type) {
