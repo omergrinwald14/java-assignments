@@ -2,7 +2,7 @@ public class Mamals {
 
 	protected String name;
 	protected int type;
-
+	
 	public static boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals)
 
 	{
