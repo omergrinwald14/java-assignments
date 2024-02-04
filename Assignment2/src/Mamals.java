@@ -53,7 +53,7 @@ public static boolean is_first_food(int i_dest,int j_dest,int i_origin,int j_ori
 	check_mamals[i_origin][j_origin]=new Mamals("*");
 check_mamals[i_origin+1][j_origin+1]=new Mamals("*");
         return true;*/
-}
+
 
 
 //constructors

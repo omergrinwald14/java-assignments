@@ -13,7 +13,13 @@ public class Mamals_Checkers {
         	endGame();
         if(choose == 1)
         	startGame();
-            
+  int status_game=1;
+  int status_player=1;
+ /* while (status_game==1 && status_player==1)
+  {
+	  
+  }
+      */      
         
 
 	}
@@ -70,5 +76,19 @@ public class Mamals_Checkers {
 	            }
 	            System.out.println();
 	        }
+	    }
+	 public static int player_turn(String[][] check_board) {
+		 System.out.println("It's your turn, please enter your move.");
+	        String move = sc.next();
+            if (move.equals("STOP"))
+            	computer_winner();
+            return 0;
+	 }
+	 public static void client_winner() {
+
+	        System.out.println("Congratulations, user has won :)");
+	    }
+	 public static void computer_winner() {
+	        System.out.println("Sorry, computer has won:(");
 	    }
 }
