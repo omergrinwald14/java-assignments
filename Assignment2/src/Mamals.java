@@ -77,7 +77,7 @@ public class Mamals {
 		return "";
 	}
 
-	public static boolean forward_computer(int i_origin,int j_origin,Mamals [][] check_mamals)
+	public boolean forward_computer(int i_origin,int j_origin,Mamals [][] check_mamals)
 
 	{
 		if ((is_valid_coordinate(i_origin+1,j_origin+1)&&check_mamals[i_origin+1][j_origin+1].equals(""))||(is_valid_coordinate(i_origin+1, j_origin-1)&&check_mamals[i_origin+1][j_origin-1].equals("")))
@@ -111,7 +111,7 @@ public class Mamals {
 
 		return false;
 	}
-	public static boolean first_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
+	public boolean first_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
 
 		if(is_valid_coordinate(i_origin+2, j_origin+2) && check_mamals[i_origin + 1][j_origin + 1].type==1)//move up right
 			if(check_mamals[i_origin + 2][j_origin + 2].equals("*"))
@@ -132,7 +132,7 @@ public class Mamals {
 
 		return false;
 	}
-	public static String double_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
+	public String double_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
 		if(is_valid_coordinate(i_origin-2, j_origin+2) && check_mamals[i_origin - 1][j_origin + 1].type==1)//back right
 			if(check_mamals[i_origin - 2][j_origin + 2].equals("*"))
 			{

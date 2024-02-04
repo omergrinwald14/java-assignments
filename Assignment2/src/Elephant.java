@@ -5,7 +5,7 @@ public class Elephant extends Mamals {
 		super(name,type);
 	}
 
-	public static boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals)
+	public boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals)
 
 	{
 		if (i_origin == i_dest+1)
@@ -32,7 +32,7 @@ public class Elephant extends Mamals {
 
 		return false;
 	}
-	public static boolean forward_computer(int i_origin,int j_origin,Mamals [][] check_mamals)
+	public boolean forward_computer(int i_origin,int j_origin,Mamals [][] check_mamals)
 
 	{
 		int steps =(int) (1+Math.random());

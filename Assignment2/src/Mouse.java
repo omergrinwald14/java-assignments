@@ -5,7 +5,7 @@ public class Mouse extends Elephant {
 		super(name,type);
 	}
 
-	public static boolean first_food_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
+	public boolean first_food_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
 		if (i_origin == i_dest - 2) { //move up
 			if (j_origin == j_dest - 2)//move up and right
 				if(check_mamals[i_origin - 1][j_origin + 1].type==2)
@@ -29,7 +29,7 @@ public class Mouse extends Elephant {
 		return false;
 	}
 
-	public static String double_food_player(int i_origin,int j_origin,Mamals [][] check_mamals) {
+	public String double_food_player(int i_origin,int j_origin,Mamals [][] check_mamals) {
 		if(check_mamals[i_origin - 1][j_origin + 1].type==2)//up right
 			if(check_mamals[i_origin - 2][j_origin + 2].type==0)
 			{
@@ -66,7 +66,7 @@ public class Mouse extends Elephant {
 			}
 		return "";
 	}
-	public static boolean first_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
+	public boolean first_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
 
 		if(is_valid_coordinate(i_origin+2, j_origin+2) && check_mamals[i_origin + 1][j_origin + 1].type==1)//move up right
 			if(check_mamals[i_origin + 2][j_origin + 2].equals("*"))
@@ -85,7 +85,7 @@ public class Mouse extends Elephant {
 
 		return false;
 	}
-	public static String double_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
+	public String double_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
 		if(is_valid_coordinate(i_origin-2, j_origin+2) && check_mamals[i_origin - 1][j_origin + 1].type==1)//back right
 			if(check_mamals[i_origin - 2][j_origin + 2].equals("*"))
 			{
