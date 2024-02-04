@@ -18,17 +18,21 @@ public class Mamals_Checkers {
 		int status_game=1;
 		int status_player=1;
 		while (status_game==1 && status_player==1){
-
+			status_player =	player_turn(check_mamals);
+			status_game = check_player_winner();
 		}
 
 
+	}
+	private static int check_player_winner() {
+		return 0;
 	}
 	public static void setNewBoard(Mamals[][] check_mamals) {
 		for(int i=0;i<check_mamals.length;i++) {
 			for(int j=0;j<check_mamals[0].length;j++) {
 				if(i%2==0 && j%2 == 0)
 					check_mamals[i][j] = new Mamals("-",0);	
-				if(i%2==0 && j%0!=0)
+				if(i%2==0 && j%2!=0)
 					check_mamals[i][j] = new Mamals("*",0);	
 			}
 			check_mamals[0][1] = new Cat("C2",2); //1 line
@@ -82,7 +86,7 @@ public class Mamals_Checkers {
 			return false;
 		return true;
 	}
-	public static int player_turn(String[][] check_board) {
+	public static int player_turn(Mamals[][] check_mamals) {
 		boolean flag1 = true;
 		while(flag1) {
 			System.out.println("It's your turn, please enter your move.");
