@@ -5,7 +5,7 @@ public class Mouse extends Elephant {
 		super(name,type);
 	}
 	
-	public static boolean first_food(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
+	public static boolean first_food_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
 		if (i_origin == i_dest - 2) { //move up
 			if (j_origin == j_dest - 2)//move up and right
 				if(check_mamals[i_origin - 1][j_origin + 1].type==2)
@@ -29,7 +29,7 @@ public class Mouse extends Elephant {
 		return false;
 	}
 
-	public static boolean double_food(int i_origin,int j_origin,Mamals [][] check_mamals) {
+	public static boolean double_food_player(int i_origin,int j_origin,Mamals [][] check_mamals) {
 		if(check_mamals[i_origin - 1][j_origin + 1].type==2)//up right
 			if(check_mamals[i_origin - 2][j_origin + 2].type==0)
 			{
