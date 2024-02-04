@@ -3,7 +3,7 @@ public class Mamals {
 	protected String name;
 	protected int type;
 	
-	public static boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals)
+	public boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals)
 
 	{
 		if (i_origin == i_dest + 1)
@@ -15,7 +15,7 @@ public class Mamals {
 				}
 		return false;
 	}
-	public static boolean first_food_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
+	public boolean first_food_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
 		if (i_origin == i_dest - 2) { //move up
 			if (j_origin == j_dest - 2)//move up and right
 				if(check_mamals[i_origin - 1][j_origin + 1].type==2)
@@ -39,7 +39,7 @@ public class Mamals {
 		return false;
 	}
 	
-	public static String double_food_player(int i_origin,int j_origin,Mamals [][] check_mamals) {
+	public String double_food_player(int i_origin,int j_origin,Mamals [][] check_mamals) {
 		if(check_mamals[i_origin - 1][j_origin + 1].type==2)//up right
 			if(check_mamals[i_origin - 2][j_origin + 2].equals("*"))
 			{
@@ -80,7 +80,7 @@ public class Mamals {
 	public static boolean forward_computer(int i_origin,int j_origin,Mamals [][] check_mamals)
 
 	{
-		if ((is_valid_coordinate(i_origin+1,j_origin+1)&&check_mamals[i_origin+1][j_origin+1].equals("*"))||(is_valid_coordinate(i_origin+1, j_origin-1)&&check_mamals[i_origin+1][j_origin-1].equals("*")))
+		if ((is_valid_coordinate(i_origin+1,j_origin+1)&&check_mamals[i_origin+1][j_origin+1].equals(""))||(is_valid_coordinate(i_origin+1, j_origin-1)&&check_mamals[i_origin+1][j_origin-1].equals("")))
 		{
 			double direction=1+(int)Math.random()*10;
 			if(direction <=5 && is_valid_coordinate(i_origin+1, j_origin+1))//move right

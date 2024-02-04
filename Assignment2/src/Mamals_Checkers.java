@@ -4,7 +4,7 @@ public class Mamals_Checkers {
 	static Scanner sc = new Scanner(System.in);
 	static Mamals[][] check_mamals = new Mamals[8][8];
 	static int status_game = 0;
-	static int status_client = 0;
+	static int status_player = 0;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Welcome to Fatma Checkers. To start the game press 1, to exit press 0:");
@@ -13,12 +13,12 @@ public class Mamals_Checkers {
 			endGame();
 		if(choose == 1)
 			startGame();
-		while (status_game==1 && status_client == 1) {
+		while (status_game==1 && status_player == 1) {
 		}
 		int status_game=1;
 		int status_player=1;
 		while (status_game==1 && status_player==1){
-
+			status_player =	player_turn(check_mamals);
 		}
 
 
@@ -59,14 +59,14 @@ public class Mamals_Checkers {
 	}
 	public static void endGame() {
 		System.out.println("bye bye");
-		status_client=0;
+		status_player=0;
 		status_game=0;
 	}
 	public static void startGame() {
 		System.out.println("The board:");
 		setNewBoard(check_mamals);
 		printBoard(check_mamals);
-		status_client=1;
+		status_player=1;
 		status_game=1;
 	}
 	public static void printBoard(Mamals[][] check_mamals) {
@@ -82,18 +82,84 @@ public class Mamals_Checkers {
 			return false;
 		return true;
 	}
-	public static int player_turn(String[][] check_board) {
-		System.out.println("It's your turn, please enter your move.");
-		String move = sc.next();
-		if (move.equals("STOP"))
-			computer_winner();
-		return 0;
+	public static int player_turn(Mamals[][] check_mamals) {
+		boolean flag1 = true;
+		while(flag1) {
+			System.out.println("It's your turn, please enter your move.");
+			String move = sc.next();
+			if (move.equals("STOP")) {
+				computer_winner();
+				return 0;
+			}		
+			while(!is_valid_string(move)){
+				System.out.println("invalid input, try again");
+				move = sc.next();
+			}
+			int i_dest = 8 - (move.charAt(0) - '0');
+			int j_dest = (move.charAt(1) - '0') - 1;
+			int i_origin = 8 - (move.charAt(3) - '0');
+			int j_origin = (move.charAt(4) - '0') - 1;
+			if(check_mamals[i_origin][j_origin].first_food_player(i_dest,j_dest,i_origin,j_origin,check_mamals)) {
+				boolean flag=true;
+				while(flag) { // double food while it's possible
+					i_origin=i_dest;
+					j_origin=i_dest;
+					String direction = check_mamals[i_origin][j_origin].double_food_player(i_origin, j_origin, check_mamals);
+					if(direction.equals("U-R")) {
+						i_dest-=2;
+						j_dest+=2;
+					}
+
+					if(direction.equals("U-L")) {
+						i_dest-=2;
+						j_dest-=2;
+					}
+
+					if(direction.equals("D-L"))	{
+						i_dest+=2;
+						j_dest-=2;
+					}
+
+					if(direction.equals("D-R")) {
+						i_dest+=2;
+						j_dest+=2;
+					}
+					else{
+						flag =false;
+					}	
+				}
+				flag1 = false;
+				return 1;
+
+			}
+			if(check_mamals[i_origin][j_origin].forward_player(i_dest, j_dest, i_origin, j_origin, check_mamals))
+			{
+				flag1=false;
+				return 1;
+			}
+		}
+		System.out.println("invalid input");
+		return 1;
+
 	}
-	public static void client_winner() {
+	public static void player_winner() {
 
 		System.out.println("Congratulations, user has won :)");
 	}
 	public static void computer_winner() {
 		System.out.println("Sorry, computer has won:(");
 	}
+	public static boolean is_valid_string(String move) {
+		int i_dest = 8 - (move.charAt(0) - '0');
+		int j_dest = (move.charAt(1) - '0') - 1;
+		int i_origin = 8 - (move.charAt(3) - '0');
+		int j_origin = (move.charAt(4) - '0') - 1;
+
+		if (i_dest > 7 || j_dest > 7 || i_origin > 7 || j_origin > 7)
+			return false;
+		if (i_dest < 0 || j_dest < 0 || i_origin < 0 || j_origin < 0)
+			return false;
+		return true;
+	}
+
 }
