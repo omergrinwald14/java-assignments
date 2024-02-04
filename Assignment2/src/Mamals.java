@@ -38,15 +38,15 @@ public class Mamals {
 
 		return false;
 	}
-
-	public static boolean double_food_player(int i_origin,int j_origin,Mamals [][] check_mamals) {
+	
+	public static String double_food_player(int i_origin,int j_origin,Mamals [][] check_mamals) {
 		if(check_mamals[i_origin - 1][j_origin + 1].type==2)//up right
 			if(check_mamals[i_origin - 2][j_origin + 2].equals("*"))
 			{
 				check_mamals[i_origin-2][j_origin+2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]= new Mamals("*",0);
 				check_mamals[i_origin-1][j_origin+1]=new Mamals("*",0);
-				return true;
+				return "U-R";
 			}
 		//up and left
 		if(check_mamals[i_origin - 1][j_origin - 1].type==2)
@@ -55,7 +55,7 @@ public class Mamals {
 				check_mamals[i_origin-2][j_origin-2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);
 				check_mamals[i_origin-1][j_origin-1]=new Mamals("*",0);
-				return true;
+				return "U-R";
 			}
 
 		if(check_mamals[i_origin +1][j_origin + 1].type==2)//back right
@@ -64,7 +64,7 @@ public class Mamals {
 				check_mamals[i_origin+2][j_origin+2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);
 				check_mamals[i_origin+1][j_origin+1]=new Mamals("*",0);
-				return true;
+				return "B-R";
 			}
 		if(check_mamals[i_origin +1][j_origin - 1].type==2)//back left
 			if(check_mamals[i_origin + 2][j_origin - 2].type==0)//check that is empty
@@ -72,9 +72,9 @@ public class Mamals {
 				check_mamals[i_origin+2][j_origin-2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);
 				check_mamals[i_origin+1][j_origin-1]=new Mamals("*",0);
-				return true;
+				return "B-L";
 			}
-		return false;
+		return "";
 	}
 
 	public static boolean forward_computer(int i_origin,int j_origin,Mamals [][] check_mamals)
@@ -132,14 +132,14 @@ public class Mamals {
 
 		return false;
 	}
-	public static boolean double_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
+	public static String double_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
 		if(is_valid_coordinate(i_origin-2, j_origin+2) && check_mamals[i_origin - 1][j_origin + 1].type==1)//back right
 			if(check_mamals[i_origin - 2][j_origin + 2].equals("*"))
 			{
 				check_mamals[i_origin-2][j_origin+2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]= new Mamals("*",0);
 				check_mamals[i_origin-1][j_origin+1]=new Mamals("*",0);
-				return true;
+				return "B-R";
 			}
 		//up and left
 		if(is_valid_coordinate(i_origin-2, j_origin-2) && check_mamals[i_origin - 1][j_origin - 1].type==1)//back left
@@ -148,7 +148,7 @@ public class Mamals {
 				check_mamals[i_origin-2][j_origin-2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);
 				check_mamals[i_origin-1][j_origin-1]=new Mamals("*",0);
-				return true;
+				return "B-L";
 			}
 
 		if(is_valid_coordinate(i_origin+2, j_origin+2) && check_mamals[i_origin +1][j_origin + 1].type==1)//up right
@@ -157,7 +157,7 @@ public class Mamals {
 				check_mamals[i_origin+2][j_origin+2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);
 				check_mamals[i_origin+1][j_origin+1]=new Mamals("*",0);
-				return true;
+				return "U-R";
 			}
 		if(is_valid_coordinate(i_origin+2, j_origin-2) && check_mamals[i_origin +1][j_origin - 1].type==1)//up left
 			if(check_mamals[i_origin + 2][j_origin - 2].equals("*"))//check that is empty
@@ -165,9 +165,9 @@ public class Mamals {
 				check_mamals[i_origin+2][j_origin-2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);
 				check_mamals[i_origin+1][j_origin-1]=new Mamals("*",0);
-				return true;
+				return "U-L";
 			}
-		return false;
+		return "";
 	}
 
 

@@ -29,14 +29,14 @@ public class Mouse extends Elephant {
 		return false;
 	}
 
-	public static boolean double_food_player(int i_origin,int j_origin,Mamals [][] check_mamals) {
+	public static String double_food_player(int i_origin,int j_origin,Mamals [][] check_mamals) {
 		if(check_mamals[i_origin - 1][j_origin + 1].type==2)//up right
 			if(check_mamals[i_origin - 2][j_origin + 2].type==0)
 			{
 				check_mamals[i_origin-2][j_origin+2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]= new Mamals("*",0);
 				check_mamals[i_origin-1][j_origin+1]=new Mamals("*",0);
-				return true;
+				return "U-R";
 			}
 		//up and left
 		if(check_mamals[i_origin - 1][j_origin - 1].type==2)
@@ -45,23 +45,16 @@ public class Mouse extends Elephant {
 				check_mamals[i_origin-2][j_origin-2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);
 
-				return true;
+				return "U-L";
 			}
-		if(check_mamals[i_origin - 1][j_origin - 1].type==2)
-			if(check_mamals[i_origin - 2][j_origin - 2].type==0)//check that is empty
-			{//move up and left
-				check_mamals[i_origin-2][j_origin-2]=check_mamals[i_origin][j_origin];
-				check_mamals[i_origin][j_origin]=new Mamals("*",0);
-
-				return true;
-			}
+		
 		if(check_mamals[i_origin +1][j_origin + 1].type==2)//back right
 			if(check_mamals[i_origin + 2][j_origin + 2].type==0)//check that is empty
 			{//move up and left
 				check_mamals[i_origin+2][j_origin+2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);
 
-				return true;
+				return "B-R";
 			}
 		if(check_mamals[i_origin +1][j_origin - 1].type==2)//back left
 			if(check_mamals[i_origin + 2][j_origin - 2].type==0)//check that is empty
@@ -69,9 +62,9 @@ public class Mouse extends Elephant {
 				check_mamals[i_origin+2][j_origin-2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);
 
-				return true;
+				return "B-L";
 			}
-		return false;
+		return "";
 	}
 	public static boolean first_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
 
