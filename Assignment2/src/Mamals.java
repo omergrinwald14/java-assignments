@@ -17,7 +17,6 @@ public class Mamals {
 		return false;
 	}
 	public static boolean first_food(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
-
 		if (i_origin == i_dest - 2) { //move up
 			if (j_origin == j_dest - 2)//move up and right
 				if(check_mamals[i_origin - 1][j_origin + 1].type==2)
@@ -85,9 +84,6 @@ public class Mamals {
 			}
 		return false;
 	}
-
-
-
 
 	//constructors
 	public Mamals (String name,int type) {
