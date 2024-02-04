@@ -8,7 +8,7 @@ public static boolean forward_player(int i_dest,int j_dest,int i_origin,int j_or
 	            	if(check_mamals[i_dest][j_dest].equals("*"))
 	            	{
 	      
-	            	check_mamals[i_origin][j_origin]="*";
+	            	check_mamals[i_origin][j_origin]=new Mamals("*");
 		 check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
 	            	}
 	                return true;
@@ -60,4 +60,11 @@ public boolean equals(Mamals other) {
 	else
 		return false;
 }
+public boolean equals(String other) {
+	if(this.type.equals(other))
+		return true;
+	else
+		return false;
+}
+
 }
