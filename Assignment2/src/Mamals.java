@@ -171,12 +171,6 @@ public class Mamals {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
 
 	//constructors
 	public Mamals (String name,int type) {

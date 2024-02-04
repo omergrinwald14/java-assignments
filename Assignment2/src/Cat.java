@@ -24,7 +24,7 @@ public class Cat extends Mamals {
 		int j_dest=0;
 		boolean flag=false;
 
-		for (int direction=1;direction<=8&& !flag ;direction++)
+		for (int direction=1;direction<=8|| !flag ;direction++)
 		{
 			if(direction ==1)//move up and the most left
 			{
@@ -34,6 +34,7 @@ public class Cat extends Mamals {
 					j_dest=-1;
 					flag=true;
 				}
+			}
 				if(direction ==2)//move up and the most left
 				{
 					if(check_mamals [i_origin+1][j_origin].equals("*"))
@@ -105,8 +106,6 @@ public class Cat extends Mamals {
 				return true;
 			}
 			return flag;
-		}
-	return flag;
 
 	}
 }
