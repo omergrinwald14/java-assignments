@@ -153,7 +153,6 @@ public class Mamals_Checkers {
 
 	}
 	public static void player_winner() {
-
 		System.out.println("Congratulations, user has won :)");
 	}
 	public static void computer_winner() {
@@ -177,7 +176,7 @@ public class Mamals_Checkers {
             for (int j = 0; j < 8; j++)
                 if (check_mamals[i][j].type==2)//if there is at least one of "2" not win for now
                     return 1; //the game will continue to run
-        client_winner();
+        player_winner();
         return 0;
 	}
 	public static int calc_computer_winner(Mamals [][] check_mamals)
