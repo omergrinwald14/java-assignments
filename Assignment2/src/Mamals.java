@@ -109,7 +109,6 @@ public class Mamals {
 		return false;
 	}
 	public boolean first_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
-
 		if(is_valid_coordinate(i_origin+2, j_origin+2) && check_mamals[i_origin + 1][j_origin + 1].type==1)//move up right
 			if(check_mamals[i_origin + 2][j_origin + 2].equals("*"))
 			{//check that is empty
@@ -126,7 +125,6 @@ public class Mamals {
 				check_mamals[i_origin+1][j_origin-1]=new Mamals("*",0);
 				return true;
 			}
-
 		return false;
 	}
 	public String double_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
