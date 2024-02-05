@@ -19,16 +19,16 @@ public class Mamals_Checkers {
 		while (status_game==1 && status_player==1){
 			status_player =	player_turn(check_mamals);
 			//    check_Q_computer(check_board);
-	          //  status_game = calc_client_player(check_mamals);
+	        status_game = calc_client_winner(check_mamals);
 			printBoard(check_mamals);
 	      //      status_game=computer_turn(check_board);
 	        //    check_Q_client(check_board);
-	          //  status_game=calc_computer_winner(check_board);
+	          status_game=calc_computer_winner(check_mamals);
 	       //     status_game=calc_tie_computer(check_board);
 	         //   status_game=calc_tie_player(check_board);
 
 
-	           // printBoard(check_board);
+	           // printBoard(check_mamals);
 
 		}
 	}
@@ -153,7 +153,7 @@ public class Mamals_Checkers {
 		return 1;
 
 	}
-	public static void player_winner() {
+	public static void client_winner() {
 
 		System.out.println("Congratulations, user has won :)");
 	}
@@ -172,5 +172,24 @@ public class Mamals_Checkers {
 			return false;
 		return true;
 	}
+	public static int calc_client_winner(Mamals [][] check_mamals)
+	{
+		for (int i = 0; i < 8; i++)
+            for (int j = 0; j < 8; j++)
+                if (check_mamals[i][j].type==2)//if there is at least one of "2" not win for now
+                    return 1; //the game will continue to run
+        client_winner();
+        return 0;
+	}
+	public static int calc_computer_winner(Mamals [][] check_mamals)
+	{
+		for (int i = 0; i < 8; i++)
+            for (int j = 0; j < 8; j++)
+                if (check_mamals[i][j].type==1)//if there is at least one of "2" not win for now
+                    return 1; //the game will continue to run
+        client_winner();
+        return 0;
+	}
 
 }
+
