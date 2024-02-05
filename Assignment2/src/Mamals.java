@@ -38,7 +38,6 @@ public class Mamals {
 
 		return false;
 	}
-	
 	public String double_food_player(int i_origin,int j_origin,Mamals [][] check_mamals) {
 		if(check_mamals[i_origin - 1][j_origin + 1].type==2)//up right
 			if(check_mamals[i_origin - 2][j_origin + 2].equals("*"))
@@ -76,7 +75,6 @@ public class Mamals {
 			}
 		return "";
 	}
-
 	public boolean forward_computer(int i_origin,int j_origin,Mamals [][] check_mamals)
 
 	{
@@ -170,16 +168,6 @@ public class Mamals {
 		return "";
 	}
 
-
-	public static boolean is_valid_coordinate(int i, int j) {
-		if (i > 7 || i < 0 || j > 7 || j < 0)
-			return false;
-		return true;
-	}
-
-
-
-
 	//constructors
 	public Mamals (String name,int type) {
 		this.name=name;
@@ -206,6 +194,11 @@ public class Mamals {
 			return true;
 		else
 			return false;
+	}
+	public static boolean is_valid_coordinate(int i, int j) {
+		if (i > 7 || i < 0 || j > 7 || j < 0)
+			return false;
+		return true;
 	}
 
 }

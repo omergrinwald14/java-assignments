@@ -13,21 +13,31 @@ public class Mamals_Checkers {
 			endGame();
 		if(choose == 1)
 			startGame();
-		while (status_game==1 && status_player == 1) {
-		}
+		
 		int status_game=1;
 		int status_player=1;
 		while (status_game==1 && status_player==1){
 			status_player =	player_turn(check_mamals);
+			//    check_Q_computer(check_board);
+	          //  status_game = calc_client_player(check_mamals);
+			printBoard(check_mamals);
+	      //      status_game=computer_turn(check_board);
+	        //    check_Q_client(check_board);
+	          //  status_game=calc_computer_winner(check_board);
+	       //     status_game=calc_tie_computer(check_board);
+	         //   status_game=calc_tie_player(check_board);
+
+
+	           // printBoard(check_board);
 
 		}
 	}
 	public static void setNewBoard(Mamals[][] check_mamals) {
 		for(int i=0;i<check_mamals.length;i++) {
 			for(int j=0;j<check_mamals[0].length;j++) {
-				if(i%2==0 && j%2 == 0)
+				if((i+j)%2 == 0)
 					check_mamals[i][j] = new Mamals("-",0);	
-				if(i%2==0 && j%2!=0)
+				else
 					check_mamals[i][j] = new Mamals("*",0);	
 			}
 			check_mamals[0][1] = new Cat("C2",2); //1 line
@@ -45,7 +55,7 @@ public class Mamals_Checkers {
 			check_mamals[5][0] = new Elephant("E1",1); //6 line
 			check_mamals[5][2] = new Mouse("M1",1);
 			check_mamals[5][4] = new Cat("C1",1);
-			check_mamals[5][8] = new Dog("D1",1);
+			check_mamals[5][6] = new Dog("D1",1);
 			check_mamals[6][1] = new Dog("D1",1); //7 line
 			check_mamals[6][3] = new Elephant("E1",1);
 			check_mamals[6][5] = new Mouse("M1",1);
@@ -62,13 +72,13 @@ public class Mamals_Checkers {
 		status_game=0;
 	}
 	public static void startGame() {
-		System.out.println("The board:");
 		setNewBoard(check_mamals);
 		printBoard(check_mamals);
 		status_player=1;
 		status_game=1;
 	}
 	public static void printBoard(Mamals[][] check_mamals) {
+		System.out.println("The board:");
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				System.out.print(check_mamals[i][j].toString() + "");
@@ -91,7 +101,7 @@ public class Mamals_Checkers {
 				return 0;
 			}		
 			while(!is_valid_string(move)){
-				System.out.println("invalid input, try again");
+				System.out.println("This move is invalid. Please enter a new move.");
 				move = sc.next();
 			}
 			int i_dest = 8 - (move.charAt(0) - '0');
@@ -128,7 +138,9 @@ public class Mamals_Checkers {
 					}	
 				}
 				flag1 = false;
-				return 1;
+				
+				if(flag)
+					return 1;
 
 			}
 			if(check_mamals[i_origin][j_origin].forward_player(i_dest, j_dest, i_origin, j_origin, check_mamals))
