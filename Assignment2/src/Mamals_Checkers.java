@@ -29,7 +29,6 @@ public class Mamals_Checkers {
 
 
 	           // printBoard(check_mamals);
-
 		}
 	}
 	public static void setNewBoard(Mamals[][] check_mamals) {
