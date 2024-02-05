@@ -19,13 +19,13 @@ public class Mamals_Checkers {
 		while (status_game==1 && status_player==1){
 			status_player =	player_turn(check_mamals);
 			//    check_Q_computer(check_board);
-	        status_game = calc_client_winner(check_mamals);
+	        status_game = calc_player_winner(check_mamals);
 			printBoard(check_mamals);
-	      //      status_game=computer_turn(check_board);
+	      //    ???  status_game=computer_turn(check_board);
 	        //    check_Q_client(check_board);
 	          status_game=calc_computer_winner(check_mamals);
-	       //     status_game=calc_tie_computer(check_board);
-	         //   status_game=calc_tie_player(check_board);
+	        status_game=calc_tie_computer(check_mamals);
+	         status_game=calc_tie_player(check_mamals);
 
 
 	           // printBoard(check_mamals);
@@ -152,7 +152,7 @@ public class Mamals_Checkers {
 		return 1;
 
 	}
-	public static void client_winner() {
+	public static void player_winner() {
 
 		System.out.println("Congratulations, user has won :)");
 	}
@@ -171,7 +171,7 @@ public class Mamals_Checkers {
 			return false;
 		return true;
 	}
-	public static int calc_client_winner(Mamals [][] check_mamals)
+	public static int calc_player_winner(Mamals [][] check_mamals)
 	{
 		for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++)
@@ -189,6 +189,38 @@ public class Mamals_Checkers {
         client_winner();
         return 0;
 	}
+	public static int calc_tie_player(Mamals [][] check_mamals)
+	{
+		boolean flag=true;
+		for (int i = 0; i < 8&&flag; i++)
+            for (int j = 0; j < 8&& flag; j++)
+            {	
+            if(check_mamals[i][j].type==1)
+           flag= check_mamals[i][j].isBlockedPlayer(check_mamals, i, j)	;
+            }
+		if(flag==false)//false = when there is foward, true = whan not found 
+			return 1;
+		print_tie();
+		return 0;
+	}
+	
+	public static void print_tie() {
 
+        System.out.println("Congratulations, user has won :)");
+    }
+	public static int calc_tie_computer(Mamals [][] check_mamals)
+	{
+		boolean flag=true;
+		for (int i = 0; i < 8&&flag; i++)
+            for (int j = 0; j < 8&& flag; j++)
+            {	
+            if(check_mamals[i][j].type==2)
+           flag= check_mamals[i][j].isBlockedPlayer(check_mamals, i, j)	;
+            }
+		if(flag==false)//false = when there is forward, true = when not found 
+			return 1;//the game is continue there is a leagl move
+		print_tie();
+		return 0;
+	}
 }
 
