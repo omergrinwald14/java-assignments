@@ -31,7 +31,7 @@ public class Mamals_Checkers {
 	           // printBoard(check_mamals);
 		}
 	}
-	public static void setNewBoard(Mamals[][] check_mamals) {
+	public static void setNewBoard(Mamals[][] check_mamals) {//set board
 		for(int i=0;i<check_mamals.length;i++) {
 			for(int j=0;j<check_mamals[0].length;j++) {
 				if((i+j)%2 == 0)
@@ -65,7 +65,7 @@ public class Mamals_Checkers {
 			check_mamals[7][6] = new Mouse("M1",1);		
 		}
 	}
-	public static void endGame() {
+	public static void endGame() {//print end game
 		System.out.println("bye bye");
 		status_player=0;
 		status_game=0;
@@ -85,7 +85,7 @@ public class Mamals_Checkers {
 			System.out.println();
 		}
 	}
-	public static boolean is_valid_coordinate(int i, int j) {
+	public static boolean is_valid_coordinate(int i, int j) {//check the i, j
 		if (i > 7 || i < 0 || j > 7 || j < 0)
 			return false;
 		return true;
@@ -138,10 +138,10 @@ public class Mamals_Checkers {
 				}
 				flag1 = false;
 				
-				if(flag)
-					return 1;
+				if(flag)// there was an "food" - move
+					return 1;// end the turn
 
-			}
+			}//forward move
 			if(check_mamals[i_origin][j_origin].forward_player(i_dest, j_dest, i_origin, j_origin, check_mamals))
 			{
 				flag1=false;
@@ -177,7 +177,7 @@ public class Mamals_Checkers {
             for (int j = 0; j < 8; j++)
                 if (check_mamals[i][j].type==2)//if there is at least one of "2" not win for now
                     return 1; //the game will continue to run
-        client_winner();
+        player_winner();
         return 0;
 	}
 	public static int calc_computer_winner(Mamals [][] check_mamals)
@@ -186,7 +186,7 @@ public class Mamals_Checkers {
             for (int j = 0; j < 8; j++)
                 if (check_mamals[i][j].type==1)//if there is at least one of "2" not win for now
                     return 1; //the game will continue to run
-        client_winner();
+        computer_winner();
         return 0;
 	}
 	public static int calc_tie_player(Mamals [][] check_mamals)
