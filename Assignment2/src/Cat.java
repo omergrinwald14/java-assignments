@@ -22,9 +22,12 @@ public class Cat extends Mamals {
 	public boolean forward_computer(int i_origin,int j_origin,Mamals[][] check_mamals) {
 		int i_dest=0;
 		int j_dest=0;
-		boolean flag=false;
+		boolean flag=false;//. become true when there is a move
+		int [] check_random= new int [8];
+		int count =0;
 
-		for (int direction=1;direction<=8|| !flag ;direction++)
+		double direction=(int)1+Math.random()*10;
+		while(!flag)
 		{
 			if(direction ==1)//move up and the most left
 			{
@@ -97,13 +100,24 @@ public class Cat extends Mamals {
 					flag=true;
 				}
 			}
+			check_random[(int)direction-1]++;
+			for (int i=0;i<=7;i++)
+			{
+				if (check_random[i]!=0)
+					count++;
+			}
+			if(count!=8)
+				count=0;
+			else
+				flag=true;/// no posibile to forward in 8 direction
+			direction=(int)1+Math.random()*10;//random new squure
 		}
 		if(i_dest!=0||j_dest!=0) {
 			check_mamals[i_origin+i_dest][j_origin+j_dest]=check_mamals[i_origin][j_origin];
 			check_mamals[i_origin][j_origin]=new Mamals("*",0);	
 			return true;
 		}
-		return flag;
+		return false;
 
 	}
 }
