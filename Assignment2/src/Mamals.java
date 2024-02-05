@@ -2,7 +2,7 @@ public class Mamals {
 
 	protected String name;
 	protected int type;
-	
+
 	public boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals)
 
 	{
@@ -16,23 +16,22 @@ public class Mamals {
 		return false;
 	}
 	public boolean first_food_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
-		if (i_origin == i_dest - 2) { //move up
-			if (j_origin == j_dest - 2)//move up and right
+		if (i_origin == i_dest + 2) { //move up and right
+			if (j_origin == j_dest - 2)
 				if(check_mamals[i_origin - 1][j_origin + 1].type==2)
-					if(check_mamals[i_origin - 2][j_origin + 2].equals("*"))//check that is empty
+					if(check_mamals[i_origin - 2][j_origin + 2].equals("*")){//check that is empty
 						check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
-			check_mamals[i_origin][j_origin]= new Mamals("*",0);
-			check_mamals[i_dest-1][j_dest+1]=new Mamals("*",0);
+						check_mamals[i_origin][j_origin]= new Mamals("*",0);
+						check_mamals[i_dest-1][j_dest+1]=new Mamals("*",0);
+					}
 			return true;
 		}
-		if (j_origin == j_dest + 2)//up and left
+		if (j_origin == j_dest + 2)//move up and left
 			if(check_mamals[i_origin - 1][j_origin - 1].type==2)
-				if(check_mamals[i_origin - 2][j_origin - 2].equals("*"))//check that is empty
-				{//move up and left
+				if(check_mamals[i_origin - 2][j_origin - 2].equals("*")){//check that is empty
 					check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]=new Mamals("*",0);
 					check_mamals[i_dest-1][j_dest-1]=new Mamals("*",0);
-
 					return true;
 				}
 

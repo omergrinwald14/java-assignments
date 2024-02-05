@@ -49,13 +49,13 @@ public class Elephant extends Mamals {
 					return true;
 				}
 			}
-			if (is_valid_coordinate(i_origin+1, j_origin+1) && check_mamals[i_origin+1][j_origin+1].equals("*"))//only right
+			if (is_valid_coordinate(i_origin+1, j_origin+1) && check_mamals[i_origin+1][j_origin+1].equals("*"))//right because left not possible
 			{
 				check_mamals[i_origin+1][j_origin+1]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);
 				return true;
 			}
-			if (is_valid_coordinate(i_origin+1, j_origin-1) && check_mamals[i_origin+1][j_origin-1].equals("*"))//only left
+			if (is_valid_coordinate(i_origin+1, j_origin-1) && check_mamals[i_origin+1][j_origin-1].equals("*"))//left because right not possible
 			{
 				check_mamals[i_origin+1][j_origin-1]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);	
@@ -67,22 +67,26 @@ public class Elephant extends Mamals {
 		if(steps==2) {
 			if ((is_valid_coordinate(i_origin+2, j_origin-2) && check_mamals[i_origin+2][j_origin-2].equals("*"))||is_valid_coordinate(i_origin+2, j_origin+2) && (check_mamals[i_origin+2][j_origin+2].equals("*"))) {
 				double direction=1+(int)Math.random()*10;
+				//move right
 				if(direction <=5 && is_valid_coordinate(i_origin+2, j_origin+2) && check_mamals[i_origin+1][j_origin+1].equals("*")){ //move right
 					check_mamals[i_origin+2][j_origin+2]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]=new Mamals("*",0);
 					return true;
 				}
+				//move left 
 				else if(is_valid_coordinate(i_origin+2, j_origin-2) && check_mamals[i_origin+1][j_origin-1].equals("*")){ //move left 		
 					check_mamals[i_origin+2][j_origin-2]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]=new Mamals("*",0);	
 					return true;
 				}
 			}
+			//right because left not possible
 			if (is_valid_coordinate(i_origin+2, j_origin+2) && check_mamals[i_origin+2][j_origin+2].equals("*") && check_mamals[i_origin+1][j_origin+1].equals("*")) { //only right
 				check_mamals[i_origin+2][j_origin+2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);
 				return true;
 			}
+			//left because right not possible
 			if (is_valid_coordinate(i_origin+2, j_origin-2) && check_mamals[i_origin+2][j_origin-2].equals("*") && check_mamals[i_origin+1][j_origin-1].equals("*")) { //only left
 				check_mamals[i_origin+2][j_origin-2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);	
