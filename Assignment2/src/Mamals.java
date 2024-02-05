@@ -197,5 +197,39 @@ public class Mamals {
 			return false;
 		return true;
 	}
-
+	public boolean isBlockedPlayer(Mamals[][] check_mamals,int i,int j) {
+		boolean flag = true;
+		//check if move up is possible
+		if(is_valid_coordinate(i+1, j+1)&&check_mamals[i+1][j+1].name.equals("*"))//right
+			flag=false;
+		if(is_valid_coordinate(i+1, j-1)&&check_mamals[i+1][j-1].name.equals("*"))//left
+			flag=false;
+		//check if eat up is possible
+		if(is_valid_coordinate(i+2, j+2)&&check_mamals[i+2][j+2].name.equals("*"))//right
+			if(check_mamals[i+1][j+1].type==2)
+				flag=false;
+		if(is_valid_coordinate(i+2, j-2)&&check_mamals[i+2][j-2].name.equals("*"))//left
+			if(check_mamals[i+1][j-1].type==2)
+				flag=false;
+		
+		return flag;
+	}
+	public boolean isBlockedComputer(Mamals[][] check_mamals,int i,int j) {
+		boolean flag = true;
+		//check if move down is possible
+		if(is_valid_coordinate(i-1, j+1)&&check_mamals[i-1][j+1].name.equals("*"))//right
+			flag=false;
+		if(is_valid_coordinate(i-1, j-1)&&check_mamals[i-1][j-1].name.equals("*"))//left
+			flag=false;
+		//check if eat down is possible
+		if(is_valid_coordinate(i-2,j+2)&&check_mamals[i-2][j+2].name.equals("*"))//right
+			if(check_mamals[i-1][j+1].type==2)
+				flag=false;
+		if(is_valid_coordinate(i-2, j-2)&&check_mamals[i-2][j-2].name.equals("*"))//left
+			if(check_mamals[i-1][j-1].type==2)
+				flag=false;
+		
+		return flag;
+		
+	}
 }
