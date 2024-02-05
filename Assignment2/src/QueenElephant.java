@@ -220,7 +220,7 @@ public class QueenElephant extends Elephant {
 		return false;
 	}
 	public boolean first_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
-		if(is_valid_coordinate(i_origin+2, j_origin+2) && check_mamals[i_origin + 1][j_origin + 1].type==1)//move up right
+		if(is_valid_coordinate(i_origin+2, j_origin+2) && check_mamals[i_origin + 1][j_origin + 1].type==1)//move down right
 			if(check_mamals[i_origin + 2][j_origin + 2].equals("*"))
 			{//check that is empty
 				check_mamals[i_origin+2][j_origin+2]=check_mamals[i_origin][j_origin];
@@ -228,12 +228,28 @@ public class QueenElephant extends Elephant {
 				check_mamals[i_origin+1][j_origin+1]=new Mamals("*",0);
 				return true;
 			}
-		if(is_valid_coordinate(i_origin+2, j_origin-2) && check_mamals[i_origin + 1][j_origin - 1].type==1)//move up left
+		if(is_valid_coordinate(i_origin+2, j_origin-2) && check_mamals[i_origin + 1][j_origin - 1].type==1)//move down left
 			if(check_mamals[i_origin + 2][j_origin - 2].equals("*"))
 			{//check that is empty
 				check_mamals[i_origin+2][j_origin-2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]= new Mamals("*",0);
 				check_mamals[i_origin+1][j_origin-1]=new Mamals("*",0);
+				return true;
+			}
+		if(is_valid_coordinate(i_origin-2, j_origin+2) && check_mamals[i_origin-1][j_origin + 1].type==1)//move up right
+			if(check_mamals[i_origin-2][j_origin + 2].equals("*"))
+			{//check that is empty
+				check_mamals[i_origin-2][j_origin+2]=check_mamals[i_origin][j_origin];
+				check_mamals[i_origin][j_origin]= new Mamals("*",0);
+				check_mamals[i_origin-1][j_origin+1]=new Mamals("*",0);
+				return true;
+			}
+		if(is_valid_coordinate(i_origin-2, j_origin-2) && check_mamals[i_origin-1][j_origin - 1].type==1)//move up left
+			if(check_mamals[i_origin-2][j_origin - 2].equals("*"))
+			{//check that is empty
+				check_mamals[i_origin-2][j_origin-2]=check_mamals[i_origin][j_origin];
+				check_mamals[i_origin][j_origin]= new Mamals("*",0);
+				check_mamals[i_origin-1][j_origin-1]=new Mamals("*",0);
 				return true;
 			}
 		return false;
