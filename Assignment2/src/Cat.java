@@ -120,6 +120,66 @@ public class Cat extends Mamals {
 		return false;
 
 	}
+	public boolean isBlockedPlayer(Mamals[][] check_mamals,int i,int j) {
+		boolean flag = true;
+		//check if move is possible
+		if(is_valid_coordinate(i+1, j+1)&&check_mamals[i+1][j+1].name.equals("*"))//right up
+			flag=false;
+		if(is_valid_coordinate(i+1, j-1)&&check_mamals[i+1][j-1].name.equals("*"))//left up
+			flag=false;
+		if(is_valid_coordinate(i-1, j+1)&&check_mamals[i-1][j+1].name.equals("*"))//down up
+			flag=false;
+		if(is_valid_coordinate(i-1, j-1)&&check_mamals[i-1][j-1].name.equals("*"))//down up
+			flag=false;
+		if(is_valid_coordinate(i+1, j)&&check_mamals[i+1][j].name.equals("*"))//up
+			flag=false;
+		if(is_valid_coordinate(i-1, j)&&check_mamals[i-1][j].name.equals("*"))//down
+			flag=false;
+		if(is_valid_coordinate(i, j-1)&&check_mamals[i][j-1].name.equals("*"))//left
+			flag=false;
+		if(is_valid_coordinate(i, j+1)&&check_mamals[i][j+1].name.equals("*"))//right
+			flag=false;
+		//check if eat up is possible
+		if(is_valid_coordinate(i+2, j+2)&&check_mamals[i+2][j+2].name.equals("*"))//right
+			if(check_mamals[i+1][j+1].type==2)
+				flag=false;
+		if(is_valid_coordinate(i+2, j-2)&&check_mamals[i+2][j-2].name.equals("*"))//left
+			if(check_mamals[i+1][j-1].type==2)
+				flag=false;
+		
+		return flag;
+	}
+	public boolean isBlockedComputer(Mamals[][] check_mamals,int i,int j) {
+		boolean flag = true;
+		if(is_valid_coordinate(i+1, j+1)&&check_mamals[i+1][j+1].name.equals("*"))//right up
+			flag=false;
+		if(is_valid_coordinate(i+1, j-1)&&check_mamals[i+1][j-1].name.equals("*"))//left up
+			flag=false;
+		if(is_valid_coordinate(i-1, j+1)&&check_mamals[i-1][j+1].name.equals("*"))//down up
+			flag=false;
+		if(is_valid_coordinate(i-1, j-1)&&check_mamals[i-1][j-1].name.equals("*"))//down up
+			flag=false;
+		if(is_valid_coordinate(i+1, j)&&check_mamals[i+1][j].name.equals("*"))//up
+			flag=false;
+		if(is_valid_coordinate(i-1, j)&&check_mamals[i-1][j].name.equals("*"))//down
+			flag=false;
+		if(is_valid_coordinate(i, j-1)&&check_mamals[i][j-1].name.equals("*"))//left
+			flag=false;
+		if(is_valid_coordinate(i, j+1)&&check_mamals[i][j+1].name.equals("*"))//right
+			flag=false;
+		//check if eat down is possible
+		if(is_valid_coordinate(i-2,j+2)&&check_mamals[i-2][j+2].name.equals("*"))//right
+			if(check_mamals[i-1][j+1].type==2)
+				flag=false;
+		if(is_valid_coordinate(i-2, j-2)&&check_mamals[i-2][j-2].name.equals("*"))//left
+			if(check_mamals[i-1][j-1].type==2)
+				flag=false;
+		
+		return flag;
+		
+	}
+
+
 }
 
 
