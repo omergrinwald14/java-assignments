@@ -185,7 +185,7 @@ public class Mamals_Checkers {
             for (int j = 0; j < 8; j++)
                 if (check_mamals[i][j].type==1)//if there is at least one of "2" not win for now
                     return 1; //the game will continue to run
-        client_winner();
+        computer_winner();
         return 0;
 	}
 	public static int calc_tie_player(Mamals [][] check_mamals)
