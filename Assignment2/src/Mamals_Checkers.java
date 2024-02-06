@@ -6,29 +6,28 @@ public class Mamals_Checkers {
 	static int status_game = 0;
 	static int status_player = 0;
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		System.out.println("Welcome to Fatma Checkers. To start the game press 1, to exit press 0:");
 		int choose = sc.nextInt();
 		if (choose == 0)
 			endGame();
 		if(choose == 1)
 			startGame();
-		
+
 		int status_game=1;
 		int status_player=1;
 		while (status_game==1 && status_player==1){
 			status_player =	player_turn(check_mamals);
 			//    check_Q_computer(check_board);
-	        status_game = calc_player_winner(check_mamals);
+			status_game = calc_player_winner(check_mamals);
 			printBoard(check_mamals);
-	      //    ???  status_game=computer_turn(check_board);
-	        //    check_Q_client(check_board);
-	          status_game=calc_computer_winner(check_mamals);
-	        status_game=calc_tie_computer(check_mamals);
-	         status_game=calc_tie_player(check_mamals);
+			status_game=computer_turn(check_mamals);
+			//    check_Q_client(check_board);
+			status_game=calc_computer_winner(check_mamals);
+			status_game=calc_tie_computer(check_mamals);
+			status_game=calc_tie_player(check_mamals);
 
 
-	           // printBoard(check_mamals);
+			// printBoard(check_mamals);
 		}
 	}
 	public static void setNewBoard(Mamals[][] check_mamals) {//set board
@@ -137,9 +136,15 @@ public class Mamals_Checkers {
 					}	
 				}
 				flag1 = false;
+<<<<<<< HEAD
 				
 				if(flag)// there was an "food" - move
 					return 1;// end the turn
+=======
+
+				if(flag)
+					return 1;
+>>>>>>> branch 'main' of https://github.com/omergrinwald14/java-assignments.git
 
 			}//forward move
 			if(check_mamals[i_origin][j_origin].forward_player(i_dest, j_dest, i_origin, j_origin, check_mamals))
@@ -152,8 +157,32 @@ public class Mamals_Checkers {
 		return 1;
 
 	}
+	public static int computer_turn(Mamals[][] check_mamals) {
+		boolean moveExecuted=false;
+		boolean computerTool=false;
+		int iRandom=0;
+		int jRandom=0;
+		if(calc_tie_computer(check_mamals)==1) {
+			while(!moveExecuted) {
+				while(!computerTool) {
+					iRandom=(int)Math.random()*7;
+					jRandom=(int)Math.random()*7;
+					if(check_mamals[iRandom][jRandom].type==2)
+						computerTool=true;
+				}
+				if(check_mamals[iRandom][jRandom].first_food_computer(iRandom, jRandom, check_mamals)) {
+					moveExecuted=true;
+					return 1;
+				}
+				if(check_mamals[iRandom][jRandom].forward_computer(iRandom, jRandom, check_mamals)) {
+					moveExecuted=true;
+					return 1;
+				}
+			}
+		}
+		return 0;
+	}
 	public static void player_winner() {
-
 		System.out.println("Congratulations, user has won :)");
 	}
 	public static void computer_winner() {
@@ -174,51 +203,66 @@ public class Mamals_Checkers {
 	public static int calc_player_winner(Mamals [][] check_mamals)
 	{
 		for (int i = 0; i < 8; i++)
+<<<<<<< HEAD
             for (int j = 0; j < 8; j++)
                 if (check_mamals[i][j].type==2)//if there is at least one of "2" not win for now
                     return 1; //the game will continue to run
         player_winner();
         return 0;
+=======
+			for (int j = 0; j < 8; j++)
+				if (check_mamals[i][j].type==2)//if there is at least one of "2" not win for now
+					return 1; //the game will continue to run
+		player_winner();
+		return 0;
+>>>>>>> branch 'main' of https://github.com/omergrinwald14/java-assignments.git
 	}
 	public static int calc_computer_winner(Mamals [][] check_mamals)
 	{
 		for (int i = 0; i < 8; i++)
+<<<<<<< HEAD
             for (int j = 0; j < 8; j++)
                 if (check_mamals[i][j].type==1)//if there is at least one of "2" not win for now
                     return 1; //the game will continue to run
         computer_winner();
         return 0;
+=======
+			for (int j = 0; j < 8; j++)
+				if (check_mamals[i][j].type==1)//if there is at least one of "2" not win for now
+					return 1; //the game will continue to run
+		computer_winner();
+		return 0;
+>>>>>>> branch 'main' of https://github.com/omergrinwald14/java-assignments.git
 	}
 	public static int calc_tie_player(Mamals [][] check_mamals)
 	{
 		boolean flag=true;
 		for (int i = 0; i < 8&&flag; i++)
-            for (int j = 0; j < 8&& flag; j++)
-            {	
-            if(check_mamals[i][j].type==1)
-           flag= check_mamals[i][j].isBlockedPlayer(check_mamals, i, j)	;
-            }
+			for (int j = 0; j < 8&& flag; j++)
+			{	
+				if(check_mamals[i][j].type==1)
+					flag= check_mamals[i][j].isBlockedPlayer(check_mamals, i, j)	;
+			}
 		if(flag==false)//false = when there is foward, true = whan not found 
 			return 1;
 		print_tie();
 		return 0;
 	}
-	
 	public static void print_tie() {
 
-        System.out.println("Congratulations, user has won :)");
-    }
+		System.out.println("Congratulations, user has won :)");
+	}
 	public static int calc_tie_computer(Mamals [][] check_mamals)
 	{
 		boolean flag=true;
 		for (int i = 0; i < 8&&flag; i++)
-            for (int j = 0; j < 8&& flag; j++)
-            {	
-            if(check_mamals[i][j].type==2)
-           flag= check_mamals[i][j].isBlockedPlayer(check_mamals, i, j)	;
-            }
+			for (int j = 0; j < 8&& flag; j++)
+			{	
+				if(check_mamals[i][j].type==2)
+					flag= check_mamals[i][j].isBlockedPlayer(check_mamals, i, j)	;
+			}
 		if(flag==false)//false = when there is forward, true = when not found 
-			return 1;//the game is continue there is a leagl move
+			return 1;//the game continues there is a legal move
 		print_tie();
 		return 0;
 	}
