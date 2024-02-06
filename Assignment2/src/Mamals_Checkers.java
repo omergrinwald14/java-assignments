@@ -6,7 +6,6 @@ public class Mamals_Checkers {
 	static int status_game = 0;
 	static int status_player = 0;
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		System.out.println("Welcome to Fatma Checkers. To start the game press 1, to exit press 0:");
 		int choose = sc.nextInt();
 		if (choose == 0)
