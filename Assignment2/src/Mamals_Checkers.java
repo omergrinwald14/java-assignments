@@ -25,9 +25,7 @@ public class Mamals_Checkers {
 			status_game=calc_computer_winner(check_mamals);
 			status_game=calc_tie_computer(check_mamals);
 			status_game=calc_tie_player(check_mamals);
-
-
-			// printBoard(check_mamals);
+			printBoard(check_mamals);
 		}
 	}
 	public static void setNewBoard(Mamals[][] check_mamals) {
