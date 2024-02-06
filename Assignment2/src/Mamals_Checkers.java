@@ -106,7 +106,7 @@ public class Mamals_Checkers {
 			if(check_mamals[i_origin][j_origin].first_food_player(i_dest,j_dest,i_origin,j_origin,check_mamals)) {
 				boolean flag=true;
 				while(flag) { // double food while it's possible
-					i_origin=i_dest;
+					i_origin=i_dest;//change the place after every eat move
 					j_origin=i_dest;
 					String direction = check_mamals[i_origin][j_origin].double_food_player(i_origin, j_origin, check_mamals);
 					if(direction.equals("U-R")) {
@@ -151,8 +151,11 @@ public class Mamals_Checkers {
 	public static int computer_turn(Mamals[][] check_mamals) {
 		boolean moveExecuted=false;
 		boolean computerTool=false;
+		boolean flag_double=true;
 		int iRandom=0;
 		int jRandom=0;
+		int i_dest;
+		int j_dest;
 		if(calc_tie_computer(check_mamals)==1) {
 			while(!moveExecuted) {
 				while(!computerTool) {
@@ -161,7 +164,45 @@ public class Mamals_Checkers {
 					if(check_mamals[iRandom][jRandom].type==2)
 						computerTool=true;
 				}
-				if(check_mamals[iRandom][jRandom].first_food_computer(iRandom, jRandom, check_mamals)) {
+				if(check_mamals[iRandom][jRandom].first_food_computer(iRandom, jRandom, check_mamals))
+				{
+					
+					if (check_mamals[iRandom+2][jRandom+2].type==2) //understand which direction was thr first eat
+						{
+						i_dest=iRandom+2;
+						j_dest=jRandom+2;
+						}
+						else
+						{
+							i_dest=iRandom+2;
+							j_dest=jRandom-2;
+						}
+						while(flag_double)//do double eat untill its not posibile
+						{
+						String direction = check_mamals[i_dest][j_dest].double_food_player(i_dest, j_dest, check_mamals);
+						if(direction.equals("U-R")) {//check which direction thr double food
+							i_dest-=2;
+							j_dest+=2;
+						}
+
+						if(direction.equals("U-L")) {
+							i_dest-=2;
+							j_dest-=2;
+						}
+
+						if(direction.equals("D-L"))	{
+							i_dest+=2;
+							j_dest-=2;
+						}
+
+						if(direction.equals("D-R")) {
+							i_dest+=2;
+							j_dest+=2;
+						}
+						else{
+							flag_double =false;
+						}	
+					}
 					moveExecuted=true;
 					return 1;
 				}
