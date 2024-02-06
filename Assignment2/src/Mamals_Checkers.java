@@ -17,13 +17,12 @@ public class Mamals_Checkers {
 		int status_player=1;
 		while (status_game==1 && status_player==1){
 			status_player =	player_turn(check_mamals);
-			//    check_Q_computer(check_board);
+		 check_Q_computer(check_mamals);
 			status_game = calc_player_winner(check_mamals);
 			printBoard(check_mamals);
 			status_game=computer_turn(check_mamals);
-			//    check_Q_client(check_board);
+			check_Q_player(check_mamals);
 			status_game=calc_computer_winner(check_mamals);
-			status_game=calc_tie_computer(check_mamals);
 			status_game=calc_tie_player(check_mamals);
 			printBoard(check_mamals);
 		}
@@ -242,4 +241,24 @@ public class Mamals_Checkers {
 		print_tie();
 		return 0;
 	}
+	  public static void check_Q_computer(Mamals [][] check_mamals) {
+	        for(int i=7;i<8;i++)
+	            for(int j=0;j<8;j++)
+	            {
+	                if(check_mamals[i][j].equals("E2"))
+	                	check_mamals[i][j] = new QueenElephant ("E2Q",2);
+	        if(check_mamals[i][j].equals("M2"))
+	        	check_mamals[i][j] = new QueenMouse ("M2Q",2);
+	            }
+	    }
+	  public static void check_Q_player(Mamals [][] check_mamals) {
+	        for(int i=7;i<8;i++)
+	            for(int j=0;j<8;j++)
+	            {
+	                if(check_mamals[i][j].equals("E1"))
+	                	check_mamals[i][j] = new QueenElephant ("E1Q",1);
+	        if(check_mamals[i][j].equals("M2"))
+	        	check_mamals[i][j] = new QueenMouse ("M1Q",1);
+	            }
+	    }
 }
