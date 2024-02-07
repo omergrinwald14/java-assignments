@@ -83,8 +83,8 @@ public class Cat extends Mamals {
 					flag=true;
 				}
 			}
-			check_random[direction]++; // mark that in that direction- not possible to move
-		for(int i=1;i<=8;i++)
+			check_random[direction-1]++; // mark that in that direction- not possible to move
+		for(int i=0;i<8;i++)
 			if(check_random[i]!=0)
 				count++;
 		if(count==8)
@@ -92,7 +92,7 @@ public class Cat extends Mamals {
 		else
 			count=0; // for the next count
 		
-			while(check_random[direction]!=0)
+			while(check_random[direction-1]!=0)
 				direction=(int)(1+Math.random()*8);//random a new square
 			
 		}

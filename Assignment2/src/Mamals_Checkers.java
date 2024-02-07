@@ -281,7 +281,7 @@ public class Mamals_Checkers {
 			if(!check_mamals[i_dest][j_dest].name.equals("*"))
 				return false;
 		if(check_mamals[i_origin][j_origin].name.equals("C1"))  //if you are a cat, only allowed to move to "*" or "-"
-			if(!check_mamals[i_dest][j_dest].name.equals("*")||!check_mamals[i_dest][j_dest].name.equals("-"))
+			if(!check_mamals[i_dest][j_dest].name.equals("*") && !check_mamals[i_dest][j_dest].name.equals("-"))
 				return false;		
 		
 		return true;
