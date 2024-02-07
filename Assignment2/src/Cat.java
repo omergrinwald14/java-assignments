@@ -16,11 +16,11 @@ public class Cat extends Mamals {
 	public boolean forward_computer(int i_origin,int j_origin,Mamals[][] check_mamals) {
 		int i_dest=0;
 		int j_dest=0;
-		boolean flag=false;//. become true when there is a move
+		boolean flag=false;// becomes true when there is no move
 		int [] check_random= new int [8];
-		int count =0;
-
-		double direction=(int)1+Math.random()*10;
+		int direction=(int)(1+Math.random()*8);
+		int count=0;
+		
 		while(!flag) {
 			if(direction ==1) { //move up and the most left
 				if(is_valid_coordinate(i_origin+1, j_origin-1) && check_mamals[i_origin+1][j_origin-1].equals("*"))	{
@@ -83,16 +83,18 @@ public class Cat extends Mamals {
 					flag=true;
 				}
 			}
-			check_random[(int)direction-1]++;
-			for (int i=0;i<=7;i++){
-				if (check_random[i]!=0)
-					count++;
-			}
-			if(count!=8)
-				count=0;
-			else
-				flag=true;/// no posibile to forward in 8 direction
-			direction=(int)1+Math.random()*10;//random new squure
+			check_random[direction]++; // mark that in that direction- not possible to move
+		for(int i=1;i<=8;i++)
+			if(check_random[i]!=0)
+				count++;
+		if(count==8)
+			break;  //the tool is blocked
+		else
+			count=0; // for the next count
+		
+			while(check_random[direction]!=0)
+				direction=(int)(1+Math.random()*8);//random a new square
+			
 		}
 		if(i_dest!=0||j_dest!=0) {
 			check_mamals[i_origin+i_dest][j_origin+j_dest]=check_mamals[i_origin][j_origin];

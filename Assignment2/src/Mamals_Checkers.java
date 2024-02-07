@@ -184,6 +184,7 @@ public class Mamals_Checkers {
 					moveExecuted=true;
 					return 1;
 				}
+				computerTool=false; //tool is blocked, need to find another one
 			}
 		}
 		return 0;
