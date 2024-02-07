@@ -8,7 +8,10 @@ public class Cat extends Mamals {
 		if (Math.abs(i_origin-i_dest)==1)//check if its valid move
 			if (Math.abs(j_origin-j_dest)==1){	
 					check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
-					check_mamals[i_origin][j_origin]=new Mamals("*",0);
+					if((i_origin+j_origin)%2 == 0)
+						check_mamals[i_origin][j_origin]=new Mamals("-",0);
+					else
+						check_mamals[i_origin][j_origin] = new Mamals("*",0);
 					return true;
 			}
 		return false;
@@ -98,12 +101,16 @@ public class Cat extends Mamals {
 		}
 		if(i_dest!=0||j_dest!=0) {
 			check_mamals[i_origin+i_dest][j_origin+j_dest]=check_mamals[i_origin][j_origin];
-			check_mamals[i_origin][j_origin]=new Mamals("*",0);	
+			if((i_origin+j_origin)%2 == 0)
+				check_mamals[i_origin][j_origin]=new Mamals("-",0);
+			else
+				check_mamals[i_origin][j_origin] = new Mamals("*",0);
 			return true;
 		}
 		return false;
 
 	}
+	
 	public boolean isBlockedPlayer(Mamals[][] check_mamals,int i,int j) {
 		boolean flag = true;
 		//check if move is possible
