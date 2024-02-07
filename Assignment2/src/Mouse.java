@@ -7,8 +7,10 @@ public class Mouse extends Mamals {
 	public boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals)
 
 	{
-		if (i_origin == i_dest+1)
+		if (i_origin == i_dest+1) {
 			super.forward_player(i_dest, j_dest, i_origin, j_origin, check_mamals);
+			return true;
+		}
 
 		if(i_origin == i_dest+2) {
 			if (j_origin == j_dest+2) // left

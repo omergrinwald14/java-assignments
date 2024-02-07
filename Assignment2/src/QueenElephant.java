@@ -7,12 +7,15 @@ public class QueenElephant extends Elephant {
 	public boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
 		//down
 		//regular move
-		if (i_origin == i_dest+1)
+		if (i_origin == i_dest+1) {
 			super.forward_player(i_dest, j_dest, i_origin, j_origin, check_mamals);
+			return true;
+		}
 		//move 2 blocks
-		if(i_origin == i_dest+2) 
+		if(i_origin == i_dest+2) {
 			super.forward_player(i_dest, j_dest, i_origin, j_origin, check_mamals);
-
+			return true;
+		}
 		//up
 		//regular move
 		if(i_origin == i_dest-1) {
@@ -87,8 +90,10 @@ public class QueenElephant extends Elephant {
 		double i_direction=1+(int)Math.random()*10;
 		//move down - like regular elephant
 		if(i_direction<=5) 
-			if(is_valid_coordinate(i_origin+1, j_origin+1)|| is_valid_coordinate(i_origin+1, j_origin-1))
+			if(is_valid_coordinate(i_origin+1, j_origin+1)|| is_valid_coordinate(i_origin+1, j_origin-1)) {
 				super.forward_computer(i_origin, j_origin, check_mamals);
+				return true;
+			}
 		int steps =(int) (1+Math.random());
 		if(steps==1) {
 			//move up

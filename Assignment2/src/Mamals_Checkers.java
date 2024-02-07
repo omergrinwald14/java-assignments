@@ -144,8 +144,8 @@ public class Mamals_Checkers {
 		if(calc_tie_computer(check_mamals)==1) {
 			while(!moveExecuted) {
 				while(!computerTool) {
-					iRandom=(int)Math.random()*7;
-					jRandom=(int)Math.random()*7;
+					iRandom=(int)(Math.random()*8);
+					jRandom=(int)(Math.random()*8);
 					if(check_mamals[iRandom][jRandom].type==2)
 						computerTool=true;
 				}
@@ -238,7 +238,7 @@ public class Mamals_Checkers {
 				if(check_mamals[i][j].type==1)
 					flag= check_mamals[i][j].isBlockedPlayer(check_mamals, i, j)	;
 			}
-		if(flag==false)//false = when there is foward, true = whan not found 
+		if(flag==false)//false = when there is forward, true = when not found 
 			return 1;
 		print_tie();
 		return 0;

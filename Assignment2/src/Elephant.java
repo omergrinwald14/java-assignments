@@ -9,8 +9,10 @@ public class Elephant extends Mamals {
 
 	{
 		// 1 step
-		if (i_origin == i_dest+1)
+		if (i_origin == i_dest+1) {
 			super.forward_player(i_dest, j_dest, i_origin, j_origin, check_mamals);
+			return true;
+		}
 		//2 steps		
 		if(i_origin == i_dest+2) {
 			if (j_origin == j_dest+2) // left

@@ -8,10 +8,14 @@ public class QueenMouse extends Mouse {
 
 	{
 		// move up
-		if (i_origin == i_dest+1)
+		if (i_origin == i_dest+1) {
 			super.forward_player(i_dest, j_dest, i_origin, j_origin, check_mamals);
-		if(i_origin == i_dest+2) 			
+			return true;
+		}
+		if(i_origin == i_dest+2) { 			
 			super.forward_player(i_dest, j_dest, i_origin, j_origin, check_mamals);
+			return true;
+		}
 		//move down
 		//1 step
 		if (i_origin == i_dest-1) 
@@ -43,8 +47,10 @@ public class QueenMouse extends Mouse {
 	{
 		double i_direction=1+(int)Math.random()*10;
 		//move down - like regular mouse
-		if(i_direction<=5 && (is_valid_coordinate(i_origin+1, j_origin+1)|| is_valid_coordinate(i_origin+1, j_origin-1)))
+		if(i_direction<=5 && (is_valid_coordinate(i_origin+1, j_origin+1)|| is_valid_coordinate(i_origin+1, j_origin-1))) {
 			super.forward_computer(i_origin, j_origin, check_mamals);
+			return true;
+		}
 		int steps =(int) (1+Math.random());
 		if(steps==1) {
 			//move up
@@ -111,8 +117,10 @@ public class QueenMouse extends Mouse {
 		return false;
 	}
 	public boolean first_food_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
-		if (i_origin == i_dest - 2)
+		if (i_origin == i_dest - 2) {
 			super.first_food_player(i_dest, j_dest, i_origin, j_origin, check_mamals);
+			return true;
+		}
 		if (i_origin == i_dest + 2)  //move down
 			if (j_origin == j_dest - 2) //down and right
 				if(check_mamals[i_origin - 1][j_origin + 1].type==2)
@@ -135,8 +143,10 @@ public class QueenMouse extends Mouse {
 	public boolean first_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
 		double i_direction=1+(int)Math.random()*10;
 		if(i_direction<=5) //move down regular
-			if(is_valid_coordinate(i_origin+2, j_origin+2) && (check_mamals[i_origin - 1][j_origin + 1].type==1||check_mamals[i_origin - 1][j_origin - 1].type==1))
+			if(is_valid_coordinate(i_origin+2, j_origin+2) && (check_mamals[i_origin - 1][j_origin + 1].type==1||check_mamals[i_origin - 1][j_origin - 1].type==1)) {
 				super.first_food_computer(i_origin, j_origin, check_mamals);
+				return true;
+			}
 		//move down
 		if(is_valid_coordinate(i_origin-2, j_origin+2) && check_mamals[i_origin - 1][j_origin + 1].type==1)//move up right
 			if(check_mamals[i_origin + 2][j_origin + 2].equals("*"))
