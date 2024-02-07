@@ -87,8 +87,7 @@ public class Mamals_Checkers {
 		return true;
 	}
 	public static int player_turn(Mamals[][] check_mamals) {
-		boolean flag1 = true;
-		while(flag1) {
+		
 			System.out.println("It's your turn, please enter your move.");
 			String move = sc.next();
 			if (move.equals("STOP")) {
@@ -132,7 +131,6 @@ public class Mamals_Checkers {
 						flag =false;
 					}	
 				}
-				flag1 = false;
 
 				if(flag)
 					return 1;
@@ -143,7 +141,7 @@ public class Mamals_Checkers {
 				flag1=false;
 				return 1;
 			}
-		}
+		
 		System.out.println("invalid input");
 		return 1;
 
