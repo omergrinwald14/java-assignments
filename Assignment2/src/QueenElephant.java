@@ -86,8 +86,9 @@ public class QueenElephant extends Elephant {
 	{
 		double i_direction=1+(int)Math.random()*10;
 		//move down - like regular elephant
-		if(i_direction<=5 && (is_valid_coordinate(i_origin+1, j_origin+1)|| is_valid_coordinate(i_origin+1, j_origin-1)))
-			super.forward_computer(i_origin, j_origin, check_mamals);
+		if(i_direction<=5) 
+			if(is_valid_coordinate(i_origin+1, j_origin+1)|| is_valid_coordinate(i_origin+1, j_origin-1))
+				super.forward_computer(i_origin, j_origin, check_mamals);
 		int steps =(int) (1+Math.random());
 		if(steps==1) {
 			//move up
