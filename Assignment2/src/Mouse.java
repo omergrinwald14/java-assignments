@@ -18,7 +18,7 @@ public class Mouse extends Mamals {
 					return true;
 				}
 			if (j_origin == j_dest-2) // right
-				if(check_mamals[i_dest-1][j_dest-1].equals("*") && check_mamals[i_dest-2][j_dest-2].equals("*")) {
+				if(check_mamals[i_dest-1][j_dest+1].equals("*") && check_mamals[i_dest-2][j_dest+2].equals("*")) {
 					check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]=new Mamals("*",0);
 					return true;

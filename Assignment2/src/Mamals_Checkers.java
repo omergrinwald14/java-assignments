@@ -7,10 +7,10 @@ public class Mamals_Checkers {
 	static int status_player = 0;
 	public static void main(String[] args) {
 		System.out.println("Welcome to Fatma Checkers. To start the game press 1, to exit press 0:");
-		int choose = sc.nextInt();
-		if (choose == 0)
+		String choose = sc.next();
+		if (choose.equals("0"))
 			endGame();
-		if(choose == 1)
+		if(choose.equals("1"))
 			startGame();
 
 		int status_game=1;
