@@ -5,24 +5,22 @@ public class Elephant extends Mamals {
 		super(name,type);
 	}
 
-	public boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals)
-
-	{
+	public boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
 		// 1 step
 		if (i_origin == i_dest+1) {
 			super.forward_player(i_dest, j_dest, i_origin, j_origin, check_mamals);
 			return true;
 		}
 		//2 steps		
-		if(i_origin == i_dest+2) {
-			if (j_origin == j_dest+2) // left
-				if(check_mamals[i_dest-1][j_dest-1].equals("*") && check_mamals[i_dest-2][j_dest-2].equals("*")) {
+		if(i_origin-2 == i_dest) {
+			if (j_origin-2 == j_dest) // left
+				if(check_mamals[i_origin-1][j_origin-1].equals("*")){
 					check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]=new Mamals("*",0);
 					return true;
 				}
-			if (j_origin == j_dest-2) // right
-				if(check_mamals[i_dest-1][j_dest-1].equals("*") && check_mamals[i_dest-2][j_dest-2].equals("*")) {
+			if (j_origin+2 == j_dest) // right
+				if(check_mamals[i_origin-1][j_origin+1].equals("*")) {
 					check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]=new Mamals("*",0);
 					return true;

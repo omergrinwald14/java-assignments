@@ -3,16 +3,76 @@ public class Mamals {
 	protected String name;
 	protected int type;
 
-	public boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals)
+		//constructor
+	public Mamals (String name,int type) {
+		this.name=name;
+		this.type=type;
 
-	{
+	}
+
+	public String toString() {
+		return name;
+	}
+	public static boolean is_valid_coordinate(int i, int j) {
+		if (i > 7 || i < 0 || j > 7 || j < 0)
+			return false;
+		return true;
+	}
+	public boolean equals(Mamals other) {
+		if(this.name.equals(other.name))
+			return true;
+		else
+			return false;
+	}
+	public boolean equals(String other) {
+		if(this.name.equals(other))
+			return true;
+		else
+			return false;
+	}
+	public boolean isBlockedPlayer(Mamals[][] check_mamals,int i,int j) {
+		boolean flag = true;
+		//check if move up is possible
+		if(is_valid_coordinate(i+1, j+1)&&check_mamals[i+1][j+1].name.equals("*"))//right
+			flag=false;
+		if(is_valid_coordinate(i+1, j-1)&&check_mamals[i+1][j-1].name.equals("*"))//left
+			flag=false;
+		//check if eat up is possible
+		if(is_valid_coordinate(i+2, j+2)&&check_mamals[i+2][j+2].name.equals("*"))//right
+			if(check_mamals[i+1][j+1].type==2)
+				flag=false;
+		if(is_valid_coordinate(i+2, j-2)&&check_mamals[i+2][j-2].name.equals("*"))//left
+			if(check_mamals[i+1][j-1].type==2)
+				flag=false;
+		
+		return flag;
+	}
+	public boolean isBlockedComputer(Mamals[][] check_mamals,int i,int j) {
+		boolean flag = true;
+		//check if move down is possible
+		if(is_valid_coordinate(i-1, j+1)&&check_mamals[i-1][j+1].name.equals("*"))//right
+			flag=false;
+		if(is_valid_coordinate(i-1, j-1)&&check_mamals[i-1][j-1].name.equals("*"))//left
+			flag=false;
+		//check if eat down is possible
+		if(is_valid_coordinate(i-2,j+2)&&check_mamals[i-2][j+2].name.equals("*"))//right
+			if(check_mamals[i-1][j+1].type==2)
+				flag=false;
+		if(is_valid_coordinate(i-2, j-2)&&check_mamals[i-2][j-2].name.equals("*"))//left
+			if(check_mamals[i-1][j-1].type==2)
+				flag=false;
+		
+		return flag;
+		
+	}
+	
+	public boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
 		if (i_origin == i_dest + 1)
-			if (j_origin == j_dest + 1 || j_origin == j_dest - 1)
-				if(check_mamals[i_dest][j_dest].equals("*")){
+			if (j_origin == j_dest + 1 || j_origin == j_dest - 1){
 					check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]=new Mamals("*",0);
 					return true;
-				}
+			}
 		return false;
 	}
 	public boolean first_food_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
@@ -165,70 +225,5 @@ public class Mamals {
 		return "";
 	}
 
-	//constructors
-	public Mamals (String name,int type) {
-		this.name=name;
-		this.type=type;
 
-	}
-
-	//getters
-	public String Getname() {
-		return name;
-	}
-	public String toString() {
-		return name;
-	}
-	public static boolean is_valid_coordinate(int i, int j) {
-		if (i > 7 || i < 0 || j > 7 || j < 0)
-			return false;
-		return true;
-	}
-	public boolean equals(Mamals other) {
-		if(this.name.equals(other.name))
-			return true;
-		else
-			return false;
-	}
-	public boolean equals(String other) {
-		if(this.name.equals(other))
-			return true;
-		else
-			return false;
-	}
-	public boolean isBlockedPlayer(Mamals[][] check_mamals,int i,int j) {
-		boolean flag = true;
-		//check if move up is possible
-		if(is_valid_coordinate(i+1, j+1)&&check_mamals[i+1][j+1].name.equals("*"))//right
-			flag=false;
-		if(is_valid_coordinate(i+1, j-1)&&check_mamals[i+1][j-1].name.equals("*"))//left
-			flag=false;
-		//check if eat up is possible
-		if(is_valid_coordinate(i+2, j+2)&&check_mamals[i+2][j+2].name.equals("*"))//right
-			if(check_mamals[i+1][j+1].type==2)
-				flag=false;
-		if(is_valid_coordinate(i+2, j-2)&&check_mamals[i+2][j-2].name.equals("*"))//left
-			if(check_mamals[i+1][j-1].type==2)
-				flag=false;
-		
-		return flag;
-	}
-	public boolean isBlockedComputer(Mamals[][] check_mamals,int i,int j) {
-		boolean flag = true;
-		//check if move down is possible
-		if(is_valid_coordinate(i-1, j+1)&&check_mamals[i-1][j+1].name.equals("*"))//right
-			flag=false;
-		if(is_valid_coordinate(i-1, j-1)&&check_mamals[i-1][j-1].name.equals("*"))//left
-			flag=false;
-		//check if eat down is possible
-		if(is_valid_coordinate(i-2,j+2)&&check_mamals[i-2][j+2].name.equals("*"))//right
-			if(check_mamals[i-1][j+1].type==2)
-				flag=false;
-		if(is_valid_coordinate(i-2, j-2)&&check_mamals[i-2][j-2].name.equals("*"))//left
-			if(check_mamals[i-1][j-1].type==2)
-				flag=false;
-		
-		return flag;
-		
-	}
 }

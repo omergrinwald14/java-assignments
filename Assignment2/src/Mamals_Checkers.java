@@ -80,11 +80,6 @@ public class Mamals_Checkers {
 			System.out.println();
 		}
 	}
-	public static boolean is_valid_coordinate(int i, int j) {
-		if (i > 7 || i < 0 || j > 7 || j < 0)
-			return false;
-		return true;
-	}
 	public static int player_turn(Mamals[][] check_mamals) {		
 		System.out.println("It's your turn, please enter your move.");
 		String move = sc.next();
@@ -199,18 +194,6 @@ public class Mamals_Checkers {
 	public static void computer_winner() {
 		System.out.println("Sorry, computer has won:(");
 	}
-	public static boolean is_valid_string(String move) {
-		int i_dest = 8 - (move.charAt(0) - '0');
-		int j_dest = (move.charAt(1) - '0') - 1;
-		int i_origin = 8 - (move.charAt(3) - '0');
-		int j_origin = (move.charAt(4) - '0') - 1;
-
-		if (i_dest > 7 || j_dest > 7 || i_origin > 7 || j_origin > 7)
-			return false;
-		if (i_dest < 0 || j_dest < 0 || i_origin < 0 || j_origin < 0)
-			return false;
-		return true;
-	}
 	public static int calc_player_winner(Mamals [][] check_mamals)
 	{
 		for (int i = 0; i < 8; i++)
@@ -281,4 +264,31 @@ public class Mamals_Checkers {
 					check_mamals[i][j] = new QueenMouse ("M1Q",1);
 			}
 	}
+	public static boolean is_valid_string(String move) {
+		int i_dest = 8 - (move.charAt(0) - '0');
+		int j_dest = (move.charAt(1) - '0') - 1;
+		int i_origin = 8 - (move.charAt(3) - '0');
+		int j_origin = (move.charAt(4) - '0') - 1;
+		
+		if (i_dest > 7 || j_dest > 7 || i_origin > 7 || j_origin > 7)
+			return false;
+		if (i_dest < 0 || j_dest < 0 || i_origin < 0 || j_origin < 0)
+			return false;
+		if(!(check_mamals[i_origin][j_origin].type==1)) // only allowed to move player tools
+			return false;
+		if(!check_mamals[i_origin][j_origin].name.equals("C1")) //if you are not a cat, only allowed to move to "*"
+			if(!check_mamals[i_dest][j_dest].name.equals("*"))
+				return false;
+		if(check_mamals[i_origin][j_origin].name.equals("C1"))  //if you are a cat, only allowed to move to "*" or "-"
+			if(!check_mamals[i_dest][j_dest].name.equals("*")||!check_mamals[i_dest][j_dest].name.equals("-"))
+				return false;		
+		
+		return true;
+	}
+	public static boolean is_valid_coordinate(int i, int j) {
+		if (i > 7 || i < 0 || j > 7 || j < 0)
+			return false;
+		return true;
+	}
+
 }

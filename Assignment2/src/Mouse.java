@@ -4,23 +4,21 @@ public class Mouse extends Mamals {
 	public Mouse(String name,int type) {
 		super(name,type);
 	}
-	public boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals)
-
-	{
-		if (i_origin == i_dest+1) {
+	public boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals){
+		if (i_origin-1 == i_dest) {
 			super.forward_player(i_dest, j_dest, i_origin, j_origin, check_mamals);
 			return true;
 		}
 
-		if(i_origin == i_dest+2) {
-			if (j_origin == j_dest+2) // left
-				if(check_mamals[i_dest-1][j_dest-1].equals("*") && check_mamals[i_dest-2][j_dest-2].equals("*")) {
+		if(i_origin-2 == i_dest) {
+			if (j_origin-2 == j_dest) // left
+				if(check_mamals[i_origin-1][j_origin-1].equals("*")) {
 					check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]=new Mamals("*",0);
 					return true;
 				}
-			if (j_origin == j_dest-2) // right
-				if(check_mamals[i_dest-1][j_dest+1].equals("*") && check_mamals[i_dest-2][j_dest+2].equals("*")) {
+			if (j_origin+2 == j_dest) // right
+				if(check_mamals[i_origin-1][j_origin+1].equals("*")) {
 					check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]=new Mamals("*",0);
 					return true;
@@ -30,18 +28,16 @@ public class Mouse extends Mamals {
 		return false;
 	}
 	public boolean first_food_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
-		if (i_origin == i_dest - 2)  //move up
-			if (j_origin == j_dest - 2)//move up and right
-				if(check_mamals[i_origin - 1][j_origin + 1].type==2)
-					if(check_mamals[i_origin - 2][j_origin + 2].equals("*")) {//check that is empty
+		if (i_origin-2 == i_dest)  //move up
+			if (j_origin+2 == j_dest)//move up and right
+				if(check_mamals[i_origin - 1][j_origin + 1].type==2) {
 						check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
 						check_mamals[i_origin][j_origin]= new Mamals("*",0);
 						PostionBeforeLastEat=i_origin*10+j_origin;
 						return true;
 					}
-		if (j_origin == j_dest + 2)//up and left
-			if(check_mamals[i_origin - 1][j_origin - 1].type==2)
-				if(check_mamals[i_origin - 2][j_origin - 2].equals("*")) {//check that is empty
+		if (j_origin-2 == j_dest)//up and left
+			if(check_mamals[i_origin - 1][j_origin - 1].type==2) {
 					check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]=new Mamals("*",0);
 					PostionBeforeLastEat=i_origin*10+j_origin;
