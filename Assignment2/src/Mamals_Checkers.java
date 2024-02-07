@@ -101,9 +101,6 @@ public class Mamals_Checkers {
 		int j_dest = (move.charAt(1) - '0') - 1;
 		int i_origin = 8 - (move.charAt(3) - '0');
 		int j_origin = (move.charAt(4) - '0') - 1;
-		if(check_mamals[i_origin][j_origin] instanceof Mouse)
-			if(check_mamals[i_origin][j_origin].forward_player(i_dest, j_dest, i_origin, j_origin, check_mamals))
-				return 1;
 		if(check_mamals[i_origin][j_origin].first_food_player(i_dest,j_dest,i_origin,j_origin,check_mamals)) {
 			boolean flag=true;
 			while(flag) { // double food while it's possible
