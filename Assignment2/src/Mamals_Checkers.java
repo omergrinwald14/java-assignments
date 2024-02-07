@@ -12,16 +12,15 @@ public class Mamals_Checkers {
 			endGame();
 		if(choose.equals("1"))
 			startGame();
-
 		int status_game=1;
 		int status_player=1;
 		while (status_game==1 && status_player==1){
 			status_player =	player_turn(check_mamals);
-			check_Q_computer(check_mamals);
+			check_Q_player(check_mamals);
 			status_game = calc_player_winner(check_mamals);
 			printBoard(check_mamals);
 			status_game=computer_turn(check_mamals);
-			check_Q_player(check_mamals);
+			check_Q_computer(check_mamals);
 			status_game=calc_computer_winner(check_mamals);
 			status_game=calc_tie_player(check_mamals);
 			printBoard(check_mamals);
@@ -137,7 +136,7 @@ public class Mamals_Checkers {
 	public static int computer_turn(Mamals[][] check_mamals) {
 		boolean moveExecuted=false;
 		boolean computerTool=false;
-		boolean flag_double=true;
+		boolean flag_double=false;
 		int iRandom=0;
 		int jRandom=0;
 		int i_dest;
@@ -150,10 +149,9 @@ public class Mamals_Checkers {
 					if(check_mamals[iRandom][jRandom].type==2)
 						computerTool=true;
 				}
-				if(check_mamals[iRandom][jRandom].first_food_computer(iRandom, jRandom, check_mamals))
-				{
-
-					if (check_mamals[iRandom+2][jRandom+2].type==2) //understand which direction was thr first eat
+				if(check_mamals[iRandom][jRandom].first_food_computer(iRandom, jRandom, check_mamals)) {
+					flag_double = true;
+					if (check_mamals[iRandom+2][jRandom+2].type==2) //understand which direction was the first eat
 					{
 						i_dest=iRandom+2;
 						j_dest=jRandom+2;
@@ -163,31 +161,26 @@ public class Mamals_Checkers {
 						i_dest=iRandom+2;
 						j_dest=jRandom-2;
 					}
-					while(flag_double)//do double eat untill its not posibile
-					{
+					while(flag_double){ //do double eat until its no longer possible
 						String direction = check_mamals[i_dest][j_dest].double_food_player(i_dest, j_dest, check_mamals);
-						if(direction.equals("U-R")) {//check which direction thr double food
+						if(direction.equals("U-R")) {//check which direction the double food
 							i_dest-=2;
 							j_dest+=2;
 						}
-
 						if(direction.equals("U-L")) {
 							i_dest-=2;
 							j_dest-=2;
 						}
-
 						if(direction.equals("D-L"))	{
 							i_dest+=2;
 							j_dest-=2;
 						}
-
 						if(direction.equals("D-R")) {
 							i_dest+=2;
 							j_dest+=2;
 						}
-						else{
+						else
 							flag_double =false;
-						}	
 					}
 					moveExecuted=true;
 					return 1;
