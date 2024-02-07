@@ -179,7 +179,11 @@ public class Mamals {
 	public String toString() {
 		return name;
 	}
-
+	public static boolean is_valid_coordinate(int i, int j) {
+		if (i > 7 || i < 0 || j > 7 || j < 0)
+			return false;
+		return true;
+	}
 	public boolean equals(Mamals other) {
 		if(this.name.equals(other.name))
 			return true;
@@ -191,11 +195,6 @@ public class Mamals {
 			return true;
 		else
 			return false;
-	}
-	public static boolean is_valid_coordinate(int i, int j) {
-		if (i > 7 || i < 0 || j > 7 || j < 0)
-			return false;
-		return true;
 	}
 	public boolean isBlockedPlayer(Mamals[][] check_mamals,int i,int j) {
 		boolean flag = true;
