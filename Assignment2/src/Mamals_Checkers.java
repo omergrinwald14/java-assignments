@@ -17,7 +17,7 @@ public class Mamals_Checkers {
 		int status_player=1;
 		while (status_game==1 && status_player==1){
 			status_player =	player_turn(check_mamals);
-		 check_Q_computer(check_mamals);
+			check_Q_computer(check_mamals);
 			status_game = calc_player_winner(check_mamals);
 			printBoard(check_mamals);
 			status_game=computer_turn(check_mamals);
@@ -86,54 +86,56 @@ public class Mamals_Checkers {
 			return false;
 		return true;
 	}
-	public static int player_turn(Mamals[][] check_mamals) {
-		
-			System.out.println("It's your turn, please enter your move.");
-			String move = sc.next();
-			if (move.equals("STOP")) {
-				computer_winner();
-				return 0;
-			}		
-			while(!is_valid_string(move)){
-				System.out.println("This move is invalid. Please enter a new move.");
-				move = sc.next();
-			}
-			int i_dest = 8 - (move.charAt(0) - '0');
-			int j_dest = (move.charAt(1) - '0') - 1;
-			int i_origin = 8 - (move.charAt(3) - '0');
-			int j_origin = (move.charAt(4) - '0') - 1;
-			if(check_mamals[i_origin][j_origin].first_food_player(i_dest,j_dest,i_origin,j_origin,check_mamals)) {
-				boolean flag=true;
-				while(flag) { // double food while it's possible
-					i_origin=i_dest;//change the place after every eat move
-					j_origin=i_dest;
-					String direction = check_mamals[i_origin][j_origin].double_food_player(i_origin, j_origin, check_mamals);
-					if(direction.equals("U-R")) {
-						i_dest-=2;
-						j_dest+=2;
-					}
-					if(direction.equals("U-L")) {
-						i_dest-=2;
-						j_dest-=2;
-					}
-					if(direction.equals("D-L"))	{
-						i_dest+=2;
-						j_dest-=2;
-					}
-					if(direction.equals("D-R")) {
-						i_dest+=2;
-						j_dest+=2;
-					}
-					else
-						flag =false;	
-				}
-				if(flag)
-					return 1;
-			}
+	public static int player_turn(Mamals[][] check_mamals) {		
+		System.out.println("It's your turn, please enter your move.");
+		String move = sc.next();
+		if (move.equals("STOP")) {
+			computer_winner();
+			return 0;
+		}		
+		while(!is_valid_string(move)){
+			System.out.println("This move is invalid. Please enter a new move.");
+			move = sc.next();
+		}
+		int i_dest = 8 - (move.charAt(0) - '0');
+		int j_dest = (move.charAt(1) - '0') - 1;
+		int i_origin = 8 - (move.charAt(3) - '0');
+		int j_origin = (move.charAt(4) - '0') - 1;
+		if(check_mamals[i_origin][j_origin] instanceof Mouse)
 			if(check_mamals[i_origin][j_origin].forward_player(i_dest, j_dest, i_origin, j_origin, check_mamals))
 				return 1;
-	
-			return 0;
+		if(check_mamals[i_origin][j_origin].first_food_player(i_dest,j_dest,i_origin,j_origin,check_mamals)) {
+			boolean flag=true;
+			while(flag) { // double food while it's possible
+				i_origin=i_dest;//change the place after every eat move
+				j_origin=i_dest;
+				String direction = check_mamals[i_origin][j_origin].double_food_player(i_origin, j_origin, check_mamals);
+				if(direction.equals("U-R")) {
+					i_dest-=2;
+					j_dest+=2;
+				}
+				if(direction.equals("U-L")) {
+					i_dest-=2;
+					j_dest-=2;
+				}
+				if(direction.equals("D-L"))	{
+					i_dest+=2;
+					j_dest-=2;
+				}
+				if(direction.equals("D-R")) {
+					i_dest+=2;
+					j_dest+=2;
+				}
+				else
+					flag =false;	
+			}
+			if(flag)
+				return 1;
+		}
+		if(check_mamals[i_origin][j_origin].forward_player(i_dest, j_dest, i_origin, j_origin, check_mamals))
+			return 1;
+
+		return 0;
 	}
 	public static int computer_turn(Mamals[][] check_mamals) {
 		boolean moveExecuted=false;
@@ -153,19 +155,19 @@ public class Mamals_Checkers {
 				}
 				if(check_mamals[iRandom][jRandom].first_food_computer(iRandom, jRandom, check_mamals))
 				{
-					
+
 					if (check_mamals[iRandom+2][jRandom+2].type==2) //understand which direction was thr first eat
-						{
+					{
 						i_dest=iRandom+2;
 						j_dest=jRandom+2;
-						}
-						else
-						{
-							i_dest=iRandom+2;
-							j_dest=jRandom-2;
-						}
-						while(flag_double)//do double eat untill its not posibile
-						{
+					}
+					else
+					{
+						i_dest=iRandom+2;
+						j_dest=jRandom-2;
+					}
+					while(flag_double)//do double eat untill its not posibile
+					{
 						String direction = check_mamals[i_dest][j_dest].double_food_player(i_dest, j_dest, check_mamals);
 						if(direction.equals("U-R")) {//check which direction thr double food
 							i_dest-=2;
@@ -269,24 +271,24 @@ public class Mamals_Checkers {
 		print_tie();
 		return 0;
 	}
-	  public static void check_Q_computer(Mamals [][] check_mamals) {
-	        for(int i=7;i<8;i++)
-	            for(int j=0;j<8;j++)
-	            {
-	                if(check_mamals[i][j].equals("E2"))
-	                	check_mamals[i][j] = new QueenElephant ("E2Q",2);
-	        if(check_mamals[i][j].equals("M2"))
-	        	check_mamals[i][j] = new QueenMouse ("M2Q",2);
-	            }
-	    }
-	  public static void check_Q_player(Mamals [][] check_mamals) {
-	        for(int i=7;i<8;i++)
-	            for(int j=0;j<8;j++)
-	            {
-	                if(check_mamals[i][j].equals("E1"))
-	                	check_mamals[i][j] = new QueenElephant ("E1Q",1);
-	        if(check_mamals[i][j].equals("M2"))
-	        	check_mamals[i][j] = new QueenMouse ("M1Q",1);
-	            }
-	    }
+	public static void check_Q_computer(Mamals [][] check_mamals) {
+		for(int i=7;i<8;i++)
+			for(int j=0;j<8;j++)
+			{
+				if(check_mamals[i][j].equals("E2"))
+					check_mamals[i][j] = new QueenElephant ("E2Q",2);
+				if(check_mamals[i][j].equals("M2"))
+					check_mamals[i][j] = new QueenMouse ("M2Q",2);
+			}
+	}
+	public static void check_Q_player(Mamals [][] check_mamals) {
+		for(int i=7;i<8;i++)
+			for(int j=0;j<8;j++)
+			{
+				if(check_mamals[i][j].equals("E1"))
+					check_mamals[i][j] = new QueenElephant ("E1Q",1);
+				if(check_mamals[i][j].equals("M2"))
+					check_mamals[i][j] = new QueenMouse ("M1Q",1);
+			}
+	}
 }
