@@ -1,6 +1,6 @@
 
 public class Mouse extends Mamals {
-	protected int PostionBeforeLastEat;
+	protected int PostionBeforeLastEat; // helps to prevent endless loop of double eating
 	public Mouse(String name,int type) {
 		super(name,type);
 	}
@@ -56,6 +56,7 @@ public class Mouse extends Mamals {
 					check_mamals[i_origin-2][j_origin+2]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]= new Mamals("*",0);
 					check_mamals[i_origin-1][j_origin+1]=new Mamals("*",0);
+					PostionBeforeLastEat=i_origin*10+j_origin;
 					return "U-R";
 				}
 			}
@@ -65,6 +66,7 @@ public class Mouse extends Mamals {
 				if(i_cancel!=i_origin-2||j_cancel!=j_origin-2) {
 					check_mamals[i_origin-2][j_origin-2]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]=new Mamals("*",0);
+					PostionBeforeLastEat=i_origin*10+j_origin;
 					return "U-L";
 				}
 			}
@@ -74,6 +76,7 @@ public class Mouse extends Mamals {
 				if(i_cancel!=i_origin-2||j_cancel!=j_origin-2) {
 					check_mamals[i_origin+2][j_origin+2]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]=new Mamals("*",0);
+					PostionBeforeLastEat=i_origin*10+j_origin;
 					return "D-R";
 				}
 			}
@@ -82,6 +85,7 @@ public class Mouse extends Mamals {
 				if(i_cancel!=i_origin+2||j_cancel!=j_origin-2) {
 					check_mamals[i_origin+2][j_origin-2]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]=new Mamals("*",0);
+					PostionBeforeLastEat=i_origin*10+j_origin;
 					return "D-L";
 				}
 			}
