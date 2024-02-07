@@ -112,39 +112,28 @@ public class Mamals_Checkers {
 						i_dest-=2;
 						j_dest+=2;
 					}
-
 					if(direction.equals("U-L")) {
 						i_dest-=2;
 						j_dest-=2;
 					}
-
 					if(direction.equals("D-L"))	{
 						i_dest+=2;
 						j_dest-=2;
 					}
-
 					if(direction.equals("D-R")) {
 						i_dest+=2;
 						j_dest+=2;
 					}
-					else{
-						flag =false;
-					}	
+					else
+						flag =false;	
 				}
-
 				if(flag)
 					return 1;
-
 			}
 			if(check_mamals[i_origin][j_origin].forward_player(i_dest, j_dest, i_origin, j_origin, check_mamals))
-			{
-				flag1=false;
 				return 1;
-			}
-		
-		System.out.println("invalid input");
-		return 1;
-
+	
+			return 0;
 	}
 	public static int computer_turn(Mamals[][] check_mamals) {
 		boolean moveExecuted=false;
