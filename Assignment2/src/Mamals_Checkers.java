@@ -95,34 +95,10 @@ public class Mamals_Checkers {
 		int j_dest = (move.charAt(1) - '0') - 1;
 		int i_origin = 8 - (move.charAt(3) - '0');
 		int j_origin = (move.charAt(4) - '0') - 1;
-		if(check_mamals[i_origin][j_origin].first_food_player(i_dest,j_dest,i_origin,j_origin,check_mamals)) {
-			boolean flag=true;
-			while(flag) { // double food while it's possible
-				i_origin=i_dest;//change the place after every eat move
-				j_origin=i_dest;
-				String direction = check_mamals[i_origin][j_origin].double_food_player(i_origin, j_origin, check_mamals);
-				if(direction.equals("U-R")) {
-					i_dest-=2;
-					j_dest+=2;
-				}
-				if(direction.equals("U-L")) {
-					i_dest-=2;
-					j_dest-=2;
-				}
-				if(direction.equals("D-L"))	{
-					i_dest+=2;
-					j_dest-=2;
-				}
-				if(direction.equals("D-R")) {
-					i_dest+=2;
-					j_dest+=2;
-				}
-				else
-					flag =false;	
-			}
-			if(flag)
+		if(check_mamals[i_origin][j_origin].first_food_player(i_origin,j_origin,i_origin,j_origin,check_mamals)) {
+			double_food(check_mamals,i_origin,j_origin,i_dest,j_dest);
 				return 1;
-		}
+		}//finish eat move
 		if(check_mamals[i_origin][j_origin].forward_player(i_dest, j_dest, i_origin, j_origin, check_mamals))
 			return 1;
 
@@ -156,27 +132,7 @@ public class Mamals_Checkers {
 						i_dest=iRandom+2;
 						j_dest=jRandom-2;
 					}
-					while(flag_double){ //do double eat until its no longer possible
-						String direction = check_mamals[i_dest][j_dest].double_food_player(i_dest, j_dest, check_mamals);
-						if(direction.equals("U-R")) {//check which direction the double food
-							i_dest-=2;
-							j_dest+=2;
-						}
-						if(direction.equals("U-L")) {
-							i_dest-=2;
-							j_dest-=2;
-						}
-						if(direction.equals("D-L"))	{
-							i_dest+=2;
-							j_dest-=2;
-						}
-						if(direction.equals("D-R")) {
-							i_dest+=2;
-							j_dest+=2;
-						}
-						else
-							flag_double =false;
-					}
+					double_food(check_mamals,iRandom,jRandom,i_dest,j_dest);
 					moveExecuted=true;
 					return 1;
 				}
@@ -291,5 +247,32 @@ public class Mamals_Checkers {
 			return false;
 		return true;
 	}
-
+	public static void double_food(Mamals [][] check_mamals,int i_origin,int j_origin,int i_dest,int j_dest)
+	{
+		
+		boolean flag=true;
+		while(flag) { // double food while it's possible
+			i_origin=i_dest;//change the place after every eat move
+			j_origin=j_dest;
+			String direction = check_mamals[i_origin][j_origin].double_food_player(i_origin, j_origin, check_mamals);
+			if(direction.equals("U-R")) {
+				i_dest-=2;
+				j_dest+=2;
+			}
+			if(direction.equals("U-L")) {
+				i_dest-=2;
+				j_dest-=2;
+			}
+			if(direction.equals("D-L"))	{
+				i_dest+=2;
+				j_dest-=2;
+			}
+			if(direction.equals("D-R")) {
+				i_dest+=2;
+				j_dest+=2;
+			}
+			else
+				flag =false;	
+		}
+	}
 }
