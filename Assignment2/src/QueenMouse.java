@@ -137,32 +137,28 @@ public class QueenMouse extends Mouse {
 				}
 		return false;
 	}
-	public boolean first_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
+	public String first_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
 		double i_direction=1+(int)Math.random()*10;
 		if(i_direction<=5) //move down regular
 			if(is_valid_coordinate(i_origin+2, j_origin+2) && (check_mamals[i_origin - 1][j_origin + 1].type==1||check_mamals[i_origin - 1][j_origin - 1].type==1)) {
-				super.first_food_computer(i_origin, j_origin, check_mamals);
-				return true;
+				String direction = super.first_food_computer(i_origin, j_origin, check_mamals);
+				return direction;
 			}
-		//move down
-		if(is_valid_coordinate(i_origin-2, j_origin+2) && check_mamals[i_origin - 1][j_origin + 1].type==1)//move up right
-			if(check_mamals[i_origin + 2][j_origin + 2].equals("*"))
-			{//check that is empty
+		//move up
+		if(is_valid_coordinate(i_origin-2, j_origin+2) && check_mamals[i_origin - 1][j_origin + 1].type==1){//move up right
 				check_mamals[i_origin+2][j_origin+2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]= new Mamals("*",0);
 				PostionBeforeLastEat=i_origin*10+j_origin;
-				return true;
+				return "U-R";
 			}
-		if(is_valid_coordinate(i_origin-2, j_origin-2) && check_mamals[i_origin - 1][j_origin - 1].type==1)//move up left
-			if(check_mamals[i_origin + 2][j_origin - 2].equals("*"))
-			{//check that is empty
+		if(is_valid_coordinate(i_origin-2, j_origin-2) && check_mamals[i_origin - 1][j_origin - 1].type==1){//move up left
 				check_mamals[i_origin+2][j_origin-2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]= new Mamals("*",0);
 				PostionBeforeLastEat=i_origin*10+j_origin;
-				return true;
+				return "U-L";
 			}
 
-		return false;
+		return "";
 	}
 
 }

@@ -153,26 +153,22 @@ public class Mouse extends Mamals {
 		}
 		return false;
 	}
-	public boolean first_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
+	public String first_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
 
-		if(is_valid_coordinate(i_origin+2, j_origin+2) && check_mamals[i_origin + 1][j_origin + 1].type==1)//move up right
-			if(check_mamals[i_origin + 2][j_origin + 2].equals("*"))
-			{//check that is empty
+		if(is_valid_coordinate(i_origin+2, j_origin+2) && check_mamals[i_origin + 1][j_origin + 1].type==1){//move down right
 				check_mamals[i_origin+2][j_origin+2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]= new Mamals("*",0);
 				PostionBeforeLastEat=i_origin*10+j_origin;
-				return true;
+				return "D-R";
 			}
-		if(is_valid_coordinate(i_origin+2, j_origin-2) && check_mamals[i_origin + 1][j_origin - 1].type==1)//move up left
-			if(check_mamals[i_origin + 2][j_origin - 2].equals("*"))
-			{//check that is empty
+		if(is_valid_coordinate(i_origin+2, j_origin-2) && check_mamals[i_origin + 1][j_origin - 1].type==1){//move down left
 				check_mamals[i_origin+2][j_origin-2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]= new Mamals("*",0);
 				PostionBeforeLastEat=i_origin*10+j_origin;
-				return true;
+				return "D-L";
 			}
 
-		return false;
+		return "";
 	}
 	public String double_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
 		int i_cancel=PostionBeforeLastEat/10;

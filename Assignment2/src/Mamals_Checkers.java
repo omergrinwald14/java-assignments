@@ -107,11 +107,10 @@ public class Mamals_Checkers {
 	public static int computer_turn(Mamals[][] check_mamals) {
 		boolean moveExecuted=false;
 		boolean computerTool=false;
-		boolean flag_double=false;
 		int iRandom=0;
 		int jRandom=0;
-		int i_dest;
-		int j_dest;
+		int i_dest=0;
+		int j_dest=0;
 		if(calc_tie_computer(check_mamals)==1) {
 			while(!moveExecuted) {
 				while(!computerTool) {
@@ -120,22 +119,30 @@ public class Mamals_Checkers {
 					if(check_mamals[iRandom][jRandom].type==2)
 						computerTool=true;
 				}
-				if(check_mamals[iRandom][jRandom].first_food_computer(iRandom, jRandom, check_mamals)) {
-					flag_double = true;
-					if (check_mamals[iRandom+2][jRandom+2].type==2) //understand which direction was the first eat
-					{
+				String direction = check_mamals[iRandom][jRandom].first_food_computer(iRandom, jRandom, check_mamals); //check if eat possible and save direction
+			     	//understand which direction was the first eat
+				if(!direction.equals("")){
+					if (direction.equals("D-R")){ 
 						i_dest=iRandom+2;
 						j_dest=jRandom+2;
 					}
-					else
-					{
+					if (direction.equals("D-L")){
 						i_dest=iRandom+2;
+						j_dest=jRandom-2;
+					}
+					if (direction.equals("U-R")){
+						i_dest=iRandom-2;
+						j_dest=jRandom+2;
+					}
+					if (direction.equals("U-L")){
+						i_dest=iRandom-2;
 						j_dest=jRandom-2;
 					}
 					double_food(check_mamals,iRandom,jRandom,i_dest,j_dest);
 					moveExecuted=true;
 					return 1;
 				}
+				
 				if(check_mamals[iRandom][jRandom].forward_computer(iRandom, jRandom, check_mamals)) {
 					moveExecuted=true;
 					return 1;
@@ -249,7 +256,6 @@ public class Mamals_Checkers {
 	}
 	public static void double_food(Mamals [][] check_mamals,int i_origin,int j_origin,int i_dest,int j_dest)
 	{
-		
 		boolean flag=true;
 		while(flag) { // double food while it's possible
 			i_origin=i_dest;//change the place after every eat move
