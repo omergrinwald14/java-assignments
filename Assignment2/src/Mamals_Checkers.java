@@ -106,19 +106,16 @@ public class Mamals_Checkers {
 	}
 	public static int computer_turn(Mamals[][] check_mamals) {
 		boolean moveExecuted=false;
-		boolean computerTool=false;
-		int iRandom=0;
-		int jRandom=0;
 		int i_dest=0;
 		int j_dest=0;
+		int RandomTool;
+		int iRandom;
+		int jRandom;
 		if(calc_tie_computer(check_mamals)==1) {
 			while(!moveExecuted) {
-				while(!computerTool) {
-					iRandom=(int)(Math.random()*8);
-					jRandom=(int)(Math.random()*8);
-					if(check_mamals[iRandom][jRandom].type==2)
-						computerTool=true;
-				}
+				 RandomTool = RandomComputerTool();
+				 iRandom= RandomTool/10;
+				 jRandom=RandomTool%10;
 				String direction = check_mamals[iRandom][jRandom].first_food_computer(iRandom, jRandom, check_mamals); //check if eat possible and save direction
 			     	//understand which direction was the first eat
 				if(!direction.equals("")){
@@ -147,7 +144,6 @@ public class Mamals_Checkers {
 					moveExecuted=true;
 					return 1;
 				}
-				computerTool=false; //tool is blocked, need to find another one
 			}
 		}
 		return 0;
@@ -219,12 +215,12 @@ public class Mamals_Checkers {
 			}
 	}
 	public static void check_Q_player(Mamals [][] check_mamals) {
-		for(int i=7;i<8;i++)
+		for(int i=0;i<1;i++)
 			for(int j=0;j<8;j++)
 			{
 				if(check_mamals[i][j].equals("E1"))
 					check_mamals[i][j] = new QueenElephant ("E1Q",1);
-				if(check_mamals[i][j].equals("M2"))
+				if(check_mamals[i][j].equals("M1"))
 					check_mamals[i][j] = new QueenMouse ("M1Q",1);
 			}
 	}
@@ -280,5 +276,17 @@ public class Mamals_Checkers {
 			else
 				flag =false;	
 		}
+	}
+	public static int RandomComputerTool() {
+		int iRandom=0;
+		int jRandom=0;
+		boolean flag=false;
+		while(!flag) {
+			iRandom=(int)(Math.random()*8);
+			jRandom=(int)(Math.random()*8);
+			if(check_mamals[iRandom][jRandom].type==2)
+				flag=true;
+		}
+		return iRandom*10+jRandom;
 	}
 }

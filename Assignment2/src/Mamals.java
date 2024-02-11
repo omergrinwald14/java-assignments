@@ -3,7 +3,7 @@ public class Mamals {
 	protected String name;
 	protected int type;
 
-		//constructor
+	//constructor
 	public Mamals (String name,int type) {
 		this.name=name;
 		this.type=type;
@@ -44,7 +44,7 @@ public class Mamals {
 		if(is_valid_coordinate(i+2, j-2)&&check_mamals[i+2][j-2].name.equals("*"))//left
 			if(check_mamals[i+1][j-1].type==2)
 				flag=false;
-		
+
 		return flag;
 	}
 	public boolean isBlockedComputer(Mamals[][] check_mamals,int i,int j) {
@@ -61,40 +61,38 @@ public class Mamals {
 		if(is_valid_coordinate(i-2, j-2)&&check_mamals[i-2][j-2].name.equals("*"))//left
 			if(check_mamals[i-1][j-1].type==2)
 				flag=false;
-		
+
 		return flag;
-		
+
 	}
-	
+
 	public boolean forward_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
 		if (i_origin == i_dest + 1)
 			if (j_origin == j_dest + 1 || j_origin == j_dest - 1){
-					check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
-					check_mamals[i_origin][j_origin]=new Mamals("*",0);
-					return true;
+				check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
+				check_mamals[i_origin][j_origin]=new Mamals("*",0);
+				return true;
 			}
 		return false;
 	}
 	public boolean first_food_player(int i_dest,int j_dest,int i_origin,int j_origin,Mamals [][] check_mamals) {
-		if (i_origin == i_dest + 2) { //move up and right
-			if (j_origin == j_dest - 2)
-				if(check_mamals[i_origin - 1][j_origin + 1].type==2)
-					if(check_mamals[i_origin - 2][j_origin + 2].equals("*")){//check that is empty
-						check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
-						check_mamals[i_origin][j_origin]= new Mamals("*",0);
-						check_mamals[i_dest-1][j_dest+1]=new Mamals("*",0);
-					}
-			return true;
-		}
-		if (j_origin == j_dest + 2)//move up and left
-			if(check_mamals[i_origin - 1][j_origin - 1].type==2)
-				if(check_mamals[i_origin - 2][j_origin - 2].equals("*")){//check that is empty
+		if (i_origin-2 == i_dest) { 
+			if (j_origin+2 == j_dest)//move up and right
+				if(check_mamals[i_origin - 1][j_origin + 1].type==2) {
+					check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
+					check_mamals[i_origin][j_origin]= new Mamals("*",0);
+					check_mamals[i_dest-1][j_dest+1]=new Mamals("*",0);
+					return true;
+				}
+
+			if (j_origin-2 == j_dest)//move up and left
+				if(check_mamals[i_origin - 1][j_origin - 1].type==2) {
 					check_mamals[i_dest][j_dest]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]=new Mamals("*",0);
 					check_mamals[i_dest-1][j_dest-1]=new Mamals("*",0);
 					return true;
 				}
-
+		}
 		return false;
 	}
 	public String double_food_player(int i_origin,int j_origin,Mamals [][] check_mamals) {
@@ -170,17 +168,17 @@ public class Mamals {
 	}
 	public String first_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
 		if(is_valid_coordinate(i_origin+2, j_origin+2) && check_mamals[i_origin + 1][j_origin + 1].type==1){//move down right
-				check_mamals[i_origin+2][j_origin+2]=check_mamals[i_origin][j_origin];
-				check_mamals[i_origin][j_origin]= new Mamals("*",0);
-				check_mamals[i_origin+1][j_origin+1]=new Mamals("*",0);
-				return "D-R";
-			}
+			check_mamals[i_origin+2][j_origin+2]=check_mamals[i_origin][j_origin];
+			check_mamals[i_origin][j_origin]= new Mamals("*",0);
+			check_mamals[i_origin+1][j_origin+1]=new Mamals("*",0);
+			return "D-R";
+		}
 		if(is_valid_coordinate(i_origin+2, j_origin-2) && check_mamals[i_origin + 1][j_origin - 1].type==1){//move down left
-				check_mamals[i_origin+2][j_origin-2]=check_mamals[i_origin][j_origin];
-				check_mamals[i_origin][j_origin]= new Mamals("*",0);
-				check_mamals[i_origin+1][j_origin-1]=new Mamals("*",0);
-				return "D-L";
-			}
+			check_mamals[i_origin+2][j_origin-2]=check_mamals[i_origin][j_origin];
+			check_mamals[i_origin][j_origin]= new Mamals("*",0);
+			check_mamals[i_origin+1][j_origin-1]=new Mamals("*",0);
+			return "D-L";
+		}
 		return "";
 	}
 	public String double_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
