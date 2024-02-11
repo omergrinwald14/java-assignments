@@ -72,36 +72,36 @@ public class QueenElephant extends Elephant {
 		double i_direction=1+(int)Math.random()*10;
 		//move down - like regular elephant
 		if(i_direction<=5) 
-			if(is_valid_coordinate(i_origin+1, j_origin+1)|| is_valid_coordinate(i_origin+1, j_origin-1)) {
+			if(is_valid_coordinate(i_origin+1, j_origin+1, check_mamals)|| is_valid_coordinate(i_origin+1, j_origin-1, check_mamals)) {
 				super.forward_computer(i_origin, j_origin, check_mamals);
 				return true;
 			}
 		int steps =(int) (1+Math.random());
 		if(steps==1) {
 			//move up
-			if ((is_valid_coordinate(i_origin-1,j_origin+1)&&check_mamals[i_origin-1][j_origin+1].equals("*"))||(is_valid_coordinate(i_origin-1, j_origin-1)&&check_mamals[i_origin-1][j_origin-1].equals("*")))
+			if ((is_valid_coordinate(i_origin-1,j_origin+1, check_mamals))||(is_valid_coordinate(i_origin-1, j_origin-1, check_mamals)))
 			{
 				double j_direction=1+(int)Math.random()*10;
-				if(j_direction <=5 && is_valid_coordinate(i_origin-1, j_origin+1))//move right
+				if(j_direction <=5 && is_valid_coordinate(i_origin-1, j_origin+1, check_mamals))//move right
 				{
 					check_mamals[i_origin-1][j_origin+1]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]=new Mamals("*",0);
 					return true;
 				}
-				else if(is_valid_coordinate(i_origin-1, j_origin-1))//move left 
+				else if(is_valid_coordinate(i_origin-1, j_origin-1, check_mamals))//move left 
 				{
 					check_mamals[i_origin-1][j_origin-1]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]=new Mamals("*",0);	
 					return true;
 				}
 			}
-			if (is_valid_coordinate(i_origin-1, j_origin+1) && check_mamals[i_origin-1][j_origin+1].equals("*"))//right because left not possible
+			if (is_valid_coordinate(i_origin-1, j_origin+1, check_mamals))//right because left not possible
 			{
 				check_mamals[i_origin-1][j_origin+1]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);
 				return true;
 			}
-			if (is_valid_coordinate(i_origin-1, j_origin-1) && check_mamals[i_origin-1][j_origin-1].equals("*"))//left because right not possible
+			if (is_valid_coordinate(i_origin-1, j_origin-1, check_mamals))//left because right not possible
 			{
 				check_mamals[i_origin-1][j_origin-1]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);	
@@ -111,29 +111,29 @@ public class QueenElephant extends Elephant {
 		}
 		if(steps==2) {
 			//up
-			if ((is_valid_coordinate(i_origin+2, j_origin-2) && check_mamals[i_origin+2][j_origin-2].equals("*"))||is_valid_coordinate(i_origin+2, j_origin+2) && (check_mamals[i_origin+2][j_origin+2].equals("*"))) {
+			if ((is_valid_coordinate(i_origin+2, j_origin-2, check_mamals))||is_valid_coordinate(i_origin+2, j_origin+2, check_mamals)) {
 				double j_direction=1+(int)Math.random()*10;
 				//move right
-				if(j_direction <=5 && is_valid_coordinate(i_origin+2, j_origin+2) && check_mamals[i_origin+1][j_origin+1].equals("*")){ //move right
+				if(j_direction <=5 && is_valid_coordinate(i_origin+2, j_origin+2, check_mamals) && check_mamals[i_origin+1][j_origin+1].equals("*")){ //move right
 					check_mamals[i_origin+2][j_origin+2]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]=new Mamals("*",0);
 					return true;
 				}
 				//move left 
-				else if(is_valid_coordinate(i_origin+2, j_origin-2) && check_mamals[i_origin+1][j_origin-1].equals("*")){ //move left 		
+				else if(is_valid_coordinate(i_origin+2, j_origin-2, check_mamals) && check_mamals[i_origin+1][j_origin-1].equals("*")){ //move left 		
 					check_mamals[i_origin+2][j_origin-2]=check_mamals[i_origin][j_origin];
 					check_mamals[i_origin][j_origin]=new Mamals("*",0);	
 					return true;
 				}
 			}
 			//right because left not possible
-			if (is_valid_coordinate(i_origin+2, j_origin+2) && check_mamals[i_origin+2][j_origin+2].equals("*") && check_mamals[i_origin+1][j_origin+1].equals("*")) { //only right
+			if (is_valid_coordinate(i_origin+2, j_origin+2, check_mamals)&& check_mamals[i_origin+1][j_origin+1].equals("*")) { //only right
 				check_mamals[i_origin+2][j_origin+2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);
 				return true;
 			}
 			//left because right not possible
-			if (is_valid_coordinate(i_origin+2, j_origin-2) && check_mamals[i_origin+2][j_origin-2].equals("*") && check_mamals[i_origin+1][j_origin-1].equals("*")) { //only left
+			if (is_valid_coordinate(i_origin+2, j_origin-2, check_mamals)&& check_mamals[i_origin+1][j_origin-1].equals("*")) { //only left
 				check_mamals[i_origin+2][j_origin-2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]=new Mamals("*",0);	
 				return true;
@@ -144,17 +144,17 @@ public class QueenElephant extends Elephant {
 	public String first_food_computer(int i_origin,int j_origin,Mamals [][] check_mamals) {
 		double i_direction=1+(int)Math.random()*10;
 		if(i_direction<=5) //move down regular
-			if(is_valid_coordinate(i_origin+2, j_origin+2) && (check_mamals[i_origin - 1][j_origin + 1].type==1||check_mamals[i_origin - 1][j_origin - 1].type==1)) {
+			if(is_valid_coordinate(i_origin+2, j_origin+2, check_mamals) && (check_mamals[i_origin - 1][j_origin + 1].type==1||check_mamals[i_origin - 1][j_origin - 1].type==1)) {
 				String direction = super.first_food_computer(i_origin, j_origin, check_mamals);
 				return direction;
 			}
-		if(is_valid_coordinate(i_origin-2, j_origin+2) && check_mamals[i_origin-1][j_origin + 1].type==1){//move up right
+		if(is_valid_coordinate(i_origin-2, j_origin+2, check_mamals) && check_mamals[i_origin-1][j_origin + 1].type==1){//move up right
 				check_mamals[i_origin-2][j_origin+2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]= new Mamals("*",0);
 				check_mamals[i_origin-1][j_origin+1]=new Mamals("*",0);
 				return "U-R";
 			}
-		if(is_valid_coordinate(i_origin-2, j_origin-2) && check_mamals[i_origin-1][j_origin - 1].type==1){//move up left
+		if(is_valid_coordinate(i_origin-2, j_origin-2, check_mamals) && check_mamals[i_origin-1][j_origin - 1].type==1){//move up left
 				check_mamals[i_origin-2][j_origin-2]=check_mamals[i_origin][j_origin];
 				check_mamals[i_origin][j_origin]= new Mamals("*",0);
 				check_mamals[i_origin-1][j_origin-1]=new Mamals("*",0);
@@ -165,20 +165,20 @@ public class QueenElephant extends Elephant {
 	public boolean isBlockedPlayer(Mamals[][] check_mamals,int i,int j) {
 		boolean flag = true;
 		//check if move up is possible
-		if(is_valid_coordinate(i+1,j+1)&&check_mamals[i+1][j+1].name.equals("*"))//right
+		if(is_valid_coordinate(i+1,j+1, check_mamals))//right
 			flag=false;
-		if(is_valid_coordinate(i+1,j-1)&&check_mamals[i+1][j-1].name.equals("*"))//left
+		if(is_valid_coordinate(i+1,j-1, check_mamals))//left
 			flag=false;
 		//check if move down is possible
-		if(is_valid_coordinate(i-1,j+1)&&check_mamals[i-1][j+1].name.equals("*"))//right
+		if(is_valid_coordinate(i-1,j+1, check_mamals))//right
 			flag=false;
-		if(is_valid_coordinate(i-1,j+1)&&check_mamals[i-1][j+1].name.equals("*"))//right
+		if(is_valid_coordinate(i-1,j+1, check_mamals))//right
 			flag=false;
 		//check if eat up is possible
-		if(is_valid_coordinate(i+2,j+2)&&check_mamals[i+2][j+2].name.equals("*"))//right
+		if(is_valid_coordinate(i+2,j+2, check_mamals))//right
 			if(check_mamals[i+1][j+1].type==2)
 				flag=false;
-		if(is_valid_coordinate(i+2,j-2)&&check_mamals[i+2][j-2].name.equals("*"))//left
+		if(is_valid_coordinate(i+2,j-2, check_mamals))//left
 			if(check_mamals[i+1][j-1].type==2)
 				flag=false;
 
@@ -187,20 +187,20 @@ public class QueenElephant extends Elephant {
 	public boolean isBlockedComputer(Mamals[][] check_mamals,int i,int j) {
 		boolean flag = true;
 		//check if move up is possible
-		if(is_valid_coordinate(i+1,j+1)&&check_mamals[i+1][j+1].name.equals("*"))//right
+		if(is_valid_coordinate(i+1,j+1, check_mamals))//right
 			flag=false;
-		if(is_valid_coordinate(i+1,j-1)&&check_mamals[i+1][j-1].name.equals("*"))//left
+		if(is_valid_coordinate(i+1,j-1, check_mamals))//left
 			flag=false;
 		//check if move down is possible
-		if(is_valid_coordinate(i-1,j+1)&&check_mamals[i-1][j+1].name.equals("*"))//right
+		if(is_valid_coordinate(i-1,j+1, check_mamals))//right
 			flag=false;
-		if(is_valid_coordinate(i-1,j-1)&&check_mamals[i-1][j-1].name.equals("*"))//left
+		if(is_valid_coordinate(i-1,j-1, check_mamals))//left
 			flag=false;
 		//check if eat down is possible
-		if(is_valid_coordinate(i-2,j+2)&&check_mamals[i-2][j+2].name.equals("*"))//right
+		if(is_valid_coordinate(i-2,j+2, check_mamals))//right
 			if(check_mamals[i-1][j+1].type==2)
 				flag=false;
-		if(is_valid_coordinate(i-2,j-2)&&check_mamals[i-2][j-2].name.equals("*"))//left
+		if(is_valid_coordinate(i-2,j-2, check_mamals))//left
 			if(check_mamals[i-1][j-1].type==2)
 				flag=false;
 

@@ -80,7 +80,9 @@ public class Mamals_Checkers {
 			System.out.println();
 		}
 	}
-	public static int player_turn(Mamals[][] check_mamals) {		
+	public static int player_turn(Mamals[][] check_mamals) {	
+		boolean flag = true;
+		while(flag) {
 		System.out.println("It's your turn, please enter your move.");
 		String move = sc.next();
 		if (move.equals("STOP")) {
@@ -95,15 +97,18 @@ public class Mamals_Checkers {
 		int j_dest = (move.charAt(1) - '0') - 1;
 		int i_origin = 8 - (move.charAt(3) - '0');
 		int j_origin = (move.charAt(4) - '0') - 1;
-		if(check_mamals[i_origin][j_origin].first_food_player(i_origin,j_origin,i_origin,j_origin,check_mamals)) {
+		if(check_mamals[i_origin][j_origin].first_food_player(i_dest,j_dest,i_origin,j_origin,check_mamals)) {
 			double_food(check_mamals,i_origin,j_origin,i_dest,j_dest);
 				return 1;
 		}//finish eat move
 		if(check_mamals[i_origin][j_origin].forward_player(i_dest, j_dest, i_origin, j_origin, check_mamals))
 			return 1;
-
-		return 0;
+		if(calc_tie_player(check_mamals)==0)
+			return 0;
+		}	
+			return 0;	
 	}
+	
 	public static int computer_turn(Mamals[][] check_mamals) {
 		boolean moveExecuted=false;
 		int i_dest=0;
@@ -197,7 +202,7 @@ public class Mamals_Checkers {
 			for (int j = 0; j < 8&& flag; j++)
 			{	
 				if(check_mamals[i][j].type==2)
-					flag= check_mamals[i][j].isBlockedPlayer(check_mamals, i, j)	;
+					flag= check_mamals[i][j].isBlockedComputer(check_mamals, i, j);
 			}
 		if(flag==false)//false = when there is forward, true = when not found 
 			return 1;//the game continues there is a legal move
@@ -248,14 +253,21 @@ public class Mamals_Checkers {
 	public static boolean is_valid_coordinate(int i, int j) {
 		if (i > 7 || i < 0 || j > 7 || j < 0)
 			return false;
+		if(!(check_mamals[i][j].type==1)) // only allowed to move player tools
+			return false;
+		if(!check_mamals[i][j].name.equals("C1")) //if you are not a cat, only allowed to move to "*"
+			if(!check_mamals[i][j].name.equals("*"))
+				return false;
+		if(check_mamals[i][j].name.equals("C1"))  //if you are a cat, only allowed to move to "*" or "-"
+			if(!check_mamals[i][j].name.equals("*") && !check_mamals[i][j].name.equals("-"))
+				return false;
 		return true;
 	}
 	public static void double_food(Mamals [][] check_mamals,int i_origin,int j_origin,int i_dest,int j_dest)
 	{
 		boolean flag=true;
 		while(flag) { // double food while it's possible
-			i_origin=i_dest;//change the place after every eat move
-			j_origin=j_dest;
+			
 			String direction = check_mamals[i_origin][j_origin].double_food_player(i_origin, j_origin, check_mamals);
 			if(direction.equals("U-R")) {
 				i_dest-=2;
@@ -275,6 +287,8 @@ public class Mamals_Checkers {
 			}
 			else
 				flag =false;	
+			i_origin=i_dest;//change the place after every eat move
+			j_origin=j_dest;
 		}
 	}
 	public static int RandomComputerTool() {
